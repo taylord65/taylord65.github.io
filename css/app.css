@@ -52,6 +52,7 @@ body {
 .pin img {
 	width: 100%;
 	padding-bottom: 15px;
+	
 }
 
 .pin p {
@@ -100,5 +101,50 @@ body {
 h1 {
 
 	font-family: 'ITCAvantGardeStd-Demi', sans-serif;
+	  animation: fadein 1.5s;
+-moz-animation: fadein 1.5s; /* Firefox */
+-webkit-animation: fadein 1.5s; /* Safari and Chrome */
+-o-animation: fadein 1.5s; /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+        -webkit-transform: translateY(-20px);
+    }
+    to {
+        opacity:1;
+        -webkit-transform: translateY(0);
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+        -webkit-transform: translateY(-20px);
+    }
+    to {
+        opacity:1;
+        -webkit-transform: translateY(0);
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+        -webkit-transform: translateY(-20px);
+    }
+    to {
+        opacity:1;
+        -webkit-transform: translateY(0);
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+        -webkit-transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
 }
 
