@@ -19,6 +19,13 @@ body {
 	margin: auto auto;
 }
 
+#header_section {
+	position: relative;
+	background-image: url("../img/crosses.png");
+	background-repeat: repeat;
+	background-attachment: scroll;
+}
+
 #single_image {
 	display: block;
 	margin-left: auto;
