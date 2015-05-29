@@ -140,6 +140,13 @@ h1 {
 -o-animation: fadein 1.5s; /* Opera */
 }
 
+.button-center {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+}
+
 @keyframes fadein {
     from {
         opacity:0;
