@@ -51,6 +51,31 @@ body {
 	color: white;
 }
 
+.other_section {
+	background: #363636;
+	text-align: center;
+	padding-top: 20px;
+	width: 100%;
+	position: relative;
+}
+
+.other_section h1 {
+	color: white;
+}
+.other_section p {
+	color: white;
+}
+
+.other_section .pin p {
+	color: white;
+}
+.other_section .pin h2 {
+	color: white;
+	font: 15px Arial, sans-serif;
+	font-weight: bold;
+}
+
+
 #single_image {
 	display: block;
 	margin-left: auto;
@@ -75,15 +100,16 @@ body {
 }
 #columns_teabot {
 	-webkit-column-count: 2;
-	-webkit-column-gap: 10px;
+	-webkit-column-gap: 15px;
 	-webkit-column-fill: auto;
 	-moz-column-count: 2;
-	-moz-column-gap: 10px;
+	-moz-column-gap: 15px;
 	-moz-column-fill: auto;
 	column-count: 2;
 	column-gap: 15px;
 	column-fill: auto;
 }
+
 
 #columns_FL {
 	-webkit-column-count: 2;
@@ -132,7 +158,8 @@ body {
 		-webkit-column-count: 1;
 		-moz-column-count: 1;
 		column-count: 1;
-	}	
+	}
+	
 	#columns {
 		-webkit-column-count: 2;
 		-moz-column-count: 2;
@@ -150,7 +177,8 @@ body {
 		-webkit-column-count: 2;
 		-moz-column-count: 2;
 		column-count: 2;
-	}	
+	}
+		
 	#columns {
 		-webkit-column-count: 3;
 		-moz-column-count: 3;
@@ -175,6 +203,7 @@ body {
 		-moz-column-count: 4;
 		column-count: 4;
 	}
+
 }
 
 .header {
