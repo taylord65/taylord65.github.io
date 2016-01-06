@@ -50,6 +50,10 @@ body {
 	color: white;
 	margin-left: 50px;
 	margin-right: 50px;
+		  animation: fadein 1.5s;
+-moz-animation: fadein 1.5s; /* Firefox */
+-webkit-animation: fadein 1.5s; /* Safari and Chrome */
+-o-animation: fadein 1.5s; /* Opera */
 }
 
 .other_section {
@@ -122,6 +126,20 @@ body {
 	column-count: 2;
 	column-gap: 5px;
 	column-fill: auto;
+}
+
+.sub-nav dt.active a, .sub-nav dd.active a, .sub-nav li.active a {
+	background: #363636;
+}
+.sub-nav dt.active a:hover, .sub-nav dd.active a:hover, .sub-nav li.active a:hover {
+	background: #363636;
+}
+.sub-nav dd {
+	display: inline-block;
+	float: none;
+}
+dl.sub-nav {
+	text-align: center;
 }
 
 

@@ -29,7 +29,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
   <title>Taylor Dotsikas</title>
   <link rel="shortcut icon" href="favicon.ico" />
 
@@ -41,10 +40,24 @@
 </head>
 <body>
 
+<!--googleoff: index-->    
+<div data-magellan-expedition="fixed">
+  <dl class="sub-nav">
+    <dd data-magellan-arrival="FL"><a href="#FL">Fifth Light</a></dd>
+    <dd data-magellan-arrival="BD"><a href="#BD">Beached</a></dd>
+    <dd data-magellan-arrival="TB"><a href="#TB">teaBot</a></dd>
+    <dd data-magellan-arrival="OP"><a href="#OP">Other Projects</a></dd>
+    <dd data-magellan-arrival="G"><a href="#G">Graphics</a></dd>
+
+  </dl>
+</div>
+<!--googleon: index-->            
+
 <div class="row">
     <div class="twelve columns text-center"><br />
         <h1>[ Taylor Dotsikas. ]</h1>
-        <h1><p>Toronto UI/UX Designer &nbsp | &nbsp taylor.dotsikas@mail.mcgill.ca</p></h1>
+        <h1><p>Toronto UI/UX Designer</p></h1>
+        <h1><p>taylor.dotsikas@mail.mcgill.ca</p></h1>
 
         <div class="button-center">
             <form action="http://github.com/taylord65">
@@ -53,10 +66,11 @@
       </div>
 </div>
 
-<!--googleoff: index-->    
-<div class="FL_section">
+<!--googleoff: index--> 
+<div class="FL_section" data-magellan-destination="FL">
+<a name="FL"></a>    
     <br>
-    <h1>Fifth Light UI/UX 2015</h1>
+    <h1 >Fifth Light UI/UX 2015</h1>
     <p>Designed user experience and interface for light management software used for system installation, setup, and maintenance. Some sample mockups are displayed.</p>
     <br>
 <div id="columns_FL">
@@ -85,9 +99,9 @@
 
         <br>
         <br>
-
-        <div id="wrapper">
-                <h1>Beached</h1>
+        <div id="wrapper" data-magellan-destination="BD">
+        <a name="BD"></a>            
+                <h1 >Beached</h1>
                 <a href="http://www.beached.tv">www.beached.tv</a>
                 <p>Instant video entertainment. Watch new youtube content in a live TV format.</p>
                 <br>           
@@ -104,11 +118,11 @@
     <br>
 
 <div class="header_section">
-
-        <div id="wrapper">
+        <div id="wrapper"  data-magellan-destination="TB">
+        <a name="TB"></a>            
         <br>
         <br>
-        <h1>teaBot UI/UX 2014</h1>
+        <h1 >teaBot UI/UX 2014</h1>
         <p>Designed user experience and interface for a custom tea making machine.</p>
         <br>
         </div>
@@ -153,7 +167,8 @@
 </div>
 
 
-<div class="other_section">
+<div class="other_section" data-magellan-destination="OP">
+    <a name="OP"></a>                
     <br>
     <h1>Other Projects</h1>
 
@@ -192,8 +207,9 @@
 
 </div>
 
-        <div id="wrapper">
-        <br>
+        <div id="wrapper" data-magellan-destination="G">
+        <a name="G"></a> 
+        <br>   
         <h1>Graphics</h1>
         <br>
         </div>           
@@ -265,8 +281,12 @@
 
 <br>
 
-<script src="js/vendor/jquery.js"></script>
+<script src="js/vendor/jquery.min.js"></script>
+<script src="js/vendor/what-input.min.js"></script>
 <script src="js/foundation.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/foundation.magellan.js"></script>
+
 <script type"text/javascript" src="http://test.gfycat.com/gfycat_test_june25.js"></script>
 <script src="../js/jquery-1.11.0.min.js"></script>
 <script src="../js/lightbox.min.js"></script>
@@ -278,10 +298,6 @@
     g.src = 'http://assets.gfycat.com/js/gfyajax-0.517d.js';
     s.parentNode.insertBefore(g, s);
 }(document, 'script'));
-</script>
-
-<script>
-  $(document).foundation();
 </script>
 
 </body>
