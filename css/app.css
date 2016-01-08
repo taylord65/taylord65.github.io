@@ -294,3 +294,23 @@ h1 {
     }
 }
 
+
+.orbit-container .orbit-slides-container img {
+  display: block;
+  max-width: 100%; 
+  margin: 0 auto;
+}
+
+.orbit-container {
+    overflow: visible !important;
+}
+.orbit-slides-container {
+    overflow: hidden !important;
+}
+.orbit-container .orbit-prev {
+    margin-left: -25px;
+}
+.orbit-container .orbit-next {
+    margin-right: -25px;
+}
+
