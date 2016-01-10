@@ -3050,7 +3050,7 @@ meta.foundation-mq-topbar {
   text-align: center; }
 
 .orbit-bullets {
-  margin: 0 auto 30px auto;
+  margin: 10px auto 30px auto;
   overflow: hidden;
   position: relative;
   top: 10px;

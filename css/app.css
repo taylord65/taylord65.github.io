@@ -44,9 +44,13 @@ ul.tabs li {
 }
 
 .home {
-	margin-top: 15px;
+	margin-top: 19px;
 	margin-left: 10px;
-	color: #3D82C4;
+	color: #3374BA;
+}
+
+.home a:hover {
+	color: #3374BA;
 }
 
 .fullWidth {
@@ -89,6 +93,11 @@ ul.tabs li {
 
 .teabot_section p {
 	padding-top: 15px;
+	color: #616161;
+}
+
+.teabot_section h1 {
+	color: #616161;
 }
 
 .FL_section {
@@ -274,6 +283,15 @@ h1 {
 .orbit-container .orbit-next {
     margin-right: -25px;
 }
+
+
+.dark .orbit-container .orbit-next > span {
+      border-left-color: #424242;
+  }
+
+.dark .orbit-container .orbit-prev > span {
+      border-right-color: #424242; 
+  }
 
 
 .pin {
