@@ -4,7 +4,7 @@ body {
 
 ul.tabs {
     text-align: center;
-    line-height: 0.05em;
+    line-height: 0.02em;
 }
 
 ul.tabs li {
@@ -24,21 +24,21 @@ ul.tabs li {
 
 .tabs dd > a, .tabs .tab-title > a {
 	background-color: white;
-	border: 20px solid white;
+	border: 15px solid white;
  
 }
 
 .tabs dd > a:hover, .tabs .tab-title > a:hover {
 	background-color: white;
 	color: #CCCCCC;
-	border: 20px solid white;
+	border: 15px solid white;
 
 }
 
 .tabs dd.active a, .tabs .tab-title.active a {
 	background-color: #363636;
-	border: 20px solid white;
-	border-radius: 25px;
+	border: 15px solid white;
+	border-radius: 20px;
 
 	color: white;
 }
@@ -191,13 +191,20 @@ dl.sub-nav {
 
 }
 
+.title_page {
+  position: relative;
+  top: 25%;
+		  animation: fadein 1s;
+-moz-animation: fadein 1s; /* Firefox */
+-webkit-animation: fadein 1s; /* Safari and Chrome */
+-o-animation: fadein 1s; /* Opera */  
+}
+
+
+
 h1 {
 
 	font-family: 'ITCAvantGardeStd-Demi', sans-serif;
-	  animation: fadein 1.5s;
--moz-animation: fadein 1.5s; /* Firefox */
--webkit-animation: fadein 1.5s; /* Safari and Chrome */
--o-animation: fadein 1.5s; /* Opera */
 }
 
 .button-center {
@@ -321,5 +328,8 @@ h1 {
 
 
 }
+
+
+
 
 
