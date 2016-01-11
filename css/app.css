@@ -4,7 +4,7 @@ body {
 
 ul.tabs {
     text-align: center;
-    line-height: 0.02em;
+    line-height: 0.01em;
 }
 
 ul.tabs li {
@@ -179,14 +179,50 @@ dl.sub-nav {
 .title_page {
   position: relative;
   top: 25%;
- 
+  text-align: center; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: nowrap;
 }
-
 
 
 h1 {
 
 	font-family: 'ITCAvantGardeStd-Demi', sans-serif;
+}
+
+.title_page h2 {
+	font-family: 'ITCAvantGardeStd-Demi', sans-serif;
+	font-size: 16px;
+	color: #757575;	
+}
+
+.title_page h1 {
+	font-size: 2.5em;
+	color: #4E4D4D;
+/*    color: #f35626;
+    background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 20s infinite linear;	*/
+}
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(180deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(200deg);
+  }
+}
+
+
+@media (min-width: 718px){
+	.title_page h1 {
+		font-size: 5em;
+	}
 }
 
 .button-center {
