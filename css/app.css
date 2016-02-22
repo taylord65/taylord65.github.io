@@ -100,6 +100,18 @@ ul.tabs li {
 	color: #616161;
 }
 
+.SD_section {
+  background: white;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.SD_section p {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
 .FL_section {
 	background: #363636;
 	text-align: center;
