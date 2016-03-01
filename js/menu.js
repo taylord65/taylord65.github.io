@@ -1,12 +1,13 @@
 var navLinks = $('.navLink');
 var contentElements = $('.content');
 
-navLinks.on('click', function (e) {
+//Navigation
+navLinks.on('click', function(e) {
 
 
     //set menu    
     navLinks.removeClass('selected');
-   
+
     $(e.currentTarget).addClass('selected');
     var navId = $(e.currentTarget).attr('id');
 

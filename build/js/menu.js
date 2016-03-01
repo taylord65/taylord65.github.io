@@ -1,0 +1,1 @@
+var navLinks=$(".navLink"),contentElements=$(".content");navLinks.on("click",function(e){navLinks.removeClass("selected"),$(e.currentTarget).addClass("selected");var n=$(e.currentTarget).attr("id");switch(contentElements.hide(),n){case"menu1":$("#one").show();break;case"menu2":$("#two").show();break;case"menu3":$("#three").show()}});

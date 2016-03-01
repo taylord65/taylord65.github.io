@@ -11,7 +11,7 @@
  * and re-initialize them or interact with them
  * as desired.
  */
-var gfyCollection = function () {
+var gfyCollection = function() {
 
     var collection = [];
 
