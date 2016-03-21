@@ -1,0 +1,341 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group D - ECSE-424 Human-Computer Interaction</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+    <style>
+      .sub-nav dd {
+        margin-left: 0;
+      }
+      td > ol > li,
+      td > ol > li > ul > li {
+        font-size: 0.875rem;
+        line-height: 1.125rem;
+      }
+      td > ol {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="HCIindex.html">Group D</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="active"><a href="proposal.html">Proposal</a></li>
+          <li><a href="low-fidelity-prototype.html">Low-Fidelity Prototype</a></li>
+          <li><a href="computer-prototype.html">Computer Prototype</a></li>
+          <li><a href="formative-feedback.html">Formative Feedback</a></li>
+          <li><a href="alpha-system.html">Alpha System</a></li>
+          <li><a href="beta-system.html">Beta System</a></li>
+          <li><a href="presentation.html">Presentation</a></li>
+        </ul>
+      </section>
+    </nav>
+    <div class="row">
+      <div class="large-12 columns">
+        <h2 style="padding-top: 1em">Proposal</h2>
+        <div class="contain-to-grid">
+          <div data-magellan-expedition="fixed" style="padding: 0px">
+            <dl class="sub-nav">
+              <dd data-magellan-arrival="ob"><a href="#ob">Observations</a></dd>
+              <dd data-magellan-arrival="pb"><a href="#pb">Problem</a></dd>
+              <dd data-magellan-arrival="pe"><a href="#pe">Personas</a></dd>
+              <dd data-magellan-arrival="uc"><a href="#uc">Use Cases</a></dd>
+              <dd data-magellan-arrival="rp"><a href="#rp">Related Products</a></dd>
+              <dd data-magellan-arrival="pc"><a href="#pc">Product Comparison</a></dd>
+              <dd data-magellan-arrival="hl"><a href="#hl">High Level Design</a></dd>
+              <dd data-magellan-arrival="fj"><a href="#fj">Feasibility</a></dd>
+            </dl>
+          </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="ob">Observations</h3>
+        <a name="ob"></a>
+        <h5 class="subheader">Setting: A music festival</h5>
+        <p>A relatively small music festival with only two stages. Most people seem to be under the age of 40, with their friends or family.</p>
+        <p>In the middle of a concert, a young woman tries to find a path between other festival goers. After making a few steps, she stops, seems to go on her tiptoes and moves her head around, possibly scanning the area for something or someone. After a short while, the person walks away, towards the left of the stage. A few minutes later, the same person comes back, stops again. A few meters away, a second young woman is waving their phone above her head. The first person seems to see the waving phone and starts walking toward it.</p>
+        <p><b>Observations to persona</b>: In this scenario, the two festival goers used visual cues to find each other. As this festival was relatively small, text messaging each other’s location and using cues such as waving mobile phones was appropriate. In the case of a larger festival, people easily get separated from their friends and mobile phones are usually of little use when the network becomes too crowded. These observations lead to person 1, Lara, the festival goer.</p>
+
+        <h5 class="subheader">Setting: On lower field (university campus)</h5>
+        <p>Students walk through the field or along the field toward the gates. Others walk in the opposite direction. Most seem to walk with a purpose.</p>
+        <p>A small child, at most 5 years old, runs from the rightmost, to the leftmost part of the field. A few seconds later, a woman, which the observer assumes to be the child’s mother appears from the same direction the child came from. She runs toward the child and firmly grabs his arm. They walk off campus, the woman holding the child’s hand.</p>
+        <p><b>Observation to persona</b>: In this situation, the woman presumed to be the child’s mother was able to catch her son before he ran too far away from her. However, if the woman had more than one child running away, she might have momentarily lost one or both children. In this case, as the setting was an open space, some safety concerns for the child might arise. However, in closed and safe areas (e.g. toy store, a relative’s house with a large backyard, a children’s museum), the parent might slightly less wary of their child running off to play games. In all of these situations, the parent needs to have a way of finding their children. These observations lead to persona 2, Marcia the mom of two.</p>
+
+        <h5 class="subheader">Setting: A building on the university campus</h5>
+        <p>Some people walk into the building in groups while others walk in alone. Most are students.</p>
+        <p>One particular student walks to the elevator with their mobile phone, possibly text messaging someone. While waiting for the elevator, the performer attempts to place a call but the other person does not seem to pick up. The performer gets on the elevator (as does the observer). They then both step off and the performer attempts to place a call again. This time, the other person picks up and the first performer asks where the other person is. After asking more questions about the other person’s location, the performer steps back into the elevator.</p>
+        <p><b>Observation to persona:</b> In this situation, the performer looks as though they are struggling to find someone. Although in this particular case, a mobile phone solved the problem, the performer had to (the observer assumes) call the person twice. In a similar but slightly different situation, the performer might have had trouble finding their friend if they were in an unfamiliar building. Similarly, if the person was at a university sanctioned event or a large conference or convention, they might have found the task of finding their friend a lot more complex. In these types of settings, using mobile phones to make calls might be considered as a lack of tact. Alternatively, the person may not have the contact information of the person they want to talk to (e.g. a speaker, an organizer, a volunteer,..). These observations lead to persona 3, JD.</p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="pb">Problem</h3>
+        <a name="pb"></a>
+        <p>Locating a person of interest in a confined space can be a challenging task. If you want to interact with a specific person who you know of, but do not know personally, you have no way of locating them. </p>
+        <p>This problem was observed when one of our group members attended a programming competition. He needed to find one of the mentors who were involved in running the competition to ask a question. He could not find or identify a mentor. Instead he had to walk around aimlessly and ask people questions until he could find one. In this situation, both people are in close proximity being at the same event so some sort of GPS based solution would not have been precise enough to help. </p>
+        <p>This lead us to imagine other scenarios where a user is trying to locate someone in close proximity. Maybe you want to find a specific person at a conference, a certain employee of a company at a job fair, or a guide at a museum. There is an opportunity for a system to bring the user to the person of interest in order to save time and eliminate the stress of not being able to find someone. If the location is a crowded space, it further increases the need for a solution since it is harder to find people in crowds. Allowing the user to engage in an interaction that will guide them to their person of interest in a relatively close proximity situation could potentially be very useful. </p>
+      </div>
+      <div class="large-6 columns">
+        <p><a href="http://ucsdnews.ucsd.edu/news_uploads/employers-recruit-ucsd-2.jpg" target="_blank"><img src="img/proposal-conference.png"/></a></p>
+        <p>The system could be used to put you in touch with a person with a desired skill set at a job fair. If everyone enabled themselves to be discoverable somehow, you could find people you are interested in and walk up to them and introduce yourself. </p>
+      </div>
+      <div class="large-6 columns">
+        <p><a href="http://www.wizardradio.co.uk/images/NewsImg/LatitudeFestival2015Header.jpg" target="_blank"><img src="img/proposal-festival.png" /></a></p>
+        <p>Often at music festivals it is not possible to get cellphone service to get in contact with your friends. If a solution was developed that was not entirely reliant on internet connection it could be used in more situations. </p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="pe">Personas</h3>
+        <a name="pe"></a>
+        <div class="row">
+          <div class="large-8 columns">
+            <h5 class="subheader">Persona 1: Lara</h5>
+            <p>Lara describes herself as a social person; she likes to meet new people and has a large circle of friends with whom she hangs out every time she gets. She is always on the lookup for the next social media website, or the next technology that will help her better communicate with her friends and followers. </p>
+            <p>When she needs to get away from school work, one of her favourite things is going to music festivals: she likes discovering new music, watching people and their creative outfits, and most of all be with her friends. However, she finds that they often get separated, unable to communicate with each other, which negatively alters her festival experience. In her own words:
+            <blockquote>"I wish there was a way to easily find my friends when cell service doesn’t work… which is most of the time!"</blockquote></p>
+          </div>
+          <div class="large-4 columns">
+            <a href="https://s-media-cache-ak0.pinimg.com/236x/2b/03/f9/2b03f9147f12ead9b1526939bacf4718.jpg" target="_blank"><img src="img/proposal-lara.png" /></a>
+            <p>
+              <b>Name</b> Lara<br />
+              <b>Age</b> 21<br />
+              <b>Occupation</b> Communications Student<br />
+              <b>Technology skills</b> always has her smartphone nearby; is always the first one in her group of friends to download new apps and try new technologies
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-8 columns">
+            <h5 class="subheader">Persona 2: Marcia</h5>
+            <p>Marcia recently went back to working full-time after spending time a few years at home with now 5 years old Casey and Kelsey. Although the twins are generally well-behaved, they can be handful. They have a lot of energy and often run off to play their favourite game: hide and seek. Sometimes, her children will become so enthralled by the game that they will stay hidden even when it is time for lunch.</p>
+            <p>While this is a minor problem when they are at home, when they are in public places, Marcia and her partner often feel worried that the kids will get lost.  Just this past weekend, Marcia went to the grocery store and when she turned around, both of her children had disappeared! While she is protective of her children, she still wants them to discover things by themselves. In the past, she tried child harnesses but she feels like the twins are now old enough to no longer need them. When asked about this problem, she replied
+            <blockquote> "I want to be able to bring the twins to different places and if I can’t prevent them from running off, I need to at least have a way to find them!"</blockquote></p>
+          </div>
+          <div class="large-4 columns">
+            <a href="http://blog.stilladancingqueen.com/static/blog/img/profile.jpg" target="_blank"><img src="img/proposal-marcia.png" /></a>
+            <p>
+              <b>Name</b> Marcia<br />
+              <b>Age</b> 38<br />
+              <b>Occupation</b> Accountant and mom of twins Casey and Kelsey<br />
+              <b>Technology skills</b> has a smartphone, mostly uses it for calling and text messaging and playing a few games but doesn’t spend a lot of time on it
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-8 columns">
+            <h5 class="subheader">Persona 3: JD</h5>
+            <p>JD likes to think of himself as a fun, loveable person. He has a close circle of friends but he can get a little anxious when he has to approach people he does not know. When he is not working on projects or on his thesis, he likes going to conferences related to computer science or engineering. He has a real love for the subject and always wants to learn more. </p>
+            <p>This year, after years of participating in hacking conventions and competitions, he became a mentor. However, he finds that because he is not flashy, mentees can have a hard time finding him. Alternatively, when he goes to conferences, he tends to find that all the speakers look alike, which makes it difficult for him to identify the person he wants to talk to. </p>
+            <p>Because he is not the most assertive person, he dreads having to walk up to strangers to ask them if they are the person he is looking for, or if they have seen a certain speaker. He would like a way to find people of interest without having to ask around or walk aimlessly.  Regarding this situation, he says
+            <blockquote>"I always end up walking around and eventually give up because I can’t find the person I am looking for. It would be great if I could just know where the person I’m looking for is!" </blockquote></p>
+          </div>
+          <div class="large-4 columns">
+            <a href="http://web.vims.edu/physical/research/geochron/images/Lab004.jpg" target="_blank"><img src="img/proposal-jd.png" /></a>
+            <p>
+              <b>Name</b> JD<br />
+              <b>Age</b> 25<br />
+              <b>Occupation</b> Graduate student in Software Engineering<br />
+              <b>Technology skills</b> uses his smartphone when he is on the go but prefers using his laptop for all other uses; is well-versed in programming languages and is up-to-date on current technologies
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="uc">Use Case Scenarios</h3>
+        <a name="uc"></a>
+        <h5 class="subheader">Use Case 1: Start application</h5>
+        <table>
+          <tbody>
+          <tr>
+            <td><b>Description</b></td>
+            <td>User wants to use the application</td>
+          </tr>
+          <tr>
+            <td><b>User Action</b></td>
+            <td>
+              <ol>
+                <li>User turns his screen on</li>
+                <li>User looks for the icon of the app</li>
+                <li>User taps the icon</li>
+              </ol>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+    
+        <h5 class="subheader">Use Case 2: Start beacon</h5>
+        <table>
+          <tbody>
+          <tr>
+            <td><b>Description</b></td>
+            <td>User wants to use the beacon</td>
+          </tr>
+          <tr>
+            <td><b>User Action</b></td>
+            <td>User presses holds the "turn on" button pressed</td>
+          </tr>
+          </tbody>
+        </table>
+    
+        <h5 class="subheader">Use Case 3: Pair beacon with app</h5>
+        <table>
+          <tbody>
+          <tr>
+            <td><b>Description</b></td>
+            <td>Connecting beacon to app in order to track user's position</td>
+          </tr>
+          <tr>
+            <td><b>User Action</b></td>
+            <td>
+              <ol>
+                <li>User taps the "I am an admin" button</li>
+                <li>User taps the "Detect" button</li>
+                <li>User selects the beacon from his network</li>
+              </ol>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <h5 class="subheader">Use Case 4: Add new "person of importance" to the network</h5>
+        <table>
+          <tbody>
+          <tr>
+            <td><b>Description</b></td>
+            <td>Add the user of the beacon to the network of users</td>
+          </tr>
+          <tr>
+            <td><b>User Action</b></td>
+            <td>
+              <ol>
+                <li>Pair beacon with app</li>
+                <li>User gives this new beacon connection a name, the name of the "person of importance"</li>
+                <li>User adds the name to the network</li>
+              </ol>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+    
+        <h5 class="subheader">Use Case 5: Track in which direction the "person of importance" is</h5>
+        <table>
+          <tbody>
+          <tr>
+            <td><b>Description</b></td>
+            <td>Tracking the direction of the beacon</td>
+          </tr>
+          <tr>
+            <td><b>User Action</b></td>
+            <td>
+              <ol>
+                <li>User taps the "I am a seeker" button</li>
+                <li>User picks the name(s) of the "person of importance"</li>
+                <li>User picks the range in which the "person of importance" might be
+                  <ul>
+                    <li>Within the range of a school gym (single floor)</li>
+                    <li>Within the range of a house/building (many floors)</li>
+                    <li>Within the range of an amusement park (neiborhood)</li>
+                  </ul>
+                </li>
+
+                <li>User taps the "Seek" button</li>
+              </ol>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+    
+        <h5 class="subheader">Use Case 6: Track if the "person of importance" is out of range</h5>
+        <table>
+          <tbody>
+          <tr>
+            <td><b>Description</b></td>
+            <td>Tracking if a "person of importance" that is now in our range becomes out of range</td>
+          </tr>
+          <tr>
+            <td><b>User Action</b></td>
+            <td>Once the "person of importance" direction displayed, user taps the "Notify if out of range" button</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="rp">Related Products</h3>
+        <a name="rp"></a>
+        <p>Since GPS-enabled smartphones have become commonplace, there has been a surge of location-based applications and devices on the market. However, most of them are geared towards street navigation and are not precise enough for close-proximity navigation.</p>
+        <h5 class="subheader">Google Maps</h5>
+        <p><a href="http://www.google.com/maps/about/" target="_blank">Google Maps</a> is an outdoor mapping application. It is designed for street navigation and also contains navigable maps of other outdoors locations, such as national parks. This is a web service and as such requires a data connection to work. It also requires a GPS signal. This application is a relevant product for outdoor locations where high-quality data and GPS signals are present.</p>
+        <p><a href="http://www.google.com/maps/about/partners/indoormaps/" target="_blank">Google Indoor Maps</a> is a new project by the same company. Their aim is to map the indoors of major buildings accross the world. Like Google Mpas, this is a web service and as such requires a data connection to work. It also requires a GPS signal for real-time navigation, which is generally not possible in closed environments. This application is a relevant product for indoor locations that have been mapped through the service, and where high-quality data connections are present and users use landmarks to navigate.</p>
+        <h5 class="subheader">Estimote Indoor Navigation</h5>
+        <p><a href="http://estimote.com/indoor/" target="_blank">Estimote</a> is an indoor location service that uses beacons. However, just like Google Indoor Maps, this is meant for indoors landmark navigation; their application is designed to recognized fixed-location beacons. This system is a relevant product for indoor locations where maps for the application are available, and where users use landmarks to navigate.</p>
+        <h5 class="subheader">Apple Find My Friends</h5>
+        <p>Apple's <a href="http://www.apple.com/apps/find-my-friends/" target="_blank">Find My Friends</a> is an application that closely represents our concept. This application allows a user and their friends to mutually on the application. From there, loading the application shows a users' friends on a map and provides directions to their location. This application is relevant since it uses persons as destination for navigation, as opposed to landmarks as for the products mentioned above.</p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="pc">Product Comparison</h3>
+        <a name="pc"></a>
+        <p>The key differentiator for our product is that the user does not require prior interaction with the person of interest. For example, both Google solutions would require agreeing with the person of interest in advance on a landmark to navigate to, either indoors (such as <em>the Microsoft booth</em> at a conference) or outdoors (such as <em>the McDonalds near the exit</em> at a festival). The Estimote solution would require similar a similar landmark agreement for indoor navigation. Our solution simply provides directions to the person of interest, avoiding this overhead.</p>
+        <p>The Google Indoor Maps and Estimote solutions also require that the interior of the building have been mapped in advance, just like the Google Maps solution requires that the location where our users are have been mapped. Our solution provides spatial directions to the person of interest, avoiding dependency on any kind of external data - making this product usable in any location.</p>
+        <p>The Find My Friends application require prior connection between the person of interest and the user. It also requires maps of the location, whether indoors or outdoors. Our solution does not require any prior interaction other than the person of interest being in possession of the beacon.</p>
+        <p>Our solution also does not require any kind of data or GPS connection, contrary to the Google and Apple solutions. This allows it to work in any kind of environment, whether indoors or outdoors, and whether cellular or GPS signals are available.</p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="hl">High-Level Design</h3>
+        <a name="hl"></a>
+        <div class="row">
+          <div class="large-7 columns">
+            <img src="img/proposal-highlevel.png" />
+          </div>
+          <div class="large-5 columns">
+            <p>The application will be written in Java and will run on android phones. A user will create a profile with their name and necessary information. If they wish to be discoverable, they will connect their beacon emitter via iBeacon protocol to their profile. The profile information along with the beacon information will be uploaded to a cloud database. Parse Core is a cloud database service that integrates with android applications. User 2 will be able to access the database, look for a location where they wish to find User 1, and find User 1’s profile. Once User 2 selects User 1’s profile, User 2 can begin detecting for User 1’s beacon since the beacon information is known. As User 2 walks closer to User 1’s beacon the signal strength will increase indicating that User 2 is getting closer to User 1.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="fj">Feasibility Justification</h3>
+        <a name="fj"></a>
+        <p>There are two components to this project: the beacon held by the person of interest and the device/application used to locate the beacon. Compact wireless beacons using the iBeacon standard are widely available and they can operate within a range that’s large enough for our application. They can also easily communicate with smartphones.</p>
+        <p>We believe we have the sufficient programming and development experience for this project, as two members of the team have mobile development experience and one has experience in user experience and user interface design. There’s a lot of documentation on how to program applications that interface with iBeacon devices.</p>
+        <p>As for the locator application, the main challenge would be technical: such a system would be useless if the location information given is not accurate. We are aiming for simplicity on the design, and as such, our first iteration would be a simple compass-like interface that uses the person of interest as its "north".</p>
+        <p>We estimate that we'd need 4-5 weeks to develop an accurate tracking algorithm, and another 4-5 weeks for user interface design and testing of the application.</p>
+      </div>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.magellan.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>

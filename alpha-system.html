@@ -1,0 +1,119 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group D - ECSE-424 Human-Computer Interaction</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+    <style>
+      .sub-nav dd {
+        margin-left: 0;
+      }
+      [data-magellan-expedition] {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      td > ol > li,
+      td > ol > li > ul > li {
+        font-size: 0.875rem;
+        line-height: 1.125rem;
+      }
+      td > ol {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="HCIindex.html">Group D</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li><a href="proposal.html">Proposal</a></li>
+          <li><a href="low-fidelity-prototype.html">Low-Fidelity Prototype</a></li>
+          <li><a href="computer-prototype.html">Computer Prototype</a></li>
+          <li><a href="formative-feedback.html">Formative Feedback</a></li>
+          <li class="active"><a href="alpha-system.html">Alpha System</a></li>
+          <li><a href="beta-system.html">Beta System</a></li>
+          <li><a href="presentation.html">Presentation</a></li>
+        </ul>
+      </section>
+    </nav>
+    <div class="row">
+      <div class="large-12 columns">
+        <h2 style="padding-top: 1em">Alpha System</h2>
+        <div class="contain-to-grid">
+          <div data-magellan-expedition="fixed" style="padding: 0px">
+            <dl class="sub-nav">
+              <dd data-magellan-arrival="de"><a href="#de">Design Evolution</a></dd>
+              <dd data-magellan-arrival="um"><a href="#um">User Manual</a></dd>
+              <dd data-magellan-arrival="cp"><a href="#cp">Current Prototype</a></dd>
+            </dl>
+          </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="de">Design Evolution</h3>
+        <a name="de"></a>
+        <h5 class="subheader">General Changes</h5>
+        <strong>Removed "X" button to go back</strong>
+        <p>Optimized the common use-case of going back by getting rid of the "X" symbol and replacing it with "< Back" in the top left. </p>
+        <strong>Changed background image</strong>
+        <p>The background image was changed to an image of a crowded indoor space which is more relevant to the applications use case. </p>
+        <h5 class="subheader">Home Screen</h5>
+        <strong>Improved link to Organizer/Beacon Pairing Screen</strong>
+        <p>Addressed size and clickability of link that takes you to Organizer/Beacon Pairing screen by increasing size, moving it away from "Locate People" Button, and making the "let me in" text colored as if it was a clickable hyperlink. Removed "Admin" from terminology as it confused users and replaced it with "organizer" to indicate that you are an organizer of the event. </p>
+        <h5 class="subheader">Organizer/Beacon Pairing</h5>
+        <strong>Changed beacon selection interaction</strong>
+        <p>Users suffered major usability issues with the check circles for selecting beacons to connect. Users wanted both the name and circle to be clickable for selection. Now the screen displays a list of beacons and their corresponding beacon IDs. Tapping on a beacon brings up a popup window with several options. This design decision was inspired by Snapchat’s friend list interaction where all controls are given in a popup.</p>
+        <p>The popup seemed like the best design decision because there were so many different actions we want the user to be able to perform (edit name, connect/disconnect, view ID, view connection status). The pop up displays the name of the beacon, connection status, and ID as well as options to edit the name of the beacon, and connect the beacon. The popup is closed by clicking cancel. Tapping "Edit Name" lets you type directly into the name field. The "Save" button will also appear below. There was no more need for a "Select Beacon" button and the text "Press and hold name to rename". Pressing connect makes the beacon available to be tracked by other users. When a beacon is connected, it will be displayed as active in the list.</p>
+        <h5 class="subheader">Tracking Screen</h5>
+        <strong>Removed 0 m symbol</strong>
+        <p>Users did not understand what the "0 m" text and symbol meant. It did not convey any useful information so it was removed from the screen.</p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="um">User Manual</h3>
+        <a name="um"></a>
+        <p>The updated user manual for our prototype is available as a PDF file. The changes made after the first version are highlighted in <span style="color:blue">blue</span>.</p>
+        <a href="pdf/a-manual.pdf" target="_blank" class="button tiny">Download</a>
+      </div>
+    </div>    
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="cp">Current Prototype</h3>
+        <a name="cp"></a>
+        <h5 class="subheader">Video Demonstration</h5>
+        <video width="372" height="688" controls>
+          <source src="vid/a-prototype.mp4" type="video/mp4">
+          <a href="vid/a-prototype.mp4" target="_blank" class="button tiny">Download video</a>
+        </video>
+        <h5 class="subheader">Objectives</h5>
+        <p>Our proposal presented four objectives:</p>
+        <ol>
+          <li>the application needed to be simple and devoid of any extraneous features</li>
+          <li>the system did not require prior interaction between the administrator/organizer, the locator (person looking for person of interest), and the person of interest</li>
+          <li>the system did not require the person of interest to have a smartphone or any equipment prior to being made available on the application</li>
+          <li>the system did not use GPS, since it needed to be effective indoors</li>
+        </ol>
+        <p>This alpha prototype meets all four objectives. The application is extremely simple, with only 5-6 steps required to have the system ready for use. An administrator can register people of interest on the application and give them beacons, and they will instantly show up on the "locator" interface on the phones of people who have never met them. Since we use beacons as the target, the person of interest does not require a smartphone or any equipment other than the beacon assigned to them. The system uses Bluetooth signals to estimate the distance of a beacon instead of GPS, which is not effective indoors and would require additional equipment. </p>
+      </div>
+    </div>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.magellan.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>

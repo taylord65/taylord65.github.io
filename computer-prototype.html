@@ -1,0 +1,310 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group D - ECSE-424 Human-Computer Interaction</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+    <style>
+      .sub-nav dd {
+        margin-left: 0;
+      }
+      [data-magellan-expedition] {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      td > ol > li,
+      td > ol > li > ul > li {
+        font-size: 0.875rem;
+        line-height: 1.125rem;
+      }
+      td > ol {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="HCIindex.html">Group D</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li><a href="proposal.html">Proposal</a></li>
+          <li><a href="low-fidelity-prototype.html">Low-Fidelity Prototype</a></li>
+          <li class="active"><a href="computer-prototype.html">Computer Prototype</a></li>
+          <li><a href="formative-feedback.html">Formative Feedback</a></li>
+          <li><a href="alpha-system.html">Alpha System</a></li>
+          <li><a href="beta-system.html">Beta System</a></li>
+          <li><a href="presentation.html">Presentation</a></li>
+        </ul>
+      </section>
+    </nav>
+    <div class="row">
+      <div class="large-12 columns">
+        <h2 style="padding-top: 1em">High-Fidelity Prototype and Evaluation Plan</h2>
+        <div class="contain-to-grid">
+          <div data-magellan-expedition="fixed" style="padding: 0px">
+            <dl class="sub-nav">
+              <dd data-magellan-arrival="um"><a href="#um">User Manual</a></dd>
+              <dd data-magellan-arrival="de"><a href="#de">Evolution</a></dd>
+              <dd data-magellan-arrival="pi"><a href="#pi">Implementation</a></dd>
+              <dd data-magellan-arrival="up"><a href="#up">User Population</a></dd>
+              <dd data-magellan-arrival="ug"><a href="#ug">Usability Goals</a></dd>
+              <dd data-magellan-arrival="ut"><a href="#ut">Test Procedure</a></dd>
+              <dd data-magellan-arrival="re"><a href="#re">Reporting</a></dd>
+              <dd data-magellan-arrival="ue"><a href="#ue">Usability Evaluation</a></dd>
+            </dl>
+          </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="um">User Manual</h3>
+        <a name="um"></a>
+        <p>The user manual for our prototype is available as a PDF file.</p>
+        <a href="pdf/hfp-manual.pdf" class="button tiny">Download</a>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="de">Design Evolution</h3>
+        <a name="de"></a>
+        <h5 class="subheader">REVISION #1: Removed radio buttons from main view.</h5>
+        <p>We removed the radio buttons from the first view, replacing it by 2 buttons. One is bigger than the other since we wanted to address one of our usability goals where the user should be able to distinguish the “admin mode” (the person that will want to add “pair beacons” and associate them with “important people”) from the regular people that will attend the event and will want to locate “important people”. Attendants of the event that will want to locate “important people” will be a lot more numerous than the organizers of the event, hence we made the button “LOCATE PEOPLE AROUND ME” a lot bigger in the view, since it is more relevant.</p>
+        <h5 class="subheader">REVISION #2: Removed “join group” authentication process</h5>
+        <p>Since one of our usability goals was to begin tracking people quickly, we also considerably reduced the number of views by removing the “authentication” process. There is no need to create groups anymore since the organizer will create a local group and the app will be only useful within a range (70 meters, allowed by the beacon). The organizer (in admin mode), will pair the beacons that are part of the group and since attendants of the event are not concerned about any other group except the one that they are attendant, we decided that it wasn’t relevant having the user pick his own group, or his own event. This removes steps of access for the user and now he can just select the people that he wants to follow and then locate them, without joining a group.</p>
+        <h5 class="subheader">REVISION #3: Changed the localization interface.</h5>
+        <p>Because of feasibility reasons, we decided to not use a map for localizing the beacons (the important people) because we noticed that the beacons aren’t providing us with an orientation, but mostly with the strength of their signal. Therefore, we decided that we’ll give the user a perspective of proximity, an indication of how close are they to the person of interest. The persons of interested are now displayed vertically in order of proximity, an interface much more intuitive than one depending on circles and pin points, where It could have been confusing because the pin point might indicate an orientation within the circle. </p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="pi">Prototype Implementation</h3>
+        <a name="pi"></a>
+        <p>To set up the prototype, follow these steps:
+        <ol>
+          <li>Download this <a href="https://github.com/dancrisan/locateAround/archive/master.zip" target="_blank">Xcode project</a></li>
+          <li>Extract the files from the Zip folder</li>
+          <li>Double click on the file called “around_alpha.xcodeproj” to open the project file in Xcode. If you do not have Xcode on your computer, it can be downloaded from the Mac App Store.</li>
+          <li>Once the project is loaded, press the play button to run the simulator.</li>
+          <li>An iPhone simulator should appear.</li>
+        </ol></p>
+        <h5 class="subheader">Video Demonstration</h5>
+        <video width="372" height="688" controls>
+          <source src="vid/hfp-prototype.mp4" type="video/mp4">
+          <a href="vid/hfp-prototype.mp4" class="button tiny">Download video</a>
+        </video> 
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="up">User Population</h3>
+        <a name="up"></a>
+        <h4 class="subheader">Initial User Segments</h4>
+        <p>Three target user segments were identified in the project proposal.</p>
+        <h6 class="subheader">The festival goer</h6>
+        <p>This user is mainly interested in this application for personal use, that is, to find friends and family at large events, including but not limited to festivals. In this scenario, all users participating in the interaction with our system are assumed to have smartphones. These mobile devices may however have limited functions due to network congestion. </p>
+        <h6 class="subheader">The parent</h6>
+        <p>This user will primarily use the system to find other members of their family. More precisely, this user would like to find individuals who cannot be reached by telephone.</p>
+        <h6 class="subheader">The conference/hackathon participant</h6>
+        <p>This user is interested in using our system to find and interact with individuals with whom they have no pre-existing relationship. </p>
+        <p><i>Refer to the project proposal for full descriptions of the intended population segments. </i></p>
+        <h4 class="subheader">User Population (for test session)</h4>
+        <p>As the system will be tested by other students, we expect the evaluators to identify with either (or both) the <b>festival (large event) goer</b> or the <b>conference/hackathon participant</b> category. In other words, the evaluator should have some interest in technology and should be fairly comfortable with using a smartphone. Although they do not need any particular skill, the user should have some knowledge on how to use smartphone applications. The user will be someone who has already been placed in a situation in which they had some difficulty finding a specific person. They will most likely be someone who can adapt to new situations and who is open to learning new skills.</p>
+        <p>As described in the project proposal, the user who identifies with the type <b>festival goer</b> will be someone who tends to spend a lot of time in social settings and who easily adapts to new situations. This ideally open-minded person is someone who is looking for ways to improve the way they interact with others. This person is mainly interested in finding people they already know. </p>
+        <p>The user who identifies with the type <b>conference/hackathon participant</b> may be less comfortable in large social events. This person is used to going to events where they do not know the majority of the participants. They are mainly interested in finding people they do not have a pre-existing relationship with. This person may not be actively looking for ways to find and interact with others but is open to trying a tried and tested application. </p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="ug">Usability Goals</h3>
+        <a name="ug"></a>
+        <table>
+          <thead>
+          <tr>
+            <td>Usability Goal</td>
+            <td>Rationale</td>
+            <td>Quantitative Target Measurement</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>The user should be able to associate adding a beacon with adding a person of interest. </td>
+            <td>The user must know that in order for a person to be tracked, they must be holding onto a beacon that is registered in the system with their name.</td>
+            <td> The user will attempt to rename a beacon after pairing it as the next step and not think that the test is complete. If the user is lost and waits idly for more than 10 seconds after pairing, the association has not been made. </td>
+          </tr>
+          <tr>
+            <td>Begin tracking a person of interest quickly.</td>
+            <td>The app should provide the ability to produce immediate assistance. We don't want the user to become lost trying to initiate the main function of the app. </td>
+            <td>The user should arrive at the screen that displays people you are tracking without deviating from the path to get there.</td>
+          </tr>
+          <tr>
+            <td>The app should be an effective way of locating a person of interest.</td>
+            <td>The user should understand how to move in order to locate the person of interest.</td>
+            <td>The user verbally confirms the distance to the selected person of interest.</td>
+          </tr>
+          <tr>
+            <td>The app should be straightforward and simple to use. </td>
+            <td>We don't want the user getting lost or asking the examiner what to do.</td>
+            <td>The user performs all activities without asking the examiner any questions.</td> 
+          </tr>
+          <tr>
+            <td>Using the app should provide a pleasant experience.</td>
+            <td>The app should not frustrate or impair the user. It needs to provide an experience that is better than wandering and searching for someone.</td>
+            <td>A satisfaction rating of at least 4/6 is desirable at this point.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="ut">Usability Test Procedure</h3>
+        <a name="ut"></a>
+        <p>This experiment is designed to test the ease of use of our locator application. When presenting a test subject with the goal of finding a friend or person with whom they have no prior relationship with, they must be able to use our application as an assistive tool. They must also be able to add people of interest to the system so that they can become discoverable.</p>
+        <p>Locating people should be faster and less stressful than wandering and searching because of our application. People of interest are holding onto iBeacons which are detected by the application. </p>
+        <b>How many examiners are required?</b>
+        <p>One examiner is enough to oversee this test.</p>
+        <b>What Equipment will the examiners need?</b>
+        <p>Our application can be run on the iOS simulator on a mac. If you do not have a mac, contact a person in our group and we will assist in setting up a test environment. To set up the prototype, follow these steps:
+        <ol>
+          <li>Download this <a href="https://github.com/dancrisan/locateAround/archive/master.zip" target="_blank">Xcode project</a></li>
+          <li>Extract the files from the Zip folder</li>
+          <li>Double click on the file called “around_alpha.xcodeproj” to open the project file in Xcode. If you do not have Xcode on your computer, it can be downloaded from the Mac App Store.</li>
+          <li>Once the project is loaded, press the play button to run the simulator.</li>
+          <li>An iPhone simulator should appear.</li>
+        </ol></p>
+        <p>Print off the required amount of data collection sheets for the amount of subject you will be testing with. Be prepared to fill out the sheet with test results.</p>
+        <b>How should the prototype be handled?</b>
+        <p>The test subject can sit at a desk with the computer running the simulator placed in front of him/her. The test subject can interact with the prototype by using the mouse to simulate touch events. Leave the app running on its initial screen.</p>
+        <b>What to tell the test subject?</b>
+        <p>Begin by reading the test subject the following text:</p>
+        <p>
+          <blockquote>Thank you for volunteering your time to test our system. We are conducting a usability evaluation on an application that allows you to locate and meet up with people of interest in a confined space. A person of interest holds onto a beacon which emits a signal that allows them to become discoverable to other users of the application. <br /><br />
+          We will use the results of this experiment to identify problems in our system or areas that need improvement so that we can provide a better experience for the user. Before we start with the experiment, we (I) have a few short questions to ask you. After, you will be asked to perform a few simple tasks with our applications prototype. You do not need any type of special preparation for it. We (I) will tell you what each task is ahead of time but I will not tell you how to do it. When you perform the tasks, it would be very helpful if you could guide us (me) through your thought process. At the end of the experiment, we will ask you a few short questions about the system and the test. <br /><br />
+          You are strongly encouraged to be honest with your feedback; we need any and all kinds of feedback in order to improve our system. We (I) will be taking notes but keep in mind that you are not being evaluated on how well you perform the tasks. It is the system that we are evaluating and not you. If something is unclear during the test, do not hesitate to ask us (me) questions.</blockquote>
+        </p>
+        <b>How should the examiner proceed with the test?</b>
+        <p>After you have read them the introduction text, ask them the pre test questionnaire questions and record their answers on the data collection sheet.</p>
+        <p>Next, read the test subject the following text to set up the usability test: </p>
+        <p>
+          <blockquote>You are an organizer in charge of running a Hackathon, a coding competition for university students. Many students will need assistance in their coding projects. In order to help assist students with their projects, the Hackathon organizing committee has hired several mentors who will walk around and students can ask them questions. Students have a hard time locating mentors for help. In order to help students locate mentors more easily, mentors will be given iBeacon devices so they can be located with the app you are about to use. Bob is an Android mentor, you need to add him to the system so he can be discoverable for students. He has a Blue beacon. Your task is to assign the blue beacon to Bob. He should be discoverable with the name Android Mentor Bob. Use the application in front of you to complete this task.</blockquote>
+        </p>
+        <p>Observe the test subject as he/she attempts to complete this task. The user should press “I am an admin, let me in”, click on the blue beacon, press pair beacon, and then press and hold the blue beacon to rename it to ‘Android Mentor Bob’. Pay attention to the user's actions and record observations and user comments in the data collection sheet. Also answer the questions. </p>
+        <p>When the test subject has completed this task, move on to the second task. Do not reset the application. Read them the following text: </p>
+        <p>
+          <blockquote>Now imagine you are a student at the Hackathon. You are sitting at your desk and you need help on your Android project so you wish to speak with an Android Mentor. Using the application, find an Android Mentor and determine how far away he is from you.</blockquote>
+        </p>
+        <p>Observe the test subject as he/she attempts to complete this task. See if they will verbally confirm how far away the person of interest is. The user should press the X in the top right to return to the home screen, then press ‘Locate People Around Me”, then select ‘Android Mentor: Maxime Gregoire”, and then press ‘Locate People’. The user should tell you he is 5 meters away.  </p>
+        <b>What/How/When should the examiners measure?</b>
+        <p>As the user is attempting to complete the tasks, the examiner should be filling out the data collection sheet in the reporting section with the test results. </p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="re">Reporting</h3>
+        <a name="re"></a>
+        <p>This reporting template is also available as a PDF for your convenience.</p>
+        <a href="pdf/hfp-reporting.pdf" class="button tiny">Download</a>
+        <h5 class="subheader">Pre-test Questionnaire</h5>
+        <ol>
+          <li>When you go to a conference, job fair, convention, hackathon, how often are you trying to locate a person of interest?</li>
+          <li>How do you go about looking for this person, or how would you go about looking for this person?</li>
+          <li>Do you have any experience with apps that allow you to find people of interest (find my friends, etc.)? If so, how is your experience (regular use vs used it once, helpful or not helpful)</li>
+          <li>If you had to look for someone but could not call them, how would you proceed to look for them?</li>
+        </ol>
+        <p>After each task has been read to the test subject, pay attention to their behaviour and fill in the following data collection sheet. </p>
+        <h5 class="subheader">Task #1 <small>(Pair Blue Beacon, rename it to Android Mentor Bob)</small></h5>
+        <b>Observations</b>
+        <p>Describe the actions the user is taking while trying to accomplish the task. </p>
+        <b>User Comments</b>
+        <p>If the user makes any comments or asks any questions, make note of them here.</p>
+        <b>Questions</b>
+        <p>Did the user attempt to rename the beacon within 10 seconds after pairing it?</p>
+        <h5 class="subheader">Task #2 <small>(See if the user can verbally confirm how far away the android mentor is from him)</small></h5>
+        <b>Observations</b>
+        <p>Describe the actions the user is taking while trying to accomplish the task. </p>
+        <b>User Comments</b>
+        <p>If the user makes any comments or asks any questions, make note of them here.</p>
+        <b>Questions</b>
+        <p>Did the user get side-tracked on the way to tracking the person of interest?</p>
+        <h5 class="subheader">Post-test Questionnaire</h5>
+        <ol>
+          <li>Generally, how do you find your encounters with the system, on a scale of 1 to 6, where 1 is not useful at all and 6 is very useful?</li>
+          <li>If you were to get face to face with the Android mentor, what would you do?</li>
+          <li>What are your suggestions for improving the system? Is there a feature you wished you had access to?</li>
+          <li>What did you like the most about the system?</li>
+          <li>What did you like the least about the system?</li>
+        </ol>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="large-12 columns">
+        <h3 data-magellan-destination="ue">Usability Evaluation</h3>
+        <a name="ue"></a>
+        <h5 class="subheader">Heuristics</h5>
+        <p>We selected the following heuristics to evaluate our system, based on Jakob Nielsen's research.</p>
+        <b>Visibility of system status</b>
+        <p>The system requires real-time display of the distance between the user and the person of interest. As such, it should have quick and accurate visual feedback especially when locating beacons.</p>
+        <b>Match between system and the real world</b>
+        <p>The interface for adding beacons should be clear, and the interface for locating users should intuitively direct the user towards the person of interest.</p>
+        <b>User control and freedom</b>
+        <p>When a user chooses the wrong option, there should be an easy way to backtrack and try another option.</p>
+        <b>Consistency and standards</b>
+        <p>The vocabulary and visual language used in the application should be consistent accross the user experience.</p>
+        <b>Recognition rather than recall</b>
+        <p>The information the user has to remember should be minimal. The application should show all relevant information at all times.</p>
+        <b>Aesthetic and minimalist design</b>
+        <p>Only relevant information should be shown to minimize information overload, since this system is supposed to be very simple by design.</p>
+
+        <h5 class="subheader">Methodology</h5>
+        <p>The test subject should follow the procedure identified in the <a href="#ut">Usability Test</a>, which represents a complete tour of the application. The following task description should be read to the test subject:</p>
+        <p>
+          <blockquote>You are an organizer in charge of running a Hackathon, a coding competition for university students. Many students will need assistance in their coding projects. In order to help assist students with their projects, the Hackathon organizing committee has hired several mentors who will walk around and students can ask them questions. Students have a hard time locating mentors for help. In order to help students locate mentors more easily, mentors will be given iBeacon devices so they can be located with the app you are about to use. Bob is an Android mentor, you need to add him to the system so he can be discoverable for students. He has a Blue beacon. Your task is to assign the blue beacon to Bob. He should be discoverable with the name Android Mentor Bob. Use the application in front of you to complete this task.</blockquote>
+        </p>
+        <p>Observe the test subject as he/she attempts to complete this task. The user should press “I am an admin, let me in”, click on the blue beacon, press pair beacon, and then press and hold the blue beacon to rename it to ‘Android Mentor Bob’. Pay attention to the user's actions and record observations and user comments in the data collection sheet. Also answer the questions. </p>
+        <p>When the test subject has completed this task, move on to the second task. Do not reset the application. Read them the following text: </p>
+        <p>
+          <blockquote>Now imagine you are a student at the Hackathon. You are sitting at your desk and you need help on your Android project so you wish to speak with an Android Mentor. Using the application, find an Android Mentor and determine how far away he is from you.</blockquote>
+        </p>
+        <p>Observe the test subject as he/she attempts to complete this task. See if they will verbally confirm how far away the person of interest is. The user should press the X in the top right to return to the home screen, then press ‘Locate People Around Me”, then select ‘Android Mentor: Maxime Gregoire”, and then press ‘Locate People’. The user should tell you he is 5 meters away.  </p>
+        <p>The test subject should answer the following questionnaire:</p>
+
+        <h5 class="subheader">Questionnaire</h5>
+        <a href="pdf/hfp-heuristics.pdf" class="button tiny">Download PDF</a>
+        <p>This heuristics evaluation is based on certain usability heuristics for user interface provided by Jakob Nielsen. For every criterion, please rate the statement from 1 to 5, where 1 means you strongly disagree with the statement, and 5 means you strongly agree with the statement.</p>
+        <p><b>At any point in the application, I am given clear visual indication of what is going on in the system.</b></p>
+        <p>Rating: 1 2 3 4 5<br />Comments: </p>
+        <p><b>When using the application, adding a person of interest is intuitive and clear to me, and when I try locating someone, the directions are intuitive and match what I would do in the real world.</b></p>
+        <p>Rating: 1 2 3 4 5<br />Comments: </p>
+        <p><b>At any point in the application, if I made a mistake, it's easy to backtrack to a previous point and try another option.</b></p>
+        <p>Rating: 1 2 3 4 5<br />Comments: </p>
+        <p><b>The vocabulary and visual language used in the application is clear and consistent.</b></p>
+        <p>Rating: 1 2 3 4 5<br />Comments: </p>
+        <p><b>At any point in the application, everything I need to know about the current state of the application is shown to me.</b></p>
+        <p>Rating: 1 2 3 4 5<br />Comments: </p>
+        <p><b>The design of the application is simple and clear of any information or details that are not useful.</b></p>
+        <p>Rating: 1 2 3 4 5<br />Comments: </p>
+      </div>
+    </div>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.magellan.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
