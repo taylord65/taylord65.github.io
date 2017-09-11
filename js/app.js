@@ -1,9 +1,5 @@
 //TODO
 //Detect no three.js
-//texture of grid on plane
-//Headline as picture on plane
-//Canvas to do this?
-//Change sandwich to Work?
 
 //GLOBAL VARS
 var container, stats;
@@ -28,24 +24,21 @@ var colorTheme = {
 
 const Soccer1 = { 
   template: '#soccer1',
-  // template: '<div class="portfolio-feature"></div>',
   created: function(){
-    window.cancelAnimationFrame(frame);
-    $('.app-container canvas').hide();
+    //window.cancelAnimationFrame(frame);
   } 
 };
 
 const Saildrone = { 
   template: '<div class="portfolio-feature"></div>',
   created: function(){
-    window.cancelAnimationFrame(frame);
+    //window.cancelAnimationFrame(frame);
   } 
 };
 
 const Home = { 
-  template: '<transition name="fade"><div class="headline-container"><div class="headline"> <h1>Taylor Dotsikas</h1> <h2>Product Desginer and Developer</h2> </div></div> </transition>',
+  template: '<transition name="fade"><div class="headline-container"><div class="headline"> <h1>Taylor Dotsikas</h1> <h2>Product Desginer / Developer</h2> </div></div> </transition>',
   created: function(){
-    $('.app-container canvas').show();
   }
 };
 
@@ -63,7 +56,7 @@ const Menu = {
       router.push(route);
     },
     closeMenu: function(event){
-      router.go(window.history.back());
+      router.go(-1);
     } 
   }
 };
@@ -89,7 +82,17 @@ var app = new Vue({
   data: {
     colorTheme: Theme,
     showMenu: false,
-    objects: []
+    objects: [],
+    threeDisplayClass: false
+  },
+  watch: {
+    '$route' (to, from){
+      if(to.path === '/'){
+        this.threeDisplayClass = undefined;
+      } else {
+        this.threeDisplayClass = 'hide-3d';
+      }
+    }
   },
   methods: {
     home: function(event){
@@ -105,57 +108,13 @@ var app = new Vue({
       camera = new THREE.PerspectiveCamera( 70, $(container).width() / $(container).height(), 1, 10000 );
       camera.position.z = 2500;
 
-      //CAMERA CONTROLS
-      controls = new THREE.OrbitControls( camera );
-      controls.rotateSpeed = 1;
-      controls.minDistance = 1000;
-      controls.maxDistance = 2000;
-      //controls.enableZoom = false;
-
-
-      var rangeLimiter;
-      var rangeLimiter_rads;
-
-      if(Theme == 'BLACK'){
-        rangeLimiter = 80;
-      } else {
-        rangeLimiter = 30;
-
-        rangeLimiter_rads = rangeLimiter * (Math.PI/180); 
-        // How far you can orbit vertically, upper and lower limits.
-        // Range is 0 to Math.PI radians.
-        controls.minPolarAngle = 0 + rangeLimiter_rads; // radians
-        controls.maxPolarAngle = Math.PI - rangeLimiter_rads; // radians
-
-        // How far you can orbit horizontally, upper and lower limits.
-        // If set, must be a sub-interval of the interval [ - Math.PI, Math.PI ].
-        controls.minAzimuthAngle = - Math.PI/2 + rangeLimiter_rads; // radians
-        controls.maxAzimuthAngle = Math.PI/2 - rangeLimiter_rads; // radians
-      }
-
-
-
       //SCENE
       scene = new THREE.Scene();
-
-
-
       this.generateSceneObjects();
-      //this.generateGrid();
-
       
       //LIGHT
-
       var light = new THREE.SpotLight( 0xffffff, 0.3 );
       light.position.set(0, 5000, 0 );
-      // light.castShadow = true;
-
-      // light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 50, 1, 200, 10000 ) );
-      // light.shadow.bias = - 0.00022;
-
-      // light.shadow.mapSize.width = 2048;
-      // light.shadow.mapSize.height = 2048;
-
       scene.add( light );
 
 
@@ -189,6 +148,15 @@ var app = new Vue({
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFShadowMap;
       container.appendChild( renderer.domElement );
+
+
+      //CAMERA CONTROLS
+      controls = new THREE.OrbitControls( camera, renderer.domElement );
+      controls.rotateSpeed = 1;
+      controls.minDistance = 1000;
+      controls.maxDistance = 2000;
+
+
       window.addEventListener( 'resize', this.onWindowResize, false );
     },
     generateGrid: function(){
@@ -278,8 +246,17 @@ var app = new Vue({
     }
   },
   mounted: function(){
-    //this.initScene();
-    //this.animate();
+
+    var currentPath = router.history.current.path;
+
+    if(currentPath === '/'){
+      this.threeDisplayClass = undefined;
+    } else {
+      this.threeDisplayClass = 'hide-3d';
+    }
+
+    this.initScene();
+    this.animate();
   },
   router
 });
