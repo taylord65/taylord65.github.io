@@ -29,6 +29,7 @@ html, body {
   width: 50px;
   height: 50px;
   z-index: 6;
+  cursor: pointer;
 }
 
 .hide-3d canvas {
@@ -54,6 +55,7 @@ html, body {
   height: 50px;
   z-index: 3;
   pointer-events: auto;
+  cursor: pointer;
 }
 
 .menu-icon-regular {
@@ -71,6 +73,7 @@ html, body {
 #x-icon {
   width: 30px;
   height: 30px;
+  cursor: pointer;
 }
 
 .menu-icon svg {
@@ -171,6 +174,7 @@ html, body {
   flex-direction: column;
   margin-top: 10px;
   margin-bottom: 4em;
+  cursor: pointer;
 }
 
 .feature span {
@@ -180,7 +184,7 @@ html, body {
 .feature h2 {
   color: #FFF;
   margin: auto;
-  font-size: 5em;
+  font-size: 4em;
 }
 
 .portfolio-feature {
@@ -285,6 +289,10 @@ html, body {
   background-image: url("https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png");
 }
 
+#sd_background {
+  background-image: url("https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3boats.jpg");
+}
+
 .iphone-container {
   width: 375px;
   height: 667px;
@@ -310,6 +318,14 @@ html, body {
 .video-container video {
   margin: auto;
   width: 80%;
+}
+
+.desktop-video {
+  margin: auto;
+  height: auto;
+  margin-top: 2em;
+  margin-bottom: 2em; 
+  width: 95%;
 }
 
 .fade-enter-active, .fade-leave-active {

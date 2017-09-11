@@ -25,14 +25,12 @@ var colorTheme = {
 const Soccer1 = { 
   template: '#soccer1',
   created: function(){
-    //window.cancelAnimationFrame(frame);
   } 
 };
 
 const Saildrone = { 
-  template: '<div class="portfolio-feature"></div>',
+  template: '#saildrone',
   created: function(){
-    //window.cancelAnimationFrame(frame);
   } 
 };
 
@@ -75,6 +73,11 @@ const router = new VueRouter({
 Vue.component('iphone-component', {
   props: ['src'],
   template: '#iphone'
+});
+
+Vue.component('desktop', {
+  props: ['src'],
+  template: '#desktop'
 });
 
 var app = new Vue({
