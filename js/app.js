@@ -89,7 +89,15 @@ const Saildrone = {
 };
 
 const Home = { 
-  template: '<div class="headline-container"><div class="headline animated fadeIn"> <h1>Taylor Dotsikas</h1> <h2>Product Desginer / Developer</h2> </div></div>',
+  template: '\
+    <div class="headline-container">\
+      <div class="headline animated fadeIn">\
+        <h1>Taylor Dotsikas</h1>\
+        <h2>UI Desginer</h2>\
+        <h2>Front-end Developer</h2>\
+        </div>\
+      </div>\
+    ',
   created: function(){
   }
 };
@@ -299,13 +307,14 @@ var app = new Vue({
       if(!this.threeDisplayClass){
         frame = requestAnimationFrame( this.animate );
         this.render();
+        this.rotateBlocks();
       }
     },
     rotateBlocks: function(){
       for (var i = this.objects.length - 1; i >= 0; i--) {
-        this.objects[i].rotateX(0.01);
-        this.objects[i].rotateY(0.01);
-        this.objects[i].rotateZ(0.01);
+        this.objects[i].rotateX(0.0008);
+        this.objects[i].rotateY(0.0008);
+        this.objects[i].rotateZ(0.0008);
       }
     },
     render: function(){
