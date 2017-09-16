@@ -13,14 +13,70 @@ var colorTheme = {
     colorName: 'BLACK',
     colorSet: ['1BE7FF', '6EEB83', 'E4FF1A', 'E8AA14', 'FF5714',
                 'F46036', '2E294E', '1B998B', 'E71D36', 'C5D86D'] 
-    // colorSet: ['363635', '62A87C', '617073', '4D685A', '545775', '202C39', '1F487E', '60B2E5', 'AEECEF']
   },
   WHITE: {
     colorName: 'WHITE',
-    colorSet: ['1BE7FF', '6EEB83', 'E4FF1A', 'E8AA14', 'FF5714',
-                'F46036', '2E294E', '1B998B', 'E71D36', 'C5D86D'] 
+    colorSet: ['1BE7FF', '6EEB83', 'E4FF1A', 'E8AA14', 'FF5714', 'F46036', '2E294E', '1B998B', 'E71D36', 'C5D86D'] 
+  },
+  ALT: {
+    colorName: 'COLORNAME',
+    colorSet: ['363635', '62A87C', '617073', '4D685A', '545775', '202C39', '1F487E', '60B2E5', 'AEECEF']
   }
 };
+
+Vue.directive('vpshow-and-autoplay', {
+  inViewport (el) {
+    var rect = el.getBoundingClientRect()
+    return !(rect.bottom < 0 || rect.right < 0 || 
+             rect.left > window.innerWidth ||
+             rect.top > window.innerHeight)
+  },
+  
+  bind(el, binding) {
+
+    el.classList.add('before-enter')
+    el.$onScroll = function() {
+      if (binding.def.inViewport(el)) {
+        el.classList.add('enter')
+        el.classList.remove('before-enter')
+
+        //Select the video node and autoplay. 
+        //If html changes this must change.
+        el.childNodes[2].children[0].autoplay = true;
+        el.childNodes[2].children[0].load();
+
+        binding.def.unbind(el, binding)        
+      }
+    }
+    document.addEventListener('scroll', el.$onScroll)
+  },
+  
+  inserted(el, binding) {
+    el.$onScroll()  
+  },
+  
+  unbind(el, binding) {    
+    document.removeEventListener('scroll', el.$onScroll)
+    delete el.$onScroll
+  }  
+});
+
+
+function getRandomColor(customThemeName) {
+  
+  var randomColor;
+
+  if(customThemeName){
+    randomColor = colorTheme[customThemeName].colorSet[Math.floor(Math.random()*colorTheme[customThemeName].colorSet.length)];
+  } else {
+    randomColor = colorTheme[Theme].colorSet[Math.floor(Math.random()*colorTheme[Theme].colorSet.length)];
+  }
+
+  return parseInt('0x' + randomColor);
+}
+
+
+
 
 const Soccer1 = { 
   template: '#soccer1',
@@ -29,13 +85,11 @@ const Soccer1 = {
 };
 
 const Saildrone = { 
-  template: '#saildrone',
-  created: function(){
-  } 
+  template: '#saildrone'
 };
 
 const Home = { 
-  template: '<transition name="fade"><div class="headline-container"><div class="headline"> <h1>Taylor Dotsikas</h1> <h2>Product Desginer / Developer</h2> </div></div> </transition>',
+  template: '<div class="headline-container"><div class="headline animated fadeIn"> <h1>Taylor Dotsikas</h1> <h2>Product Desginer / Developer</h2> </div></div>',
   created: function(){
   }
 };
@@ -70,6 +124,8 @@ const router = new VueRouter({
   routes
 });
 
+
+
 Vue.component('iphone-component', {
   props: ['src'],
   template: '#iphone'
@@ -86,12 +142,13 @@ var app = new Vue({
     colorTheme: Theme,
     showMenu: false,
     objects: [],
-    threeDisplayClass: false
+    threeDisplayClass: null
   },
   watch: {
     '$route' (to, from){
       if(to.path === '/'){
-        this.threeDisplayClass = undefined;
+        this.threeDisplayClass = null;
+        this.animate();
       } else {
         this.threeDisplayClass = 'hide-3d';
       }
@@ -114,6 +171,7 @@ var app = new Vue({
       //SCENE
       scene = new THREE.Scene();
       this.generateSceneObjects();
+      //this.generateGrid();
       
       //LIGHT
       var light = new THREE.SpotLight( 0xffffff, 0.3 );
@@ -165,21 +223,22 @@ var app = new Vue({
     generateGrid: function(){
 
       var material = new THREE.LineBasicMaterial({
-        color: 0x3da9ff
+        color: 0xFFFFFF
       });
 
       for (var j = 4; j >= 0; j--) {
         for (var i = 50 - 1; i >= 0; i--) {
 
           var geometry = new THREE.Geometry();
+          var material = new THREE.LineBasicMaterial({color: getRandomColor('ALT')});
 
           geometry.vertices.push(
-            new THREE.Vector3( -1000, (i*100), 0 ),
-            new THREE.Vector3( 1000, (i*100), 0 )
+            new THREE.Vector3( (i*100), 1000, (j*100) ),
+            new THREE.Vector3( (i*100), 500, (j*100) )
           );
 
           var line = new THREE.Line( geometry, material );
-          line.translateZ(j*1000);
+          line.translateZ(j*100);
           scene.add( line );
         };
       };
@@ -187,20 +246,12 @@ var app = new Vue({
     },
     generateSceneObjects: function(){
 
-      function getRandomRolor() {
-              
-        var randomColor = colorTheme[Theme].colorSet[Math.floor(Math.random()*colorTheme[Theme].colorSet.length)];
-
-
-        return parseInt('0x' + randomColor);
-      }
-
       var geometry = new THREE.BoxGeometry( 40, 30, 40 );
 
       for ( var i = 0; i < 80; i ++ ) {
 
         var object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({
-            color: getRandomRolor()
+            color: getRandomColor()
           })
         );
 
@@ -226,8 +277,10 @@ var app = new Vue({
       }
     },
     animate: function(){
-      frame = requestAnimationFrame( this.animate );
-      this.render();
+      if(!this.threeDisplayClass){
+        frame = requestAnimationFrame( this.animate );
+        this.render();
+      }
     },
     rotateBlocks: function(){
       for (var i = this.objects.length - 1; i >= 0; i--) {
@@ -253,7 +306,7 @@ var app = new Vue({
     var currentPath = router.history.current.path;
 
     if(currentPath === '/'){
-      this.threeDisplayClass = undefined;
+      this.threeDisplayClass = null;
     } else {
       this.threeDisplayClass = 'hide-3d';
     }

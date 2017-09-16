@@ -38,7 +38,6 @@
 <body>
 
 <template id="menu">
-  <transition name="fade">
     <div class="menu">
 
     <div v-on:click="closeMenu" class="menu-icon menu-icon-regular">
@@ -59,7 +58,6 @@
 
       <h1>taylordotsikas@gmail.com</h1>
     </div>
-  </transition>
 </template>
 
 
@@ -67,7 +65,7 @@
 
 
 <template id="iphone">
-  <div class="iphone-container">
+  <div class="iphone-container" v-vpshow-and-autoplay>
     <svg version="1.1" x="0px" y="0px"
        viewBox="0 0 294.7 600" enable-background="new 0 0 294.7 600" xml:space="preserve">
       <g>
@@ -178,13 +176,15 @@
     </svg>
 
     <div class="video-container">
-      <video width="100%" height="auto" autoplay loop muted playsinline>
+      <video width="100%" height="auto" loop muted playsinline>
         <source :src="src" type="video/mp4">
       Your browser does not support the video tag.
       </video>
     </div>
   </div>
 </template>
+
+
 
 
 <template id="desktop">
@@ -198,6 +198,7 @@
 
 
 <template id="soccer1">
+  <transition name="portfolio-transition">
   <div class="portfolio-feature">
 
     <div class="cover" id="s1_background">
@@ -299,11 +300,13 @@
 
     </div>
   </div>
+  </transition>
 </template>
 
 
 
 <template id="saildrone">
+  <transition name="portfolio-transition">
   <div class="portfolio-feature">
 
     <div class="cover" id="sd_background">
@@ -344,7 +347,7 @@
     </div>
 
     <div class="content-section">
-      <div class="content-panel">
+      <div class="content-panel" style="min-height: auto;">
         <h1 style="margin-top: 1em;">Mission planning for ocean data collection</h1>
         <desktop src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/saildroneVideo.mp4">
         </desktop>
@@ -352,10 +355,8 @@
     </div>
 
   </div>
+</transition>
 </template>
-
-
-
 
 
 
