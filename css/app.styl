@@ -1,0 +1,585 @@
+userSelectNone()
+  -webkit-user-select: none; /* Chrome, Opera, Safari */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
+  
+curveTop()
+  border-top-left-radius 4px
+  border-top-right-radius 4px
+  
+font = "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+customFont = 'ITCAvantGardeStd-Demi', sans-serif;
+maxContainerWidth = 1246px;
+med = 1130px;
+sml = 480px;
+
+
+.darkHeader
+  background-color #333333
+
+html, body 
+  margin 0
+  height 100%
+  background-color #000
+  padding 0px
+  font-size 20px
+  font-family font
+  @media (max-width: sml)
+    font-size 16px
+    
+.app-container 
+  position relative
+  height 100%
+
+#app 
+  height 100%
+    
+p
+  line-height 1.62em
+  
+.webgl-notice
+  position absolute
+  bottom 2em
+  line-height 1.6em
+  left 1.5em
+  right 1.5em
+  text-align center
+  span
+    color #6d6d6d
+  
+  
+header
+  position fixed
+  top 0em
+  left 0em
+  right 0em
+  padding 0.3em
+  height 2.5em
+  z-index 6
+  display flex
+  background-color transparent
+  transition background-color 0.2s
+  .home-icon 
+    margin auto
+    margin-left 0px
+    display flex
+    width 2.5em
+    height 100%
+    cursor pointer
+    pointer-events auto
+    userSelectNone()
+    svg
+      margin auto
+      width 2.5em
+      height 2.5em
+      pointer-events none
+  .menu-icon 
+    margin auto
+    margin-right 0px
+    display flex
+    width 110px
+    height 100%
+    pointer-events auto
+    cursor pointer
+    userSelectNone()
+    span
+      margin auto
+      color #FFF
+      font-size 0.9em
+      margin-right 0px
+      pointer-events none
+    svg
+      margin auto
+      width 25px
+      height 25px
+      fill #FFF
+      pointer-events none
+      
+.homeScreen
+  header
+    .menu-icon
+      background-color rgba(0, 0, 0, 0.56)
+
+
+.hide-3d
+  canvas
+    display none
+    
+.blur
+  canvas
+    opacity 0.2
+  @media(max-width: sml)
+    canvas
+      opacity 1
+
+.WHITE
+  .home-icon
+    h1
+      color #000
+  .headline
+    h1
+      color #000
+    h2
+      color #000
+      
+.noWebGL
+  .headline
+    h1
+      color #FFF
+    h2
+      color #FFF
+
+
+.menu-icon-regular 
+  width 50px !important
+  position absolute
+  right 1em
+  top 1em
+  display flex
+
+#x-icon
+  margin auto 
+  width 30px
+  height 30px
+  cursor pointer
+  fill #000
+
+.title_page 
+  display flex
+  margin auto
+  width 100%
+  height 100%
+  position absolute
+  z-index 100
+  h1
+    @media (max-width: sml)
+      font-size 1.8em
+
+
+.headline-container 
+  pointer-events none
+  position fixed
+  top 0
+  bottom 0
+  right 0
+  left 0
+  display flex
+
+
+.headline 
+  margin auto
+  text-align center
+  height auto
+  userSelectNone()
+  h1
+    margin auto
+    font-size 1.5em
+    color #FFF
+    text-align center
+    font-family customFont
+  h2
+    font-size 0.8em
+    color #FFF
+    text-transform uppercase
+    letter-spacing 0.1em
+    margin-top 0.6em
+
+
+.menu
+  position fixed
+  z-index 6
+  background-color rgba(255,255,255,0.98)
+  top 0
+  bottom 0
+  left 0
+  right 0
+  display flex
+  flex-direction column
+  text-align center
+  overflow-y hidden
+  userSelectNone()
+  h1
+    margin auto
+    margin-bottom 10px
+    margin-top 100px
+    color #616161
+    font-size 0.7em
+    text-transform uppercase
+    letter-spacing 0.1em
+  @media (min-width: sml)
+    left 50%
+    box-shadow -6px 0px 11px rgba(0, 0, 0, 0.14)
+  .feature
+    width 80%
+    margin auto
+    display flex
+    flex-direction column
+    margin-top 10px
+    margin-bottom 4em
+    cursor pointer
+    span
+      color rgba(255, 255, 255, 0.34)
+    h2
+      color rgba(255, 255, 255, 0.41)
+      margin auto
+      font-size 2em
+      color rgba(62, 62, 62, 0.41)
+      &:hover
+        color #2196F3
+  @media(max-width: sml)
+    background-color rgba(0, 0, 0, 0.48)
+    .feature
+      h2
+        color #FFF
+            
+
+
+.portfolio-feature 
+  width 100%
+  height 100%
+  .scrollUpSection
+    width calc(100% - 5.6em)
+    margin-left 2.8em
+    @media (max-width: med)
+      width 100%
+      margin-left 0px
+    position relative
+    top 95%
+    background-color #FFF
+    padding-bottom 1px
+    curveTop()
+  footer
+    background-color #171717
+    height 7em
+    margin-bottom -1px
+    display flex
+    .center-content
+      margin auto
+      text-align center
+      color #cecece
+      h1
+        font-size 1em
+        margin-bottom 0.4em
+        margin-top 0em
+      span
+        font-size 0.8em
+        
+sideTextContainer()
+  margin auto
+  width 2em
+  position relative
+  display inline-block
+  height auto
+  @media (max-width: sml)
+    display none
+  span
+    position absolute
+    top 50%
+    left 50%
+    width 15em
+    text-align center
+    padding-top 1em
+    text-transform uppercase
+    font-size 0.9em
+    color #ababab
+
+.cover 
+  top 0
+  bottom 0
+  left 0
+  right 0
+  position fixed
+  background-color #000
+  background-repeat no-repeat
+  background-position center
+  background-size cover
+  display flex
+  .side-text-left
+    sideTextContainer()
+    margin-left 0px
+    span
+      transform translateX(-50%) translateY(-50%) rotate(-90deg)
+  .side-text-right
+    sideTextContainer()
+    margin-right 0px
+    span
+      transform translateX(-50%) translateY(-50%) rotate(90deg)
+  .cover-headline 
+    margin auto
+    color #FFF
+    text-align center
+    h1
+      text-transform uppercase
+      letter-spacing 0.3em
+      font-size 2.5em
+      font-weight 600
+      margin-bottom 0.3em
+      font-family customFont
+    h2
+      text-transform uppercase
+      font-size 1em
+      letter-spacing 0.4em
+      margin-top 0px
+      font-weight 300
+    @media (max-width: sml)
+      h1
+        font-size 2em
+        margin-bottom 0.3em
+      h2
+        font-size 0.6em
+  .links-to-app 
+    margin auto
+    width 250px
+    height 50px
+    display flex
+    margin-top 1.5em
+    cursor pointer
+    .app-link
+      margin auto
+      height 50px
+      width 50px
+  .scroll-indicator
+    height 50px
+    margin-bottom 20px
+    left 0
+    right 0
+    display flex
+    text-align center
+    position fixed
+    z-index 2
+    bottom 7%
+    svg
+      width 30px
+      height 30px
+      margin auto
+
+.overview-banner
+  height auto
+  padding 2em 0em
+  background-color #F2F2F2
+  display flex
+  .banner-container
+    width 80%
+    margin auto
+    max-width maxContainerWidth
+    p
+      color #333333
+      &:first-child
+        margin-top 0px
+      &:last-child
+        margin-bottom 0px
+    @media (max-width: sml)
+      width 90%
+
+.content-section
+  height auto
+  width 100%
+  margin-top 5em
+  @media (max-width: med)
+    margin-top 3em
+  .content-panel
+    width 80%
+    display block
+    overflow auto
+    min-height 667px
+    max-width maxContainerWidth
+    background-color #FFF
+    margin 8em auto
+    &:first-child
+      margin-top 0px
+    &:last-child
+      margin-bottom 5em
+    .description-area
+      height 100%
+      width 49.4%
+      display inline-block
+      float left
+      p
+        color #404040
+      .quote
+        color #000000
+        font-style italic
+    h1
+      width 50%
+      line-height 1.3em
+      margin auto
+      color #000
+      text-align left
+      font-size 1.8em
+      margin-bottom 0px
+      margin-left 0px
+    @media (max-width: med)
+      margin 3em auto
+      .description-area
+        width 100%
+      .iphone-container
+        float none
+        margin-bottom 1em
+      h1
+        width 100%
+        margin auto
+        text-align center
+        margin-bottom 1em
+    @media (max-width: sml)
+      width 100%
+      .description-area
+        width auto 
+        padding 0 1em
+        
+      
+.tabbed-content
+  width 100%
+  height auto
+  margin-top 2.5em
+  .title-row
+    display flex
+    border-bottom 2px solid #e8e8e8
+    width 100%
+    height 3em
+    display flex
+    margin-bottom 1em
+    padding-bottom 0.2em
+    .tab-title
+      font-weight 500
+      color #B4B4B4
+      margin auto
+      cursor pointer
+      margin-left 0px
+      transition color 0.2s
+      padding 0px 0.35em
+      line-height 1.3em
+      &:hover
+        color #0070c9
+    .activeTitle
+      color #171717
+      cursor default
+      &:hover
+        color #171717
+  .tab-content-area
+    width 100% 
+  @media (max-width: med)
+    .tab-title
+      margin-left auto !important
+  @media (max-width: sml)
+    margin-top 2em
+
+
+.iphone-container
+  opacity 1
+  width 375px
+  height 667px
+  float right
+  position relative
+  display flex
+  margin auto
+  svg
+    position absolute
+    width 100%
+    height 100%
+    margin auto
+  .video-container
+    position absolute
+    width 100%
+    height 100%
+    display flex
+    video
+      margin auto
+      width 80%
+
+.desktop-video 
+  margin auto
+  height auto
+  margin-top 2em
+  margin-bottom 2em
+  width 95%
+  
+
+  
+.checkItOutButton
+  margin-left 20%
+  margin-right 20%
+  margin-top 2em
+  height 2em
+  border-radius 4px
+  background-color #0E3C6A
+  color #FFF
+  display flex
+  cursor pointer
+  &:hover
+    background-color #00609A
+  span
+    margin auto
+    pointer-events none
+    font-size 0.9em
+    userSelectNone()
+  @media (max-width: sml)
+    margin-left 10%
+    margin-right 10%
+
+
+.viewOptionsOpen
+  flex-direction column
+  height auto
+  background-color #005382
+  &:hover
+    background-color #005382
+  span
+    padding 1em 0em
+    margin-left 1em
+    userSelectNone()
+
+
+
+
+
+
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0
+}
+
+.slide-leave-active,
+.slide-enter-active {
+  transition: 0.2s;
+}
+.slide-enter {
+  transform: translate(100%, 0);
+}
+.slide-leave-to {
+  transform: translate(100%, 0);
+}
+
+
+// .portfolio-transition-leave-active,
+// .portfolio-transition-active {
+//   transition: 2s;
+//   opacity: 1;
+// }
+// .portfolio-transition-enter {
+//   transform: translate(100%, 0);
+// }
+// .portfolio-transition-leave-to {
+//   transform: translate(100%, 0);
+// }
+
+/* v-vpshow classes */
+.before-enter {
+  opacity: 0;
+  //transform: translateY(2em);
+}
+
+.enter {
+  transition: all 2s ease;
+}
+
+.bounce {
+  animation-iteration-count: 2;
+}
+
+
+

@@ -1,12 +1,10 @@
-//TODO
-//Detect no three.js
+$(document).ready(function () {
 
-//GLOBAL VARS
 var container, stats;
-var camera, controls, scene, renderer, composer;
+var camera, controls, scene, renderer, composer, composer2;
+var glitchPass;
 var frame;
-var Theme = 'BLACK'; // BLACK || WHITE
-var counter = 0;
+var Theme = 'WHITE';
 
 var colorTheme = {
   BLACK: {
@@ -24,108 +22,54 @@ var colorTheme = {
   }
 };
 
-Vue.directive('vpshow-and-autoplay', {
-  inViewport (el) {
-    var rect = el.getBoundingClientRect()
-    return !(rect.bottom < 0 || rect.right < 0 || 
-             rect.left > window.innerWidth ||
-             rect.top > window.innerHeight)
-  },
-  
-  bind(el, binding) {
-
-    el.classList.add('before-enter')
-    el.$onScroll = function() {
-      if (binding.def.inViewport(el)) {
-        el.classList.add('enter')
-        el.classList.remove('before-enter')
-
-        //Select the video node and autoplay. 
-        //If html changes this must change.
-        el.childNodes[2].children[0].autoplay = true;
-        el.childNodes[2].children[0].load();
-
-        binding.def.unbind(el, binding)        
-      }
-    }
-    document.addEventListener('scroll', el.$onScroll)
-  },
-  
-  inserted(el, binding) {
-    el.$onScroll()  
-  },
-  
-  unbind(el, binding) {    
-    document.removeEventListener('scroll', el.$onScroll)
-    delete el.$onScroll
-  }  
-});
-
-
-function getRandomColor(customThemeName) {
-  
-  var randomColor;
-
-  if(customThemeName){
-    randomColor = colorTheme[customThemeName].colorSet[Math.floor(Math.random()*colorTheme[customThemeName].colorSet.length)];
-  } else {
-    randomColor = colorTheme[Theme].colorSet[Math.floor(Math.random()*colorTheme[Theme].colorSet.length)];
-  }
-
-  return parseInt('0x' + randomColor);
-}
-
-
-
-
 const Soccer1 = { 
   template: '#soccer1',
+  data: function(){
+    return {
+      src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png'
+    }
+  },
   created: function(){
-  } 
+
+    $('<img/>').attr('src', this.src).on('load', function() {
+       $(this).remove();
+       $('#s1_background').css('background-image', 'url(' + this.src + ')');
+    });
+  }
 };
 
 const Saildrone = { 
-  template: '#saildrone'
+  template: '#saildrone',
+  data: function(){
+    return {
+      src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3boats.jpg"
+    }
+  },
+  created: function(){
+
+    $('<img/>').attr('src', this.src).on('load', function() {
+       $(this).remove();
+       $('#sd_background').css('background-image', 'url(' + this.src + ')');
+    });
+  }
 };
 
 const Home = { 
   template: '\
     <div class="headline-container">\
-      <div class="headline animated fadeIn">\
+      <div class="headline">\
         <h1>Taylor Dotsikas</h1>\
         <h2>UI Designer</h2>\
-        <h2>Front-end Developer</h2>\
+        <h2>Front end Developer</h2>\
         </div>\
       </div>\
-    ',
-  created: function(){
-  }
-};
-
-const Menu = {
-  template: '#menu',
-  data: function() {
-    return {
-      soccerRoute: 'soccer1',
-      sailDroneRoute: 'saildrone'
-    }
-  },
-  methods: {
-    routeTo: function(event, route){
-      this.showMenu = !this.showMenu;
-      router.push(route);
-    },
-    closeMenu: function(event){
-      router.go(-1);
-    } 
-  }
+    '
 };
 
 const routes = [
   { path: '/soccer1', component: Soccer1 },
   { path: '/saildrone', component: Saildrone },
-  { path: '/', component: Home},
-  { path: '/nav', component: Menu}
+  { path: '/', component: Home}
 ];
 
 const router = new VueRouter({
@@ -133,11 +77,114 @@ const router = new VueRouter({
 });
 
 
+Vue.component('header-menu', {
+  props: ['showMenu'],
+  template: '\
+    <header v-header>\
+      <div class="home-icon" v-on:click="home">\
+        <svg version="1.1" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">\
+        <rect fill="#A01212" width="50" height="50"/> <g> <path fill="#FFFFFF" d="M20,41.7V17.1h-9V8.3H39v8.8h-8.9v24.6H20z"/> </g> <circle fill="#FFFFFF" cx="37" cy="40.3" r="1.8"/> </svg>\
+      </div>\
+      <div v-on:click="menu" class="menu-icon">\
+        <span>WORK</span>\
+        <svg id="icon-menu" viewBox="0 0 24 24">\
+          <path d="M3 6h18v2.016h-18v-2.016zM3 12.984v-1.969h18v1.969h-18zM3 18v-2.016h18v2.016h-18z"></path>\
+        </svg>\
+      </div>\
+    </header>\
+  ',
+  methods: {
+    home: function(){
+      this.$emit('homeaction');
+    },
+    menu: function(){
+      this.$emit('menuaction');
+    }
+  },
+  directives: {
+    header: {
+      positionReached(el) {
+        if(router.history.current.path !== '/'){
+          var headerHeight = $("#header").height();
+          var scrollUpSectionPosition = $(".scrollUpSection").offset().top - headerHeight;
+          var windowScroll = $(window).scrollTop();
+
+          if(windowScroll > scrollUpSectionPosition){
+            if(el.classList.length == 0){
+              el.classList.add('darkHeader');
+            }
+          } else {
+            if(el.classList.length > 0){
+              el.classList.remove('darkHeader');
+            }
+          }
+        }
+      },
+      inserted(el, binding) {
+        el.$onScroll();
+      },
+      bind(el, binding) {
+        el.$onScroll = function() {
+          binding.def.positionReached(el);
+        }
+        document.addEventListener('scroll', el.$onScroll);
+      }
+    }
+  }
+});
+
+
+Vue.component('nav-menu', {
+  props: ['showMenu'],
+  template: '\
+    <transition name="slide">\
+      <div v-if="showMenu" class="menu">\
+        <div v-on:click="closeMenu" class="menu-icon menu-icon-regular animated fadeIn">\
+          <svg version="1.1" id="x-icon" x="0px" y="0px" viewBox="0 0 792 612" enable-background="new 0 0 792 612" xml:space="preserve"> <rect x="166.5" y="280.3" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 459.6396 802.389)" width="459" height="51.4"/> <rect x="370.3" y="76.5" transform="matrix(0.7071 0.7071 -0.7071 0.7071 332.3604 -190.389)" width="51.4" height="459"/></svg>\
+        </div>\
+        <h1>Featured Work</h1>\
+        <div v-on:click="routeTo($event, soccerRoute )" class="feature">\
+          <h2>Soccer-1</h2>\
+        </div>\
+        <div v-on:click="routeTo($event, sailDroneRoute )" class="feature">\
+          <h2>Saildrone</h2>\
+        </div>\
+        <div class="feature">\
+          <h2>Fifthlight</h2>\
+        </div>\
+        <div class="feature">\
+          <h2>teaBot</h2>\
+        </div>\
+        <div class="feature">\
+          <h2>Art</h2>\
+        </div>\
+        <h1>taylordotsikas@gmail.com</h1>\
+      </div>\
+    </transition>\
+  ',
+  data: function() {
+    return {
+      soccerRoute: 'soccer1',
+      sailDroneRoute: 'saildrone'
+    }
+  },
+  methods: {
+    closeMenu: function(){
+      this.$emit('menuaction');
+    },
+    routeTo: function(event, route){
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      router.push(route);
+      this.$emit('menuaction');
+    }
+  }
+});
+
 
 Vue.component('iphone-component', {
   props: ['src'],
   template: '\
-    <div class="iphone-container" v-vpshow-and-autoplay>\
+    <div class="iphone-container" v-autofade>\
       <iphone-svg></iphone-svg>\
       <div class="video-container">\
         <video width="100%" height="auto" loop muted playsinline>\
@@ -145,10 +192,50 @@ Vue.component('iphone-component', {
         </video>\
       </div>\
     </div>\
-  '
+  ',
+  directives: {
+    autofade: {
+      inViewport (el) {
+        var rect = el.getBoundingClientRect()
+        return !(rect.bottom < 0 || rect.right < 0 || 
+                 rect.left > window.innerWidth ||
+                 rect.top > window.innerHeight)
+      },
+      
+      bind(el, binding) {
+
+        el.classList.add('before-enter')
+        el.$onScroll = function() {
+          if (binding.def.inViewport(el)) {
+            el.classList.add('enter')
+            el.classList.remove('before-enter')
+
+            //Select the video node and autoplay. 
+            //If html changes this must change.
+            el.childNodes[2].children[0].autoplay = true;
+            el.childNodes[2].children[0].load();
+
+            binding.def.unbind(el, binding)        
+          }
+        }
+        document.addEventListener('scroll', el.$onScroll)
+      },
+      
+      inserted(el, binding) {
+        el.$onScroll()  
+      },
+      
+      unbind(el, binding) {    
+        document.removeEventListener('scroll', el.$onScroll)
+        delete el.$onScroll
+      }  
+    }
+  }
 });
 
+
 Vue.component('iphone-svg', {
+
   template: '<svg version="1.1" x="0px" y="0px" viewBox="0 0 294.7 600" enable-background="new 0 0 294.7 600" xml:space="preserve"> <g> <g> <path fill="#595A60" d="M293.7,555c-0.1,24.8-20.3,45-45.1,45H48.1c-24.8,0-45-20.2-45-45V45c0-24.8,20.2-45,45-45h201.7 c24.8,0,45,20.2,44.9,45L293.7,555z"/> <path fill="#83848A" d="M48.1,598c-23.7,0-43-19.3-43-43V45c0-23.7,19.3-43,43-43h201.7c11.4,0,22.2,4.5,30.3,12.6 s12.6,18.9,12.6,30.4l-1.1,510c0,23.7-19.4,43-43.1,43H48.1z"/> <path fill="#111111" d="M48.1,596c-22.6,0-41-18.4-41-41V45c0-22.6,18.4-41,41-41h201.7c10.9,0,21.2,4.3,28.9,12 c7.8,7.8,12,18,12,28.9l-1.1,510c0,22.6-18.5,41-41.1,41H48.1z"/> <path d="M48.1,594c-21.5,0-39-17.5-39-39V45c0-21.5,17.5-39,39-39h201.7c10.4,0,20.1,4.1,27.5,11.5c7.4,7.4,11.4,17.2,11.4,27.5 l-1.1,510c0,21.5-17.6,39-39.1,39L48.1,594L48.1,594L48.1,594z"/> <path fill="#323232" d="M12.5,555V45c0-14,6.7-26.5,17.2-34.3C17.4,17.3,9.1,30.2,9.1,45v510c0,14.8,8.3,27.7,20.5,34.3 C19.2,581.5,12.5,569,12.5,555z"/> </g> <path d="M19.6,530.8V73.2h258.7l-1.2,457.7H19.6z M276.6,532.3c1.1,0,2-0.9,2-2l1.2-456.7c0-1.1-0.9-2-2-2H20.1c-1.1,0-2,0.9-2,2 v456.7c0,1.1,0.9,2,2,2H276.6z"/> <g> <linearGradient id="IPHONESVG_1_" gradientUnits="userSpaceOnUse" x1="-137.2615" y1="705.5685" x2="-136.7999" y2="705.0101" gradientTransform="matrix(39.88 0 0 -39.882 5606.9712 28685.8789)"> <stop  offset="0" style="stop-color:#0A0A0A"/> <stop  offset="0.5263" style="stop-color:#353535"/> <stop  offset="1" style="stop-color:#656565"/> </linearGradient> <path fill="url(#IPHONESVG_1_)" d="M148.3,541.4c-12.9,0-23.4,10.5-23.4,23.4c0,6.5,2.6,12.3,6.8,16.5l33-33 C160.4,543.9,154.5,541.4,148.3,541.4z"/> <linearGradient id="IPHONESVG_2_" gradientUnits="userSpaceOnUse" x1="-136.6682" y1="704.8604" x2="-137.0466" y2="705.2754" gradientTransform="matrix(39.881 0 0 -39.881 5613.96 28692.0156)"> <stop  offset="0" style="stop-color:#0A0A0A"/> <stop  offset="0.4251" style="stop-color:#353535"/> <stop  offset="0.83" style="stop-color:#575757"/> </linearGradient> <path fill="url(#IPHONESVG_2_)" d="M171.6,564.8c0-6.2-2.5-12.1-6.8-16.5l-33,33c4.4,4.4,10.3,6.9,16.5,6.8 C161.2,588.1,171.6,577.7,171.6,564.8z"/> <path d="M127.3,564.8c0,11.5,9.4,20.9,20.9,20.9c11.5,0,20.9-9.4,20.9-20.9c0-11.5-9.4-20.9-20.9-20.9 C136.7,543.9,127.3,553.2,127.3,564.8z"/> </g> <linearGradient id="IPHONESVG_3_" gradientUnits="userSpaceOnUse" x1="-125.7053" y1="697.9696" x2="-124.9982" y2="697.2625" gradientTransform="matrix(9.308 0 0 -9.308 1268.4148 6531.4409)"> <stop  offset="0" style="stop-color:#1A1A1A"/> <stop  offset="0.5992" style="stop-color:#353535"/> <stop  offset="1" style="stop-color:#5A5A5A"/> </linearGradient> <path fill="url(#IPHONESVG_3_)" d="M97,38c0,2.6,2.1,4.7,4.7,4.7s4.7-2.1,4.7-4.7c0,0,0,0,0,0c0-2.6-2.1-4.7-4.7-4.7 C99.1,33.4,97,35.5,97,38"/> <path fill="#3F5A83" d="M99.8,39.1c0-0.4,0.4-0.8,0.8-0.8c0.4,0,0.8,0.4,0.8,0.8c0,0.4-0.4,0.8-0.8,0.8S99.8,39.5,99.8,39.1"/> <g> <linearGradient id="IPHONESVG_4_" gradientUnits="userSpaceOnUse" x1="-95.5096" y1="705.7754" x2="-95.5096" y2="704.7837" gradientTransform="matrix(3.134 0 0 -41.5 300.894 29474.9863)"> <stop  offset="0" style="stop-color:#666666"/> <stop  offset="0.1417" style="stop-color:#ADADAD"/> <stop  offset="0.8302" style="stop-color:#B8B8B8"/> <stop  offset="1" style="stop-color:#666666"/> </linearGradient> <path fill="url(#IPHONESVG_4_)" d="M1.5,185c-0.8,0-1.5,0.7-1.5,1.5L0,225c0,0.8,0.7,1.5,1.5,1.5h1.7V185H1.5z"/> <linearGradient id="IPHONESVG_5_" gradientUnits="userSpaceOnUse" x1="-54.2087" y1="705.7966" x2="-54.2087" y2="704.7376" gradientTransform="matrix(1.634 0 0 -41.273 89.394 29314.3867)"> <stop  offset="0" style="stop-color:#4F4F4F"/> <stop  offset="0.1417" style="stop-color:#7A7A7A"/> <stop  offset="0.8302" style="stop-color:#858585"/> <stop  offset="1" style="stop-color:#404040"/> </linearGradient> <path fill="url(#IPHONESVG_5_)" d="M1.6,187.2c0-0.8-0.3-1.5-0.7-2.1c-0.6,0.2-0.9,0.8-0.9,1.4L0,225c0,0.6,0.4,1.1,0.9,1.4 c0.5-0.6,0.7-1.3,0.7-2.1L1.6,187.2z"/> </g> <g> <linearGradient id="IPHONESVG_6_" gradientUnits="userSpaceOnUse" x1="-95.5096" y1="705.7754" x2="-95.5096" y2="704.7837" gradientTransform="matrix(3.134 0 0 -41.5 300.894 29420.9863)"> <stop  offset="0" style="stop-color:#666666"/> <stop  offset="0.1417" style="stop-color:#ADADAD"/> <stop  offset="0.8302" style="stop-color:#B8B8B8"/> <stop  offset="1" style="stop-color:#666666"/> </linearGradient> <path fill="url(#IPHONESVG_6_)" d="M1.5,131c-0.8,0-1.5,0.7-1.5,1.5L0,171c0,0.8,0.7,1.5,1.5,1.5h1.7V131H1.5z"/> <linearGradient id="IPHONESVG_7_" gradientUnits="userSpaceOnUse" x1="-54.2087" y1="705.7966" x2="-54.2087" y2="704.7376" gradientTransform="matrix(1.634 0 0 -41.273 89.394 29260.3867)"> <stop  offset="0" style="stop-color:#4F4F4F"/> <stop  offset="0.1417" style="stop-color:#7A7A7A"/> <stop  offset="0.8302" style="stop-color:#858585"/> <stop  offset="1" style="stop-color:#404040"/> </linearGradient> <path fill="url(#IPHONESVG_7_)" d="M1.6,133.2c0-0.8-0.3-1.5-0.7-2.1c-0.6,0.2-0.9,0.8-0.9,1.4L0,171c0,0.6,0.4,1.1,0.9,1.4 c0.5-0.6,0.7-1.3,0.7-2.1L1.6,133.2z"/> </g> <path fill="#212121" d="M285.2,555V45c0-14-6.7-26.5-17.2-34.3c12.2,6.6,20.5,19.5,20.5,34.3v510c0,14.8-8.3,27.7-20.5,34.3 C278.4,581.5,285.2,569,285.2,555z"/> <g> <path fill="#505050" d="M292.7,45.3l0,8.6h2l0-8.6"/> <path fill="#6E6E6E" d="M290.7,53.9h2l0-8.6h-2"/> <path fill="#505050" d="M5.1,45.3l0,8.6h-2l0-8.6"/> <path fill="#6E6E6E" d="M7.1,53.9h-2l0-8.6h2"/> </g> <path d="M19.6,532.3c-0.8,0-1.5-0.7-1.5-1.5V73.2c0-0.8,0.7-1.5,1.5-1.5h258.1c0.8,0,1.5,0.7,1.5,1.5v457.7c0,0.8-0.7,1.5-1.5,1.5 H19.6z M277.7,530.8V73.2H19.6v457.7H277.7z"/> <path fill="#1A1A1A" stroke="#0D0D0D" stroke-width="0.136" d="M128.1,40.2c-1.2,0-2.2-1-2.2-2.2v-0.2c0-1.2,1-2.2,2.2-2.2h41.7 c1.2,0,2.2,1,2.2,2.2V38c0,1.2-1,2.2-2.2,2.2H128.1z"/> <path fill="none" d="M128.1,35.6c-1.2,0-2.2,1-2.2,2.2V38c0,1.2,1,2.2,2.2,2.2h41.7c1.2,0,2.2-1,2.2-2.2v-0.2c0-1.2-1-2.2-2.2-2.2 H128.1z"/> <radialGradient id="IPHONESVG_8_" cx="-119.7891" cy="693.9844" r="0.5" gradientTransform="matrix(6.808 0 0 -6.807 963.9155 4742.0396)" gradientUnits="userSpaceOnUse"> <stop  offset="0" style="stop-color:#454545"/> <stop  offset="0.5587" style="stop-color:#353535"/> <stop  offset="1" style="stop-color:#1A1A1A"/> </radialGradient> <path fill="url(#IPHONESVG_8_)" d="M145,18c0,1.9,1.5,3.4,3.3,3.5c1.9,0,3.4-1.5,3.5-3.3c0,0,0-0.1,0-0.1c0-1.9-1.6-3.4-3.5-3.3 C146.5,14.7,145,16.2,145,18"/> </g> </svg>'
 });
 
@@ -163,19 +250,124 @@ Vue.component('desktop', {
 });
 
 
+Vue.component('tabbed-content', {
+  data: function(){
+    return {
+      activeTabId: 0,
+      tabContentClass: 'tab-content-area',
+      tabTitleClass: 'tab-title',
+      tabs: this.tabdata
+    }
+  },
+  props: ['tabdata'],
+  methods: {
+    setActive: function(tab){
+
+      var self = this;
+
+      tab.isActive = true;
+      this.activeTabId = tab.id;
+
+      this.tabs.forEach(function(tab){
+
+          if(tab.id !== self.activeTabId){
+            tab.isActive = false;
+          }
+      });
+    }
+  },
+  template: '\
+  <div class="tabbed-content">\
+    <div class="title-row">\
+      <div v-for="tab in tabs" :class="[{activeTitle:tab.isActive}, tabTitleClass]" v-on:click="setActive(tab)">\
+        {{tab.title}}\
+      </div>\
+    </div>\
+    \
+    <transition name="fade" mode="out-in">\
+    <p v-if="tab.isActive" v-for="tab in tabs" :key="tab.id" :class="tabContentClass">\
+      {{tab.text}}\
+    </p>\
+    </transition>\
+  </div>\
+  '
+});
+
+
+Vue.component('portfolio-feature-footer', {
+  template: '\
+    <footer>\
+      <div class="center-content">\
+        <h1>Taylor Dotsikas</h1>\
+        <span>Get in touch</span>\
+      </div>\
+    </footer>\
+  '
+});
+
+Vue.component('check-it-out', {
+  props: ['linkoptions'],
+  data: function(){
+    return {
+      viewOptions: false,
+      options: this.linkoptions
+    }
+  },
+  methods: {
+    showViewOptions: function(){
+      if(this.options.length > 1){
+        this.viewOptions = !this.viewOptions;
+      } else {
+        //route to this.options[0].url
+      }
+    }
+  },
+  template: '\
+    <div class="checkItOutButton" v-on:click="showViewOptions" :class="[{viewOptionsOpen: viewOptions}]">\
+      <span v-if="!viewOptions">Check it out</span>\
+      <span v-if="viewOptions" class="link-option" v-for="option in options" :key="option.id">\
+        {{option.title}}\
+      </span>\
+    </div>\
+  '
+});
+
+Vue.component('webgl-notice', {
+  template: '\
+    <div class="webgl-notice">\
+      <span>Unable to initialize WebGL. Your browser or machine may not support it.</span>\
+    </div>\
+  '
+});
+
+
 var app = new Vue({
   el: '#app',
   data: {
     colorTheme: Theme,
+    glitchEnabled: false,
     showMenu: false,
     objects: [],
-    threeDisplayClass: null
+    threeDisplayClass: null,
+    showWebGLNotice: false,
+    blurClass: null
   },
   watch: {
     '$route' (to, from){
       if(to.path === '/'){
+
+        this.checkForScrollHeader();
+
+        if(!Detector.webgl){
+          console.log("Unable to initialize WebGL. Your browser or machine may not support it.");
+          this.threeDisplayClass = 'noWebGL';
+          this.showWebGLNotice = true;
+          return;
+        }
+
         this.threeDisplayClass = null;
         this.animate();
+        this.glitchEffect();
       } else {
         this.threeDisplayClass = 'hide-3d';
       }
@@ -183,17 +375,26 @@ var app = new Vue({
   },
   methods: {
     home: function(event){
+      if(this.showMenu){
+        this.showMenu = false;
+        this.blurClass = null;
+      }
       router.push('/');
     },
     menu: function(event){
-      router.push('nav');
+      this.showMenu = !this.showMenu;
+      if(this.showMenu){
+        this.blurClass = 'blur'
+      } else {
+        this.blurClass = null;
+      }
     },
     initScene: function(){
       container = document.getElementById( 'threeDisplay' );
 
       //CAMERA
       camera = new THREE.PerspectiveCamera( 70, $(container).width() / $(container).height(), 1, 10000 );
-      camera.position.z = 2500;
+      camera.position.z = 4000;
 
       //SCENE
       scene = new THREE.Scene();
@@ -210,20 +411,10 @@ var app = new Vue({
 
       if(Theme === 'BLACK'){
         backgroundColor = 0x000000;
-        scene.add( new THREE.AmbientLight( 0x262626 ) );
+        scene.add( new THREE.AmbientLight( 0xd0d0d0 ) );
       } else {
         backgroundColor = 0xeeeeee;
         scene.add( new THREE.AmbientLight( 0xc5c5c5 ) );
-
-        //PLANE
-        var shadowMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
-        var shadowGeo = new THREE.PlaneBufferGeometry( 1242, 2206, 1, 1 );
-        mesh = new THREE.Mesh( shadowGeo, shadowMaterial );
-        mesh.material.side = THREE.DoubleSide;
-        mesh.receiveShadow = true;
-        mesh.position.y = 0;
-        mesh.position.z = -50;
-        scene.add( mesh );
       }
 
       renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -241,11 +432,46 @@ var app = new Vue({
       //CAMERA CONTROLS
       controls = new THREE.OrbitControls( camera, renderer.domElement );
       controls.rotateSpeed = 1;
-      controls.minDistance = 1000;
-      controls.maxDistance = 2000;
+      //controls.minDistance = 1000;
+      controls.maxDistance = 5000;
 
+      //Composer
+      composer = new THREE.EffectComposer( renderer );
+      composer.addPass( new THREE.RenderPass( scene, camera));
+
+      composer2 = new THREE.EffectComposer(renderer);
+      composer2.addPass( new THREE.RenderPass( scene, camera))
+
+      //Glitch
+      glitchPass = new THREE.GlitchPass();
+      glitchPass.renderToScreen = true;
+      composer.addPass( glitchPass );
+      glitchPass.goWild = true;
+
+      //Blur
+      var blurAmount = 0.005;
+
+      hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+      hblur.material.uniforms.h.value = blurAmount;
+      composer2.addPass( hblur );
+
+      vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+      vblur.renderToScreen = true;
+      vblur.material.uniforms.v.value = blurAmount;
+      composer2.addPass( vblur );
 
       window.addEventListener( 'resize', this.onWindowResize, false );
+    },
+    getRandomColor: function(customThemeName){
+      var randomColor;
+
+      if(customThemeName){
+        randomColor = colorTheme[customThemeName].colorSet[Math.floor(Math.random()*colorTheme[customThemeName].colorSet.length)];
+      } else {
+        randomColor = colorTheme[Theme].colorSet[Math.floor(Math.random()*colorTheme[Theme].colorSet.length)];
+      }
+
+      return parseInt('0x' + randomColor);
     },
     generateGrid: function(){
 
@@ -257,7 +483,7 @@ var app = new Vue({
         for (var i = 50 - 1; i >= 0; i--) {
 
           var geometry = new THREE.Geometry();
-          var material = new THREE.LineBasicMaterial({color: getRandomColor('ALT')});
+          var material = new THREE.LineBasicMaterial({color: this.getRandomColor('ALT')});
 
           geometry.vertices.push(
             new THREE.Vector3( (i*100), 1000, (j*100) ),
@@ -278,22 +504,25 @@ var app = new Vue({
       for ( var i = 0; i < 80; i ++ ) {
 
         var object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({
-            color: getRandomColor()
+            color: this.getRandomColor()
           })
         );
 
-        object.position.x = (Math.round(Math.random()) * 2 - 1) * Math.random() * 1000;
-        object.position.y = (Math.round(Math.random()) * 2 - 1) * Math.random() * 1000;
-        object.position.z = (Math.round(Math.random()) * 2 - 1) * Math.random() * 1000;
-        //object.position.z = 500;
+        var spread = 1700;
+
+        object.position.x = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
+        object.position.y = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
+        object.position.z = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
 
         object.rotation.x = Math.random() * 2 * Math.PI;
         object.rotation.y = Math.random() * 2 * Math.PI;
         object.rotation.z = Math.random() * 2 * Math.PI;
 
-        object.scale.x = 10*Math.random() * 2 + 1;
-        object.scale.y = 2*Math.random() * 2 + 1;
-        object.scale.z = 1.5*Math.random() * 2 + 1;
+        var masterScale = 1;
+
+        object.scale.x = (10*Math.random() * 2 + 1)*masterScale;
+        object.scale.y = (2*Math.random() * 2 + 1)*masterScale;
+        object.scale.z = (1.5*Math.random() * 2 + 1)*masterScale;
 
         object.castShadow = true;
         object.receiveShadow = false;
@@ -319,14 +548,34 @@ var app = new Vue({
     },
     render: function(){
       controls.update();
-
-      renderer.render( scene, camera );
+      if(this.glitchEnabled){
+        composer.render();
+      } else if (this.showMenu) {
+        composer2.render();
+      } else {
+        renderer.render( scene, camera );
+      }
     },
     onWindowResize: function(){
       camera.aspect = $(container).width() / $(container).height();
       camera.updateProjectionMatrix();
 
       renderer.setSize($(container).width(), $(container).height());
+      composer.setSize( window.innerWidth, window.innerHeight );
+
+    },
+    glitchEffect: function(){
+      this.glitchEnabled = true;
+
+      var self = this;
+      setTimeout(function(){
+        self.glitchEnabled = false;
+      }, 300);
+    },
+    checkForScrollHeader: function(){
+      if(document.getElementById('header').classList.length > 0){
+        document.getElementById('header').classList.remove('darkHeader');
+      }
     }
   },
   mounted: function(){
@@ -339,10 +588,20 @@ var app = new Vue({
       this.threeDisplayClass = 'hide-3d';
     }
 
+    if(!Detector.webgl){
+      console.log("Unable to initialize WebGL. Your browser or machine may not support it.");
+      this.threeDisplayClass = 'noWebGL';
+      this.showWebGLNotice = true;
+      return;
+    }
+
     this.initScene();
     this.animate();
+    this.glitchEffect();
+
   },
   router
 });
 
+}); //end ready
 

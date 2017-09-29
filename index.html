@@ -17,7 +17,7 @@
     }
   </style>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/normalize.css">
   <link rel="stylesheet" href="./css/app.css">
   <link rel="stylesheet" href="./css/animate.min.css"> 
 
@@ -37,98 +37,40 @@
 </head>
 <body>
 
-<template id="menu">
-    <div class="menu">
-
-    <div v-on:click="closeMenu" class="menu-icon menu-icon-regular">
-     <svg version="1.1" id="x-icon" x="0px" y="0px"
-         viewBox="0 0 792 612" enable-background="new 0 0 792 612" xml:space="preserve">
-      <rect x="166.5" y="280.3" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 459.6396 802.389)" width="459" height="51.4"/>
-      <rect x="370.3" y="76.5" transform="matrix(0.7071 0.7071 -0.7071 0.7071 332.3604 -190.389)" width="51.4" height="459"/>
-      </svg>
-    </div>
-
-      <h1>Featured Work</h1>
-      <div v-on:click="routeTo($event, soccerRoute )" class="feature">
-        <h2>Soccer-1</h2>
-      </div>
-      <div v-on:click="routeTo($event, sailDroneRoute )" class="feature">
-        <h2>Saildrone</h2>
-      </div>
-
-      <h1>taylordotsikas@gmail.com</h1>
-    </div>
-</template>
-
-
 <template id="soccer1">
   <transition name="portfolio-transition">
   <div class="portfolio-feature">
 
     <div class="cover" id="s1_background">
+
+      <div class="side-text-left">
+        <span>Taylor Dotsikas</span>
+      </div>
+
       <div class="cover-headline">
         <h1>Soccer-1</h1>
         <h2>Design and development</h2>
-        <div class="links-to-app">
 
-          <div class="app-link" onclick="location.href='itms://itunes.apple.com/ca/app/soccer-1/id1196922363?mt=8';">
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
-            <g>
-              <path d="M47.5,0H2.5C1.1,0,0,1.1,0,2.5v44.9C0,48.9,1.1,50,2.5,50h44.9c1.4,0,2.5-1.1,2.5-2.5V2.5C50,1.1,48.9,0,47.5,0z"/>
-              <path fill="#999999" d="M47.5,1C48.3,1,49,1.7,49,2.5v44.9c0,0.8-0.7,1.5-1.5,1.5H2.5C1.7,49,1,48.3,1,47.5V2.5C1,1.7,1.7,1,2.5,1
-                H47.5 M47.5,0H2.5C1.1,0,0,1.1,0,2.5v44.9C0,48.9,1.1,50,2.5,50h44.9c1.4,0,2.5-1.1,2.5-2.5V2.5C50,1.1,48.9,0,47.5,0L47.5,0z"/>
-            </g>
-            <path fill="#999999" d="M33.3,26c0-3.8,3.1-5.7,3.3-5.8c-1.8-2.6-4.6-3-5.6-3c-2.4-0.2-4.6,1.4-5.8,1.4c-1.2,0-3.1-1.4-5-1.3
-              c-2.6,0-5,1.5-6.3,3.8c-2.7,4.6-0.7,11.5,1.9,15.3c1.3,1.8,2.8,3.9,4.8,3.8c1.9-0.1,2.7-1.2,5-1.2s3,1.2,5,1.2
-              c2.1,0,3.4-1.9,4.6-3.7c1.5-2.1,2.1-4.2,2.1-4.3C37.3,32.1,33.3,30.5,33.3,26L33.3,26z M29.5,14.7c1.1-1.3,1.8-3.1,1.6-4.9
-              c-1.5,0.1-3.4,1-4.5,2.3c-1,1.1-1.8,3-1.6,4.7C26.7,16.9,28.4,15.9,29.5,14.7L29.5,14.7z"/>
-            </svg>
-          </div>
+        <check-it-out :linkoptions = "[
+            {
+              title: 'Apple App store',
+              id: 'apple'
+            },
+            {
+              title: 'Google Play store',
+              id: 'google'
+            },
+            {
+              title: 'Browser',
+              id: 'browser'
+            }
+          ]">
+        </check-it-out>
 
-          <div class="app-link" onclick="location.href='https://play.google.com/store/apps/details?id=net.project_1.soccer_1&hl=en&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1';">
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
-            <g>
-              <path d="M47.5,0H2.5C1.1,0,0,1.1,0,2.5v44.9C0,48.9,1.1,50,2.5,50h44.9c1.4,0,2.5-1.1,2.5-2.5V2.5C50,1.1,48.9,0,47.5,0z"/>
-              <path fill="#999999" d="M47.5,1C48.3,1,49,1.7,49,2.5v44.9c0,0.8-0.7,1.5-1.5,1.5H2.5C1.7,49,1,48.3,1,47.5V2.5C1,1.7,1.7,1,2.5,1
-                H47.5 M47.5,0H2.5C1.1,0,0,1.1,0,2.5v44.9C0,48.9,1.1,50,2.5,50h44.9c1.4,0,2.5-1.1,2.5-2.5V2.5C50,1.1,48.9,0,47.5,0L47.5,0z"/>
-            </g>
-            <g>
-              <path fill="#999999" d="M37,21c-1.1,0-2,0.9-2,2v8c0,1.1,0.9,2,2,2s2-0.9,2-2v-8C39,21.9,38.1,21,37,21z M13,21c-1.1,0-2,0.9-2,2v8
-                c0,1.1,0.9,2,2,2s2-0.9,2-2v-8C15,21.9,14.1,21,13,21z M16,32c0,1.7,1.3,3,3,3l0,0v4c0,1.1,0.9,2,2,2s2-0.9,2-2v-4h4v4
-                c0,1.1,0.9,2,2,2s2-0.9,2-2v-4c1.7,0,3-1.3,3-3V21H16V32z"/>
-              <path fill="#999999" d="M33.9,19c-0.3-2.7-1.8-5.1-4.1-6.6l1-2c0.2-0.5,0-1.1-0.4-1.3c-0.5-0.2-1.1,0-1.3,0.4l-1,2l-0.3-0.1
-                C26.9,11.2,26,11,25,11c-1,0-1.9,0.2-2.8,0.5l-0.3,0.1l-1-2c-0.2-0.5-0.8-0.7-1.3-0.4c-0.5,0.2-0.7,0.8-0.4,1.3l1,2
-                c-2.2,1.4-3.7,3.8-4.1,6.6v1H34L33.9,19L33.9,19L33.9,19z M22,17c-0.6,0-1-0.4-1-1c0-0.6,0.4-1,1-1c0,0,0,0,0,0c0,0,0,0,0,0
-                c0.6,0,1,0.4,1,1C23,16.6,22.5,17,22,17z M28,17c-0.6,0-1-0.4-1-1c0-0.6,0.4-1,1-1c0,0,0,0,0,0c0,0,0,0,0,0c0.6,0,1,0.4,1,1
-                C29,16.6,28.5,17,28,17z"/>
-            </g>
-            </svg>
-          </div>
+      </div>
 
-          <div class="app-link" onclick="window.open('https://webapp.soccer-1.com/', '_blank');">
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
-            <g>
-              <path d="M47.5,0H2.5C1.1,0,0,1.1,0,2.5v44.9C0,48.9,1.1,50,2.5,50h44.9c1.4,0,2.5-1.1,2.5-2.5V2.5C50,1.1,48.9,0,47.5,0z"/>
-              <path fill="#999999" d="M47.5,1C48.3,1,49,1.7,49,2.5v44.9c0,0.8-0.7,1.5-1.5,1.5H2.5C1.7,49,1,48.3,1,47.5V2.5C1,1.7,1.7,1,2.5,1
-                H47.5 M47.5,0H2.5C1.1,0,0,1.1,0,2.5v44.9C0,48.9,1.1,50,2.5,50h44.9c1.4,0,2.5-1.1,2.5-2.5V2.5C50,1.1,48.9,0,47.5,0L47.5,0z"/>
-            </g>
-            <path fill="#999999" d="M25,10.2c-8.1,0-14.8,6.6-14.8,14.8S16.9,39.8,25,39.8c8.1,0,14.8-6.6,14.8-14.8S33.1,10.2,25,10.2z
-               M33.3,29.9c0.3-1.2,0.4-2.6,0.5-3.9h3.9c-0.1,1.4-0.4,2.7-0.9,3.9H33.3z M16.7,20.1c-0.3,1.2-0.4,2.6-0.5,3.9h-3.9
-              c0.1-1.4,0.4-2.7,0.9-3.9H16.7z M31.3,20.1c0.3,1.3,0.5,2.6,0.5,3.9H26v-3.9H31.3L31.3,20.1z M26,18.1v-5.8c0.4,0.1,0.9,0.3,1.3,0.7
-              c0.8,0.6,1.6,1.5,2.3,2.6c0.5,0.8,0.9,1.6,1.2,2.5L26,18.1L26,18.1z M20.4,15.6c0.7-1.1,1.4-2,2.3-2.6c0.4-0.3,0.9-0.5,1.3-0.7v5.8
-              h-4.8C19.6,17.2,20,16.3,20.4,15.6z M24,20.1V24h-5.9c0.1-1.4,0.2-2.7,0.5-3.9H24z M13.2,29.9c-0.5-1.3-0.8-2.6-0.9-3.9h3.9
-              c0.1,1.4,0.2,2.7,0.5,3.9C16.7,29.9,13.2,29.9,13.2,29.9z M18.1,26H24v3.9h-5.3C18.4,28.7,18.2,27.3,18.1,26L18.1,26z M24,31.9v5.8
-              c-0.4-0.1-0.9-0.3-1.3-0.7c-0.8-0.6-1.6-1.5-2.3-2.6c-0.5-0.8-0.9-1.6-1.2-2.5L24,31.9L24,31.9z M29.6,34.4c-0.7,1.1-1.4,2-2.3,2.6
-              c-0.4,0.3-0.9,0.5-1.3,0.7v-5.8h4.8C30.4,32.8,30,33.7,29.6,34.4z M26,29.9V26h5.9c-0.1,1.4-0.2,2.7-0.5,3.9H26L26,29.9z M33.8,24
-              c-0.1-1.4-0.2-2.7-0.5-3.9h3.5c0.5,1.3,0.8,2.6,0.9,3.9H33.8z M35.8,18.1h-2.9c-0.6-1.8-1.4-3.4-2.3-4.7c1.3,0.6,2.5,1.5,3.5,2.5
-              C34.7,16.6,35.3,17.3,35.8,18.1z M16,16c1-1,2.2-1.9,3.5-2.5c-1,1.3-1.7,2.8-2.3,4.7h-2.9C14.7,17.3,15.3,16.6,16,16L16,16z
-               M14.2,31.9h2.9c0.6,1.8,1.4,3.4,2.3,4.7C18.2,35.9,17,35.1,16,34C15.3,33.4,14.7,32.7,14.2,31.9z M34,34c-1,1-2.2,1.9-3.5,2.5
-              c1-1.3,1.7-2.8,2.3-4.7h2.9C35.3,32.7,34.7,33.4,34,34z"/>
-            </svg>
-          </div>
-        </div>
+      <div class="side-text-right">
+        <span>2016 - 2017</span>
       </div>
 
       <div class="scroll-indicator">
@@ -136,37 +78,88 @@
           <path fill="#FFFFFF" d="M158.628 177.372l-45.256 45.256 142.628 142.627 142.627-142.628-45.254-45.254-97.373 97.372z"></path>
         </svg>
       </div>
-
     </div>
 
-    <div class="content-section">
-      
-      <div class="content-panel">
-        <h1>Engaging Learning Experience</h1>
-        <iphone-component
-          src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3dModel2.mp4">
-        </iphone-component>
+    <div class="scrollUpSection">
+
+      <div class="overview-banner">
+        <div class="banner-container">
+          <p>Soccer-1 is a mobile application for improving your soccer skills and connecting with other players and coaches.</p>
+          <p>The project called for combining a 3D learning experience, a regimented personalized training assistant, an extensive social network, and a tool for soccer coaches into one application. A high degree of organization and consistency was required to bring all of these features together.</p>
+        </div>
       </div>
 
-      <div class="content-panel alt-content-panel">
-        <h1>Personalized Training</h1>
-        <iphone-component
-          src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/trainingVideo.mp4">
-        </iphone-component>
-      </div>
+      <div class="content-section">
+        
+        <div class="content-panel">
+          <h1>An engaging learning experience</h1>
 
-      <div class="content-panel">
-        <h1>Share with friends</h1>
-        <iphone-component
-          src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/posting.mp4">
-        </iphone-component>
-      </div>
+          <iphone-component
+            src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3dModel2.mp4">
+          </iphone-component>
 
+          <div class="description-area">
+            <p>Using state of the art motion capture, the movements of professional soccer players were recorded as they performed the fundamentals of the game.</p>
+            <p class="quote">If a user can understand to a high degree how a professional player performs, then they can replicate the movement.</p>
+            <p>I combined the motion capture data with the knowledge from the sports science team to create an experience that helps the user improve their kicking, passing, dribbling, and much more.</p>
+
+            <tabbed-content :tabdata = "[
+                {
+                  title: '360 degree view',
+                  id: 0,
+                  isActive: true, 
+                  text: 'If you are learning a soccer move from a video, you can only see what the camera shows you. With a 3D environment, the user has full control over the camera position. For example, the user can move the camera and zoom in on the kicking foot to see exactly where to strike the ball to deliver the most power.'
+                },
+                {
+                  title: 'Motion control',
+                  id: 1,
+                  isActive: false,
+                  text: 'If you are watching a video of a soccer move, you will find yourself pausing and rewinding to analyze a specific moment. Adding the motion controller enables the user with complete fine grained control over viewing every moment during the move.'
+                },
+                {
+                  title: 'Hologram assist',
+                  id: 2,
+                  isActive: false,
+                  text: '3D hologram elements were added to highlight the importance of certain aspects of a move. This proved to be more effective and engaging rather than overlaying descriptive text on the 3D model. I wrote the code to be performant and scalable so it could be applied to all the motion capture data and run smoothly on a mobile phone. The elements were refined through user feedback until users understood what the elements were highlighting.'
+                }
+              ]">
+            </tabbed-content>
+          </div>
+        </div>
+
+        <div class="content-panel">
+          <h1>Personalized Training</h1>
+
+          <iphone-component
+            src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/trainingVideo.mp4">
+          </iphone-component>
+
+          <div class="description-area">
+            <p>Tapping the soccer ball in the bottom left corner opens up a customized training program. The skill training facilitates practicing and asks for the user’s personal feedback each time a technique is completed. The feedback generates corrective exercises to address the user’s problem areas. </p>
+            <p>A bright theme was applied to make it easier to read for the primary use case of being outside. The list of assigned techniques is displayed up front so the user’s workload can be understood at a glance. Illustrations were added as a visual assist to the text in the detail view.</p>
+          </div>
+        </div>
+
+        <div class="content-panel">
+
+          <h1>A community for soccer</h1>
+
+          <iphone-component
+            src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/posting.mp4">
+          </iphone-component>
+
+          <div class="description-area">
+            <p>Tapping the newsfeed icon in the bottom right corner opens up the community. Soccer-1 values the ability for users to connect with each other. Multimedia sharing between users was a priority since the beginning of development.</p>
+            <p>Users can login and register with social media, upload a profile picture, and post content to their feeds.</p>
+          </div> 
+        </div>
+      </div>
+      <portfolio-feature-footer></portfolio-feature-footer>
     </div>
+
   </div>
   </transition>
 </template>
-
 
 <template id="saildrone">
   <transition name="portfolio-transition">
@@ -221,29 +214,33 @@
 </transition>
 </template>
 
+<div id="app" v-bind:class="[colorTheme, threeDisplayClass, blurClass, {homeScreen: !threeDisplayClass}]">
 
+  <webgl-notice v-if="showWebGLNotice"></webgl-notice>
 
-<div id="app" v-bind:class="[colorTheme, threeDisplayClass]">
-  <div class="home-icon" v-on:click="home">
-    <h1>T.</h1>
-  </div>
-  <div v-on:click="menu" class="menu-icon">
-    <span>WORK</span>
-    <svg id="icon-menu" viewBox="0 0 24 24">
-    <path d="M3 6h18v2.016h-18v-2.016zM3 12.984v-1.969h18v1.969h-18zM3 18v-2.016h18v2.016h-18z"></path>
-    </svg>
-  </div>
-
+  <header-menu id="header" v-on:homeaction="home" v-on:menuaction="menu"></header-menu>
+  <nav-menu v-on:menuaction="menu" v-bind:show-menu="showMenu"></nav-menu>
   <div class="app-container" id="threeDisplay">
     <router-view></router-view>
   </div>
 </div>
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
+<script src="https://stemkoski.github.io/Three.js/js/Detector.js"></script>
 <script src="js/controls/DragControls.js"></script>
 <script src="js/controls/OrbitControls.js"></script>
-<script src="js/libs/stats.min.js"></script>
+
+<script src="js/shaders/CopyShader.js"></script>
+<script src="http://mrdoob.github.com/three.js/examples/js/shaders/HorizontalBlurShader.js"></script>
+<script src="http://mrdoob.github.com/three.js/examples/js/shaders/VerticalBlurShader.js"></script>
+<script src="js/shaders/DigitalGlitch.js"></script>
+
+<script src="js/postprocessing/EffectComposer.js"></script>
+<script src="js/postprocessing/RenderPass.js"></script>
+<script src="js/postprocessing/MaskPass.js"></script>
+<script src="js/postprocessing/ShaderPass.js"></script>
+<script src="js/postprocessing/GlitchPass.js"></script>
+
 <script src="js/app.js"></script>
 
 </body>
