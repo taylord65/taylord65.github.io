@@ -39,7 +39,7 @@
 
 <template id="soccer1">
   <transition name="portfolio-transition">
-  <div class="portfolio-feature">
+  <div v-bind:class="[{unfocusedFeature: menuOpen}, portfolioFeature]">
 
     <div class="cover" id="s1_background">
 
@@ -54,15 +54,18 @@
         <check-it-out :linkoptions = "[
             {
               title: 'Apple App store',
-              id: 'apple'
+              id: 'apple',
+              url: 'itms://itunes.apple.com/ca/app/soccer-1/id1196922363?mt=8'
             },
             {
               title: 'Google Play store',
-              id: 'google'
+              id: 'google',
+              url: 'https://play.google.com/store/apps/details?id=net.project_1.soccer_1&hl=en&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1',
             },
             {
               title: 'Browser',
-              id: 'browser'
+              id: 'browser',
+              url: 'https://webapp.soccer-1.com/'
             }
           ]">
         </check-it-out>
@@ -163,7 +166,7 @@
 
 <template id="saildrone">
   <transition name="portfolio-transition">
-  <div class="portfolio-feature">
+  <div class="portfolioFeature">
 
     <div class="cover" id="sd_background">
       <div class="cover-headline">
@@ -218,10 +221,10 @@
 
   <webgl-notice v-if="showWebGLNotice"></webgl-notice>
 
-  <header-menu id="header" v-on:homeaction="home" v-on:menuaction="menu"></header-menu>
+  <header-menu id="header" v-on:homeaction="home"></header-menu>
   <nav-menu v-on:menuaction="menu" v-bind:show-menu="showMenu"></nav-menu>
   <div class="app-container" id="threeDisplay">
-    <router-view></router-view>
+    <router-view :menu-open="showMenu"></router-view>
   </div>
 </div>
 

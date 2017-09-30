@@ -1,31 +1,11 @@
 $(document).ready(function () {
 
-var container, stats;
-var camera, controls, scene, renderer, composer, composer2;
-var glitchPass;
-var frame;
-var Theme = 'WHITE';
-
-var colorTheme = {
-  BLACK: {
-    colorName: 'BLACK',
-    colorSet: ['1BE7FF', '6EEB83', 'E4FF1A', 'E8AA14', 'FF5714',
-                'F46036', '2E294E', '1B998B', 'E71D36', 'C5D86D'] 
-  },
-  WHITE: {
-    colorName: 'WHITE',
-    colorSet: ['1BE7FF', '6EEB83', 'E4FF1A', 'E8AA14', 'FF5714', 'F46036', '2E294E', '1B998B', 'E71D36', 'C5D86D'] 
-  },
-  ALT: {
-    colorName: 'COLORNAME',
-    colorSet: ['363635', '62A87C', '617073', '4D685A', '545775', '202C39', '1F487E', '60B2E5', 'AEECEF']
-  }
-};
-
-const Soccer1 = { 
+const Soccer1 = {
+  props: ['menuOpen'],
   template: '#soccer1',
   data: function(){
     return {
+      portfolioFeature: 'portfolio-feature',
       src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png'
     }
   },
@@ -38,7 +18,8 @@ const Soccer1 = {
   }
 };
 
-const Saildrone = { 
+const Saildrone = {
+  props: ['menuOpen'], 
   template: '#saildrone',
   data: function(){
     return {
@@ -54,22 +35,25 @@ const Saildrone = {
   }
 };
 
-const Home = { 
+const Home = {
+  props: ['menuOpen'], 
   template: '\
     <div class="headline-container">\
-      <div class="headline">\
+      <transition name="fade">\
+      <div v-if="!menuOpen" class="headline">\
         <h1>Taylor Dotsikas</h1>\
         <h2>UI Designer</h2>\
         <h2>Front end Developer</h2>\
-        </div>\
       </div>\
+      </transition>\
+    </div>\
     '
 };
 
 const routes = [
   { path: '/soccer1', component: Soccer1 },
   { path: '/saildrone', component: Saildrone },
-  { path: '/', component: Home}
+  { path: '/', component: Home }
 ];
 
 const router = new VueRouter({
@@ -85,20 +69,11 @@ Vue.component('header-menu', {
         <svg version="1.1" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">\
         <rect fill="#A01212" width="50" height="50"/> <g> <path fill="#FFFFFF" d="M20,41.7V17.1h-9V8.3H39v8.8h-8.9v24.6H20z"/> </g> <circle fill="#FFFFFF" cx="37" cy="40.3" r="1.8"/> </svg>\
       </div>\
-      <div v-on:click="menu" class="menu-icon">\
-        <span>WORK</span>\
-        <svg id="icon-menu" viewBox="0 0 24 24">\
-          <path d="M3 6h18v2.016h-18v-2.016zM3 12.984v-1.969h18v1.969h-18zM3 18v-2.016h18v2.016h-18z"></path>\
-        </svg>\
-      </div>\
     </header>\
   ',
   methods: {
     home: function(){
       this.$emit('homeaction');
-    },
-    menu: function(){
-      this.$emit('menuaction');
     }
   },
   directives: {
@@ -137,11 +112,9 @@ Vue.component('header-menu', {
 Vue.component('nav-menu', {
   props: ['showMenu'],
   template: '\
+    <div>\
     <transition name="slide">\
       <div v-if="showMenu" class="menu">\
-        <div v-on:click="closeMenu" class="menu-icon menu-icon-regular animated fadeIn">\
-          <svg version="1.1" id="x-icon" x="0px" y="0px" viewBox="0 0 792 612" enable-background="new 0 0 792 612" xml:space="preserve"> <rect x="166.5" y="280.3" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 459.6396 802.389)" width="459" height="51.4"/> <rect x="370.3" y="76.5" transform="matrix(0.7071 0.7071 -0.7071 0.7071 332.3604 -190.389)" width="51.4" height="459"/></svg>\
-        </div>\
         <h1>Featured Work</h1>\
         <div v-on:click="routeTo($event, soccerRoute )" class="feature">\
           <h2>Soccer-1</h2>\
@@ -161,15 +134,24 @@ Vue.component('nav-menu', {
         <h1>taylordotsikas@gmail.com</h1>\
       </div>\
     </transition>\
+    \
+    <div id="menuIcon" v-on:click="menuTrigger" v-bind:class="[{open: showMenu}]">\
+      <span></span>\
+      <span></span>\
+      <span></span>\
+    </div>\
+    \
+    </div>\
   ',
   data: function() {
     return {
       soccerRoute: 'soccer1',
-      sailDroneRoute: 'saildrone'
+      sailDroneRoute: 'saildrone',
+      open: 'open'
     }
   },
   methods: {
-    closeMenu: function(){
+    menuTrigger: function(){
       this.$emit('menuaction');
     },
     routeTo: function(event, route){
@@ -293,7 +275,6 @@ Vue.component('tabbed-content', {
   '
 });
 
-
 Vue.component('portfolio-feature-footer', {
   template: '\
     <footer>\
@@ -341,6 +322,28 @@ Vue.component('webgl-notice', {
 });
 
 
+var container, stats;
+var camera, controls, scene, renderer, composer, composer2;
+var glitchPass;
+var frame;
+var Theme = 'WHITE';
+
+var colorTheme = {
+  BLACK: {
+    colorName: 'BLACK',
+    colorSet: ['1BE7FF', '6EEB83', 'E4FF1A', 'E8AA14', 'FF5714',
+                'F46036', '2E294E', '1B998B', 'E71D36', 'C5D86D'] 
+  },
+  WHITE: {
+    colorName: 'WHITE',
+    colorSet: ['1BE7FF', '6EEB83', 'E4FF1A', 'E8AA14', 'FF5714', 'F46036', '2E294E', '1B998B', 'E71D36', 'C5D86D'] 
+  },
+  ALT: {
+    colorName: 'COLORNAME',
+    colorSet: ['363635', '62A87C', '617073', '4D685A', '545775', '202C39', '1F487E', '60B2E5', 'AEECEF']
+  }
+};
+
 var app = new Vue({
   el: '#app',
   data: {
@@ -384,9 +387,11 @@ var app = new Vue({
     menu: function(event){
       this.showMenu = !this.showMenu;
       if(this.showMenu){
-        this.blurClass = 'blur'
+        this.blurClass = 'blur';
+        document.body.style.overflowY = "hidden";
       } else {
         this.blurClass = null;
+        document.body.style.overflowY = "auto";
       }
     },
     initScene: function(){
@@ -499,6 +504,8 @@ var app = new Vue({
     },
     generateSceneObjects: function(){
 
+      var group = new THREE.Object3D();
+
       var geometry = new THREE.BoxGeometry( 40, 30, 40 );
 
       for ( var i = 0; i < 80; i ++ ) {
@@ -527,10 +534,13 @@ var app = new Vue({
         object.castShadow = true;
         object.receiveShadow = false;
 
-        scene.add( object );
+        group.add( object );
 
         this.objects.push( object );
       }
+
+      scene.add(group);
+      console.log(scene);
     },
     animate: function(){
       if(!this.threeDisplayClass){
@@ -545,6 +555,7 @@ var app = new Vue({
         this.objects[i].rotateY(0.0008);
         this.objects[i].rotateZ(0.0008);
       }
+      scene.children[0].rotateY(0.0002);
     },
     render: function(){
       controls.update();
@@ -571,6 +582,7 @@ var app = new Vue({
       setTimeout(function(){
         self.glitchEnabled = false;
       }, 300);
+
     },
     checkForScrollHeader: function(){
       if(document.getElementById('header').classList.length > 0){
