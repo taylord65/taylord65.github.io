@@ -32,7 +32,7 @@ var app = new Vue({
     blurClass: null
   },
   watch: {
-    '$route' (to, from){
+    '$route': function(to, from){
       if(to.path === '/'){
 
         this.checkForScrollHeader();
@@ -46,7 +46,7 @@ var app = new Vue({
 
         this.threeDisplayClass = null;
         this.animate();
-        this.glitchEffect();
+        this.glitchEffect(600);
       } else {
         this.threeDisplayClass = 'hide-3d';
       }
@@ -250,13 +250,13 @@ var app = new Vue({
       composer.setSize( window.innerWidth, window.innerHeight );
 
     },
-    glitchEffect: function(){
+    glitchEffect: function(time){
       this.glitchEnabled = true;
 
       var self = this;
       setTimeout(function(){
         self.glitchEnabled = false;
-      }, 300);
+      }, time);
 
     },
     checkForScrollHeader: function(){
@@ -284,9 +284,9 @@ var app = new Vue({
 
     this.initScene();
     this.animate();
-    this.glitchEffect();
+    this.glitchEffect(300);
 
   },
-  router
+  router: router
 });
 

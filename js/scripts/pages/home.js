@@ -1,4 +1,4 @@
-const Home = {
+var Home = {
   props: ['menuOpen'], 
   template: '\
     <div class="headline-container">\

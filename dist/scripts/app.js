@@ -1,4 +1,4 @@
-const Home = {
+var Home = {
   props: ['menuOpen'], 
   template: '\
     <div class="headline-container">\
@@ -12,11 +12,12 @@ const Home = {
     </div>\
     '
 };
-const Saildrone = {
+var Saildrone = {
   props: ['menuOpen'], 
   template: '#saildrone',
   data: function(){
     return {
+      portfolioFeature: 'portfolio-feature',
       src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3boats.jpg"
     }
   },
@@ -28,12 +29,13 @@ const Saildrone = {
     });
   }
 };
-const Soccer1 = {
+var Soccer1 = {
   props: ['menuOpen'],
   template: '#soccer1',
   data: function(){
     return {
       portfolioFeature: 'portfolio-feature',
+      // src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/webapp.soccer-1.com-.jpg'
       src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png'
     }
   },
@@ -45,19 +47,14 @@ const Soccer1 = {
     });
   }
 };
-const routes = [
+var routes = [
   { path: '/soccer1', component: Soccer1 },
   { path: '/saildrone', component: Saildrone },
   { path: '/', component: Home }
 ];
 
-const router = new VueRouter({routes});
-Vue.component('webgl-notice', {
-  template: '\
-    <div class="webgl-notice">\
-      <span>Unable to initialize WebGL. Your browser or machine may not support it.</span>\
-    </div>\
-  '
+var router = new VueRouter({
+	routes: routes
 });
 Vue.component('check-it-out', {
   props: ['linkoptions'],
@@ -104,47 +101,55 @@ Vue.component('portfolio-feature-footer', {
   '
 });
 Vue.component('header-menu', {
-  props: ['showMenu'],
-  template: '\
-    <header v-header>\
-      <div class="home-icon" v-on:click="home">\
-        <svg version="1.1" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">\
-        <rect fill="#A01212" width="50" height="50"/> <g> <path fill="#FFFFFF" d="M20,41.7V17.1h-9V8.3H39v8.8h-8.9v24.6H20z"/> </g> <circle fill="#FFFFFF" cx="37" cy="40.3" r="1.8"/> </svg>\
-      </div>\
-    </header>\
-  ',
-  methods: {
-    home: function(){
-      this.$emit('homeaction');
+  data: function(){
+    return {
+      showFill: false
     }
   },
-  directives: {
-    header: {
-      positionReached(el) {
-        if(router.history.current.path !== '/'){
-          var headerHeight = $("#header").height();
-          var scrollUpSectionPosition = $(".scrollUpSection").offset().top - headerHeight;
-          var windowScroll = $(window).scrollTop();
+  props: ['showMenu'],
+  template: '\
+    <div>\
+      <header>\
+        <div class="home-icon" v-on:click="home">\
+          <svg version="1.1" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">\
+          <rect fill="#A01212" width="50" height="50"/> <g> <path fill="#FFFFFF" d="M20,41.7V17.1h-9V8.3H39v8.8h-8.9v24.6H20z"/> </g> <circle fill="#FFFFFF" cx="37" cy="40.3" r="1.8"/> </svg>\
+        </div>\
+      </header>\
+      <transition name="headerFade">\
+        <div v-if="showFill" class="rect-fill"></div>\
+      </transition>\
+    </div>\
+  ',
+  created: function(){
+    console.log("scroll added");
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed: function(){
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    home: function(){
+      this.showFill = false;
+      this.$emit('homeaction');
+    },
+    handleScroll: function(event){
+      if(router.history.current.path !== '/'){
+        var headerHeight = $("header").outerHeight();
+        var scrollUpSectionPosition;
 
-          if(windowScroll > scrollUpSectionPosition){
-            if(el.classList.length == 0){
-              el.classList.add('darkHeader');
-            }
-          } else {
-            if(el.classList.length > 0){
-              el.classList.remove('darkHeader');
-            }
+        if($(".scrollUpSection").offset()){
+          scrollUpSectionPosition = $(".scrollUpSection").offset().top - headerHeight;
+        }
+
+        if($(window).scrollTop() > scrollUpSectionPosition){
+          if(!this.showFill){
+            this.showFill = true;
+          }
+        } else {
+          if(this.showFill){
+            this.showFill = false;
           }
         }
-      },
-      inserted(el, binding) {
-        el.$onScroll();
-      },
-      bind(el, binding) {
-        el.$onScroll = function() {
-          binding.def.positionReached(el);
-        }
-        document.addEventListener('scroll', el.$onScroll);
       }
     }
   }
@@ -164,14 +169,13 @@ Vue.component('iphone-component', {
   ',
   directives: {
     autofade: {
-      inViewport (el) {
+      inViewport: function(el) {
         var rect = el.getBoundingClientRect()
         return !(rect.bottom < 0 || rect.right < 0 || 
                  rect.left > window.innerWidth ||
                  rect.top > window.innerHeight)
       },
-      
-      bind(el, binding) {
+      bind: function(el, binding) {
 
         el.classList.add('before-enter')
         el.$onScroll = function() {
@@ -189,12 +193,11 @@ Vue.component('iphone-component', {
         }
         document.addEventListener('scroll', el.$onScroll)
       },
-      
-      inserted(el, binding) {
+      inserted: function(el, binding) {
         el.$onScroll()  
       },
       
-      unbind(el, binding) {    
+      unbind: function(el, binding) {    
         document.removeEventListener('scroll', el.$onScroll)
         delete el.$onScroll
       }  
@@ -301,6 +304,13 @@ Vue.component('tabbed-content', {
   </div>\
   '
 });
+Vue.component('webgl-notice', {
+  template: '\
+    <div class="webgl-notice">\
+      <span>Unable to initialize WebGL. Your browser or machine may not support it.</span>\
+    </div>\
+  '
+});
 var container, stats;
 var camera, controls, scene, renderer, composer, composer2;
 var glitchPass;
@@ -335,7 +345,7 @@ var app = new Vue({
     blurClass: null
   },
   watch: {
-    '$route' (to, from){
+    '$route': function(to, from){
       if(to.path === '/'){
 
         this.checkForScrollHeader();
@@ -349,7 +359,7 @@ var app = new Vue({
 
         this.threeDisplayClass = null;
         this.animate();
-        this.glitchEffect();
+        this.glitchEffect(600);
       } else {
         this.threeDisplayClass = 'hide-3d';
       }
@@ -553,13 +563,13 @@ var app = new Vue({
       composer.setSize( window.innerWidth, window.innerHeight );
 
     },
-    glitchEffect: function(){
+    glitchEffect: function(time){
       this.glitchEnabled = true;
 
       var self = this;
       setTimeout(function(){
         self.glitchEnabled = false;
-      }, 300);
+      }, time);
 
     },
     checkForScrollHeader: function(){
@@ -587,9 +597,9 @@ var app = new Vue({
 
     this.initScene();
     this.animate();
-    this.glitchEffect();
+    this.glitchEffect(300);
 
   },
-  router
+  router: router
 });
 

@@ -14,8 +14,19 @@ maxContainerWidth = 1246px;
 med = 1130px;
 sml = 480px;
 
+menuTransitionTime = 0.2s;
 
-.darkHeader
+
+// .darkHeader
+//   background-color #333333
+  
+.rect-fill
+  position fixed
+  z-index 6
+  top 0
+  left 0
+  right 0
+  height 65px
   background-color #333333
 
 html, body 
@@ -28,8 +39,8 @@ html, body
   @media (max-width: sml)
     font-size 16px
 
-// canvas
-//   transition opacity .25s
+canvas
+  transition opacity menuTransitionTime
     
 .app-container 
   position relative
@@ -51,15 +62,22 @@ p
   span
     color #6d6d6d
   
+
+headerFadeTime = 0.1s;
+
+.headerFade-enter-active,.headerFade-leave-active 
+  transition headerFadeTime
+
+.headerFade-enter,.headerFade-leave-to
+  transform translate(0, -100%)
   
 header
   position fixed
   top 0em
   left 0em
-  right 0em
   padding 0.3em
   height 2.5em
-  z-index 6
+  z-index 10
   display flex
   background-color transparent
   transition background-color 0.2s
@@ -86,7 +104,6 @@ menuBarWidth = 1.5em;
 
 menuBar2Offset = 0.35em;
 menuBar3Offset = 0.7em;
-
 
 #menuIcon
   position fixed
@@ -120,6 +137,7 @@ menuBar3Offset = 0.7em;
       
 #menuIcon.open
   span
+    transform rotate(90deg)
     background-color menuBarDarkColor
     &:nth-child(1)
       top menuBar2Offset
@@ -131,8 +149,8 @@ menuBar3Offset = 0.7em;
       left -60px
     &:nth-child(3)
       top menuBar2Offset
-      -webkit-transform rotate(135deg)
-      -ms-transform rotate(135deg)
+      -webkit-transform rotate(-135deg)
+      -ms-transform rotate(-135deg)
       transform rotate(-135deg)
       
 .homeScreen
@@ -230,14 +248,13 @@ menuBar3Offset = 0.7em;
   z-index 6
   background-color rgba(255,255,255,1)
   top 0
-  bottom 0
+  bottom 10%
   left 0
   right 0
   display flex
   flex-direction column
   text-align center
   overflow-y hidden
-  left 50%
   box-shadow -6px 0px 11px rgba(0, 0, 0, 0.14)
   userSelectNone()
   h1
@@ -615,18 +632,18 @@ sideTextContainer()
 
 .slide-leave-active,
 .slide-enter-active {
-  transition: 0.2s;
+  transition: menuTransitionTime;
 }
 .slide-enter {
-  transform: translate(100%, 0);
+  transform: translate(0, -100%);
 }
 .slide-leave-to {
-  transform: translate(100%, 0);
+  transform: translate(0, -100%);
 }
 
 
 .portfolio-transition-enter-active {
-  transition: opacity .2s
+  transition: opacity 1s
 }
 .portfolio-transition-enter {
   opacity: 0

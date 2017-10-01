@@ -1,9 +1,10 @@
-const Soccer1 = {
+var Soccer1 = {
   props: ['menuOpen'],
   template: '#soccer1',
   data: function(){
     return {
       portfolioFeature: 'portfolio-feature',
+      // src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/webapp.soccer-1.com-.jpg'
       src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png'
     }
   },

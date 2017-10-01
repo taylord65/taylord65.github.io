@@ -1,8 +1,9 @@
-const Saildrone = {
+var Saildrone = {
   props: ['menuOpen'], 
   template: '#saildrone',
   data: function(){
     return {
+      portfolioFeature: 'portfolio-feature',
       src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3boats.jpg"
     }
   },

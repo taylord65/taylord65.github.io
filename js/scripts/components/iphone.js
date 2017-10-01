@@ -13,14 +13,13 @@ Vue.component('iphone-component', {
   ',
   directives: {
     autofade: {
-      inViewport (el) {
+      inViewport: function(el) {
         var rect = el.getBoundingClientRect()
         return !(rect.bottom < 0 || rect.right < 0 || 
                  rect.left > window.innerWidth ||
                  rect.top > window.innerHeight)
       },
-      
-      bind(el, binding) {
+      bind: function(el, binding) {
 
         el.classList.add('before-enter')
         el.$onScroll = function() {
@@ -38,12 +37,11 @@ Vue.component('iphone-component', {
         }
         document.addEventListener('scroll', el.$onScroll)
       },
-      
-      inserted(el, binding) {
+      inserted: function(el, binding) {
         el.$onScroll()  
       },
       
-      unbind(el, binding) {    
+      unbind: function(el, binding) {    
         document.removeEventListener('scroll', el.$onScroll)
         delete el.$onScroll
       }  

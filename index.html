@@ -38,7 +38,6 @@
 <body>
 
 <template id="soccer1">
-  <transition name="portfolio-transition">
   <div v-bind:class="[{unfocusedFeature: menuOpen}, portfolioFeature]">
 
     <div class="cover" id="s1_background">
@@ -161,12 +160,10 @@
     </div>
 
   </div>
-  </transition>
 </template>
 
 <template id="saildrone">
-  <transition name="portfolio-transition">
-  <div class="portfolioFeature">
+  <div v-bind:class="[{unfocusedFeature: menuOpen}, portfolioFeature]">
 
     <div class="cover" id="sd_background">
       <div class="cover-headline">
@@ -214,7 +211,6 @@
     </div>
 
   </div>
-</transition>
 </template>
 
 <div id="app" v-bind:class="[colorTheme, threeDisplayClass, blurClass, {homeScreen: !threeDisplayClass}]">
@@ -222,10 +218,19 @@
   <webgl-notice v-if="showWebGLNotice"></webgl-notice>
 
   <header-menu id="header" v-on:homeaction="home"></header-menu>
+
   <nav-menu v-on:menuaction="menu" v-bind:show-menu="showMenu"></nav-menu>
+
   <div class="app-container" id="threeDisplay">
-    <router-view :menu-open="showMenu"></router-view>
+
+    <transition name="portfolio-transition" mode="out-in">
+
+      <router-view :menu-open="showMenu"></router-view>
+
+    </transition>
+
   </div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
