@@ -35,8 +35,6 @@ var app = new Vue({
     '$route': function(to, from){
       if(to.path === '/'){
 
-        this.checkForScrollHeader();
-
         if(!Detector.webgl){
           console.log("Unable to initialize WebGL. Your browser or machine may not support it.");
           this.threeDisplayClass = 'noWebGL';
@@ -48,6 +46,7 @@ var app = new Vue({
         this.animate();
         this.glitchEffect(600);
       } else {
+        cancelAnimationFrame(frame);
         this.threeDisplayClass = 'hide-3d';
       }
     }
@@ -218,11 +217,9 @@ var app = new Vue({
       scene.add(group);
     },
     animate: function(){
-      if(!this.threeDisplayClass){
         frame = requestAnimationFrame( this.animate );
         this.render();
-        this.rotateBlocks();
-      }
+        this.rotateBlocks();      
     },
     rotateBlocks: function(){
       for (var i = this.objects.length - 1; i >= 0; i--) {
@@ -230,7 +227,9 @@ var app = new Vue({
         this.objects[i].rotateY(0.0008);
         this.objects[i].rotateZ(0.0008);
       }
-      scene.children[0].rotateY(0.0002);
+      scene.children[0].rotateY(0.0005);
+      scene.children[0].rotateX(0.0005);
+      scene.children[0].rotateZ(-0.0005);
     },
     render: function(){
       controls.update();
@@ -258,19 +257,18 @@ var app = new Vue({
         self.glitchEnabled = false;
       }, time);
 
-    },
-    checkForScrollHeader: function(){
-      if(document.getElementById('header').classList.length > 0){
-        document.getElementById('header').classList.remove('darkHeader');
-      }
     }
   },
   mounted: function(){
 
     var currentPath = router.history.current.path;
 
+    this.initScene();
+
     if(currentPath === '/'){
       this.threeDisplayClass = null;
+      this.animate();
+      this.glitchEffect(300);
     } else {
       this.threeDisplayClass = 'hide-3d';
     }
@@ -281,10 +279,6 @@ var app = new Vue({
       this.showWebGLNotice = true;
       return;
     }
-
-    this.initScene();
-    this.animate();
-    this.glitchEffect(300);
 
   },
   router: router

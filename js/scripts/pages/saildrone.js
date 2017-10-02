@@ -7,6 +7,14 @@ var Saildrone = {
       src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3boats.jpg"
     }
   },
+  methods: {
+    closemenu: function(menuOpen){
+      if(menuOpen){
+        //emit close menu
+        this.$emit('menuaction');
+      }
+    }
+  },
   created: function(){
 
     $('<img/>').attr('src', this.src).on('load', function() {

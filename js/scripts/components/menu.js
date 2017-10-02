@@ -5,19 +5,19 @@ Vue.component('nav-menu', {
     <transition name="slide">\
       <div v-if="showMenu" class="menu">\
         <h1>Featured Work</h1>\
-        <div v-on:click="routeTo($event, soccerRoute )" class="feature">\
+        <div v-on:click="routeTo($event, soccerRoute )" class="feature animated fadeInUp">\
           <h2>Soccer-1</h2>\
         </div>\
-        <div v-on:click="routeTo($event, sailDroneRoute )" class="feature">\
+        <div v-on:click="routeTo($event, sailDroneRoute )" class="feature animated fadeInUp">\
           <h2>Saildrone</h2>\
         </div>\
-        <div class="feature">\
+        <div class="feature animated fadeInUp">\
           <h2>Fifthlight</h2>\
         </div>\
-        <div class="feature">\
+        <div class="feature animated fadeInUp">\
           <h2>teaBot</h2>\
         </div>\
-        <div class="feature">\
+        <div class="feature animated fadeInUp">\
           <h2>Art</h2>\
         </div>\
         <h1>taylordotsikas@gmail.com</h1>\

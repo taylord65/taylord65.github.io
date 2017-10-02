@@ -2,8 +2,8 @@ var Home = {
   props: ['menuOpen'], 
   template: '\
     <div class="headline-container">\
-      <transition name="fade">\
-      <div v-if="!menuOpen" class="headline">\
+      <transition>\
+      <div class="headline">\
         <h1>Taylor Dotsikas</h1>\
         <h2>UI Designer</h2>\
         <h2>Front end Developer</h2>\
@@ -19,6 +19,14 @@ var Saildrone = {
     return {
       portfolioFeature: 'portfolio-feature',
       src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3boats.jpg"
+    }
+  },
+  methods: {
+    closemenu: function(menuOpen){
+      if(menuOpen){
+        //emit close menu
+        this.$emit('menuaction');
+      }
     }
   },
   created: function(){
@@ -37,6 +45,14 @@ var Soccer1 = {
       portfolioFeature: 'portfolio-feature',
       // src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/webapp.soccer-1.com-.jpg'
       src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png'
+    }
+  },
+  methods: {
+    closemenu: function(menuOpen){
+      if(menuOpen){
+        //emit close menu
+        this.$emit('menuaction');
+      }
     }
   },
   created: function(){
@@ -85,10 +101,15 @@ Vue.component('check-it-out', {
 Vue.component('desktop', {
   props: ['src'],
   template: '\
-      <video class="desktop-video" width="100%" height="auto" autoplay loop muted playsinline>\
-      <source :src="src" type="video/mp4">\
-      </video>\
-      '
+	<div class="desktop-video">\
+		<img src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/macbook2X_noLabel.jpg">\
+		<div class="video-container">\
+			<video width="100%" height="auto" autoplay loop muted playsinline>\
+				<source :src="src" type="video/mp4">\
+			</video>\
+		</div>\
+	</div>\
+	'
 });
 Vue.component('portfolio-feature-footer', {
   template: '\
@@ -217,19 +238,19 @@ Vue.component('nav-menu', {
     <transition name="slide">\
       <div v-if="showMenu" class="menu">\
         <h1>Featured Work</h1>\
-        <div v-on:click="routeTo($event, soccerRoute )" class="feature">\
+        <div v-on:click="routeTo($event, soccerRoute )" class="feature animated fadeInUp">\
           <h2>Soccer-1</h2>\
         </div>\
-        <div v-on:click="routeTo($event, sailDroneRoute )" class="feature">\
+        <div v-on:click="routeTo($event, sailDroneRoute )" class="feature animated fadeInUp">\
           <h2>Saildrone</h2>\
         </div>\
-        <div class="feature">\
+        <div class="feature animated fadeInUp">\
           <h2>Fifthlight</h2>\
         </div>\
-        <div class="feature">\
+        <div class="feature animated fadeInUp">\
           <h2>teaBot</h2>\
         </div>\
-        <div class="feature">\
+        <div class="feature animated fadeInUp">\
           <h2>Art</h2>\
         </div>\
         <h1>taylordotsikas@gmail.com</h1>\
@@ -348,8 +369,6 @@ var app = new Vue({
     '$route': function(to, from){
       if(to.path === '/'){
 
-        this.checkForScrollHeader();
-
         if(!Detector.webgl){
           console.log("Unable to initialize WebGL. Your browser or machine may not support it.");
           this.threeDisplayClass = 'noWebGL';
@@ -361,6 +380,7 @@ var app = new Vue({
         this.animate();
         this.glitchEffect(600);
       } else {
+        cancelAnimationFrame(frame);
         this.threeDisplayClass = 'hide-3d';
       }
     }
@@ -531,11 +551,9 @@ var app = new Vue({
       scene.add(group);
     },
     animate: function(){
-      if(!this.threeDisplayClass){
         frame = requestAnimationFrame( this.animate );
         this.render();
-        this.rotateBlocks();
-      }
+        this.rotateBlocks();      
     },
     rotateBlocks: function(){
       for (var i = this.objects.length - 1; i >= 0; i--) {
@@ -543,7 +561,9 @@ var app = new Vue({
         this.objects[i].rotateY(0.0008);
         this.objects[i].rotateZ(0.0008);
       }
-      scene.children[0].rotateY(0.0002);
+      scene.children[0].rotateY(0.0005);
+      scene.children[0].rotateX(0.0005);
+      scene.children[0].rotateZ(-0.0005);
     },
     render: function(){
       controls.update();
@@ -571,19 +591,18 @@ var app = new Vue({
         self.glitchEnabled = false;
       }, time);
 
-    },
-    checkForScrollHeader: function(){
-      if(document.getElementById('header').classList.length > 0){
-        document.getElementById('header').classList.remove('darkHeader');
-      }
     }
   },
   mounted: function(){
 
     var currentPath = router.history.current.path;
 
+    this.initScene();
+
     if(currentPath === '/'){
       this.threeDisplayClass = null;
+      this.animate();
+      this.glitchEffect(300);
     } else {
       this.threeDisplayClass = 'hide-3d';
     }
@@ -594,10 +613,6 @@ var app = new Vue({
       this.showWebGLNotice = true;
       return;
     }
-
-    this.initScene();
-    this.animate();
-    this.glitchEffect(300);
 
   },
   router: router

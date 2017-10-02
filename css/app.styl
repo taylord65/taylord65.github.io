@@ -20,15 +20,6 @@ menuTransitionTime = 0.2s;
 // .darkHeader
 //   background-color #333333
   
-.rect-fill
-  position fixed
-  z-index 6
-  top 0
-  left 0
-  right 0
-  height 65px
-  background-color #333333
-
 html, body 
   margin 0
   height 100%
@@ -62,14 +53,29 @@ p
   span
     color #6d6d6d
   
-
-headerFadeTime = 0.1s;
+.rect-fill
+  position fixed
+  z-index 6
+  top 0
+  left 0
+  right 0
+  height 62px
+  background-color #333333
+  @media (max-width: sml)
+    height 50px
+    
+headerFadeTime = 0.5s;
 
 .headerFade-enter-active,.headerFade-leave-active 
   transition headerFadeTime
+  transition-timing-function cubic-bezier(0, 1.24, 0.35, 0.98)
+  background-color #333333
+  opacity 1
 
 .headerFade-enter,.headerFade-leave-to
-  transform translate(0, -100%)
+  transform translate(-100%, 0)
+  background-color #a01211
+  opacity 0
   
 header
   position fixed
@@ -105,6 +111,8 @@ menuBarWidth = 1.5em;
 menuBar2Offset = 0.35em;
 menuBar3Offset = 0.7em;
 
+menuTransition = 0.5s ease-in-out;
+
 #menuIcon
   position fixed
   z-index 7
@@ -112,7 +120,7 @@ menuBar3Offset = 0.7em;
   right 1.2em
   display flex
   width menuBarWidth
-  height 2.5em
+  height 1.188em
   pointer-events auto
   cursor pointer
   userSelectNone() 
@@ -127,7 +135,7 @@ menuBar3Offset = 0.7em;
     -webkit-transform rotate(0deg)
     -ms-transform  rotate(0deg)
     transform rotate(0deg)
-    transition .25s ease-in-out
+    transition menuTransition
     &:nth-child(1)
       top 0
     &:nth-child(2)
@@ -136,6 +144,7 @@ menuBar3Offset = 0.7em;
       top menuBar3Offset
       
 #menuIcon.open
+  transform rotate(90deg)
   span
     transform rotate(90deg)
     background-color menuBarDarkColor
@@ -162,12 +171,23 @@ menuBar3Offset = 0.7em;
   canvas
     display none
     
+
+// .homeScreen
+// //   .menu
+// //     @media(max-width: sml)
+// //       background-color rgba(0, 0, 0, 0.48)
+// //       .feature
+// //         h2
+// //           color #FFF
+// //       h1
+// //         color #d6d6d6
+
 .blur
   canvas
     opacity 0.2
   @media(max-width: sml)
     canvas
-      opacity 1
+      opacity 0.2
 
 .WHITE
   .home-icon
@@ -228,19 +248,34 @@ menuBar3Offset = 0.7em;
   margin auto
   text-align center
   height auto
+  width 40%
+  margin-left 0px
+  padding 2em
+  background-color whitesmoke
+  border 1px solid #c5c5c5
+  border-left none
   userSelectNone()
   h1
+    float left
+    padding-top 10%
+    border-right 3px solid #515151
+    margin-right 10px
+    height 3em
+    padding-right 30px
     margin auto
     font-size 1.5em
     color #FFF
     text-align center
     font-family customFont
   h2
+    width 50%
+    float right
+    text-align left
     font-size 0.8em
     color #FFF
     text-transform uppercase
     letter-spacing 0.1em
-    margin-top 0.6em
+    margin-top 2em
 
 
 .menu
@@ -248,7 +283,6 @@ menuBar3Offset = 0.7em;
   z-index 6
   background-color rgba(255,255,255,1)
   top 0
-  bottom 10%
   left 0
   right 0
   display flex
@@ -286,15 +320,7 @@ menuBar3Offset = 0.7em;
     box-shadow none
     left 0
 
-.homeScreen
-  .menu
-    @media(max-width: sml)
-      background-color rgba(0, 0, 0, 0.48)
-      .feature
-        h2
-          color #FFF
-      h1
-        color #d6d6d6
+
 
             
 
@@ -305,8 +331,8 @@ menuBar3Offset = 0.7em;
   opacity 1
   transition opacity 0.25s
   .scrollUpSection
-    width calc(100% - 5.6em)
-    margin-left 2.8em
+    width calc(100% - 6.34em)
+    margin-left 3.17em
     @media (max-width: med)
       width 100%
       margin-left 0px
@@ -495,6 +521,19 @@ sideTextContainer()
       .description-area
         width auto 
         padding 0 1em
+  .full-width-content
+    h1
+      width 100%
+      margin auto
+      text-align center
+      margin-bottom 1em
+    .description-area
+      width 100%
+    @media (max-width: sml)
+      width 100%
+      .description-area
+        width auto 
+        padding 0 1em
         
       
 .tabbed-content
@@ -532,6 +571,9 @@ sideTextContainer()
       margin-left auto !important
   @media (max-width: sml)
     margin-top 2em
+    .title-row
+      .tab-title
+        padding 0px .4em
 
 
 .iphone-container
@@ -557,11 +599,24 @@ sideTextContainer()
       width 80%
 
 .desktop-video 
-  margin auto
+  width 100%
   height auto
-  margin-top 2em
-  margin-bottom 2em
-  width 95%
+  position relative
+  img
+    width 100%
+    margin 1em 0em
+  .video-container 
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+    display flex
+    video
+      margin auto
+      width 76%
+      padding-right 5px
+      padding-bottom 15px
   
 
   

@@ -10,7 +10,7 @@ var jsFiles = [
 	'js/scripts/pages/**.js',
 	'js/scripts/routeDefs.js',
 	'js/scripts/components/**.js',
-	'js/scripts/app.js'
+	'js/scripts/vueApp.js'
 ];
 var jsDest = 'dist/scripts';
 
