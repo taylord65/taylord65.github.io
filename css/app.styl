@@ -34,6 +34,7 @@ html, body
 
 canvas
   transition opacity menuTransitionTime
+  
     
 .app-container 
   position relative
@@ -119,12 +120,12 @@ menuBarWidth = 1.5em;
 menuBar2Offset = 0.35em;
 menuBar3Offset = 0.7em;
 
-menuTransition = 0.5s ease-in-out;
+menuTransition = 0.2s ease-in-out;
 
 #menuIcon
   position fixed
   z-index 7
-  top 1.2em
+  top 1.07em
   right 0.94em
   display flex
   width menuBarWidth
@@ -152,7 +153,6 @@ menuTransition = 0.5s ease-in-out;
       top menuBar3Offset
       
 #menuIcon.open
-  transform rotate(90deg)
   span
     transform rotate(90deg)
     background-color menuBarDarkColor
@@ -173,12 +173,13 @@ menuTransition = 0.5s ease-in-out;
 #workLabel
   position fixed
   z-index 7
-  top 1.05em
-  right 3.2em
+  top .92em
+  right 3.5em
   font-weight 600
   color #FFF
   transition color menuTransition
   cursor pointer
+  userSelectNone()
       
 .homeScreen
   #menuIcon
@@ -307,7 +308,27 @@ menuTransition = 0.5s ease-in-out;
     text-transform uppercase
     letter-spacing 0.1em
     margin-top 2em
+  @media (max-width: sml)
+    width 60%
 
+featureBlock()
+  margin auto
+  display flex
+  height 100%
+  flex-direction column
+  
+leftAllignment()
+  text-align left
+  margin-left 30px
+  @media (max-width: sml)
+    margin-left 10px
+    
+rightAllignment()
+  margin-right 30px
+  @media (max-width: sml)
+    margin-right 10px
+
+featureTransitionTime = 0.2s
 
 .menu
   position fixed
@@ -324,31 +345,89 @@ menuTransition = 0.5s ease-in-out;
   overflow-y hidden
   box-shadow -9px 0px 18px rgba(0, 0, 0, 0.15)
   userSelectNone()
-  h1
+  .menu-header
+    height 15%
+    width 100%
+    display flex
+    border-bottom 1px solid #E2E2E2
     margin auto
-    margin-bottom 10px
-    margin-top 100px
-    color #616161
-    font-size 0.7em
-    text-transform uppercase
-    letter-spacing 0.1em
-  .feature
-    width 80%
+    h1
+      margin: auto;
+      color: #272727;
+      font-size: 1em;
+      margin-bottom: 1em;
+      text-transform: uppercase;
+  .feature-list
     margin auto
+    margin-top 0px
+    height 60%
+    width 100%
     display flex
     flex-direction column
-    margin-top 10px
-    margin-bottom 4em
-    cursor pointer
-    span
-      color rgba(255, 255, 255, 0.34)
-    h2
-      color rgba(255, 255, 255, 0.41)
+    .feature
+      width 93%
+      height calc(100%/4)
       margin auto
-      font-size 2em
-      color rgba(62, 62, 62, 0.41)
+      display flex
+      border-bottom 1px solid #E2E2E2
+      cursor pointer
       &:hover
-        color #2196F3
+        .feature-info
+          h1
+            color #a01211
+            .indicator
+              display inline-block
+              width 17px
+              margin-right 8px
+      .feature-info
+        featureBlock()
+        width 70%
+        h1
+          margin auto
+          leftAllignment()
+          display flex
+          margin-bottom 0.5em
+          font-size 1.414em
+          transition color featureTransitionTime
+          .indicator
+            margin auto
+            margin-left 0px
+            margin-right 0px
+            height 3px
+            width 0px
+            background-color #a01211
+            transition width featureTransitionTime
+        span
+          margin auto
+          leftAllignment()
+          margin-top 0px
+          font-size 1em
+          color #808080
+      .feature-date
+        featureBlock()
+        width 30%
+        span
+          margin auto
+          rightAllignment()
+          color #7B7B7B
+          text-align right
+  .menu-footer
+    width 93%
+    height 25%
+    display flex
+    flex-direction column
+    margin auto
+    span
+      margin auto
+      margin-bottom 0px
+      leftAllignment()
+    input
+      margin auto
+      margin-top 1em
+      leftAllignment()
+      width 17em
+      text-align center
+      height 3em
   @media(max-width: sml)
     box-shadow none
     width 100%
