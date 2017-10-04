@@ -4,7 +4,7 @@ var Saildrone = {
   data: function(){
     return {
       portfolioFeature: 'portfolio-feature',
-      src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3boats.jpg"
+      src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/sd/sd_cover.jpg"
     }
   },
   methods: {

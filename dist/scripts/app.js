@@ -1,14 +1,37 @@
+var Fifthlight = {
+  props: ['menuOpen'], 
+  template: '#fifthlight',
+  data: function(){
+    return {
+      portfolioFeature: 'portfolio-feature',
+      src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/fl/fl_cover_dark.jpg"
+    }
+  },
+  methods: {
+    closemenu: function(menuOpen){
+      if(menuOpen){
+        //emit close menu
+        this.$emit('menuaction');
+      }
+    }
+  },
+  created: function(){
+
+    $('<img/>').attr('src', this.src).on('load', function() {
+       $(this).remove();
+       $('#fl_background').css('background-image', 'url(' + this.src + ')');
+    });
+  }
+};
 var Home = {
   props: ['menuOpen'], 
   template: '\
-    <div class="headline-container">\
-      <transition>\
-      <div class="headline">\
+    <div  class="headline-container">\
+      <div v-if="!menuOpen" class="headline animated fadeIn">\
         <h1>Taylor Dotsikas</h1>\
         <h2>UI Designer</h2>\
         <h2>Front end Developer</h2>\
       </div>\
-      </transition>\
     </div>\
     '
 };
@@ -18,7 +41,7 @@ var Saildrone = {
   data: function(){
     return {
       portfolioFeature: 'portfolio-feature',
-      src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3boats.jpg"
+      src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/sd/sd_cover.jpg"
     }
   },
   methods: {
@@ -47,6 +70,23 @@ var Soccer1 = {
       src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png'
     }
   },
+  created: function(){
+
+    $('<img/>').attr('src', this.src).on('load', function() {
+       $(this).remove();
+       $('#s1_background').css('background-image', 'url(' + this.src + ')');
+    });
+  }
+};
+var Teabot = {
+  props: ['menuOpen'], 
+  template: '#teabot',
+  data: function(){
+    return {
+      portfolioFeature: 'portfolio-feature',
+      src: "https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/tb/tb_new_cover.jpg"
+    }
+  },
   methods: {
     closemenu: function(menuOpen){
       if(menuOpen){
@@ -59,14 +99,16 @@ var Soccer1 = {
 
     $('<img/>').attr('src', this.src).on('load', function() {
        $(this).remove();
-       $('#s1_background').css('background-image', 'url(' + this.src + ')');
+       $('#tb_background').css('background-image', 'url(' + this.src + ')');
     });
   }
 };
 var routes = [
-  { path: '/soccer1', component: Soccer1 },
-  { path: '/saildrone', component: Saildrone },
-  { path: '/', component: Home }
+  { path: '/soccer1', component: Soccer1, name: 'Soccer-1' },
+  { path: '/saildrone', component: Saildrone, name:'Saildrone' },
+  { path: '/fifthlight', component: Fifthlight, name: 'Fifthlight' },
+  { path: '/teabot', component: Teabot, name: 'teaBot'},
+  { path: '/', component: Home, name: 'home' }
 ];
 
 var router = new VueRouter({
@@ -82,18 +124,24 @@ Vue.component('check-it-out', {
   },
   methods: {
     showViewOptions: function(){
-      if(this.options.length > 1){
-        this.viewOptions = !this.viewOptions;
-      } else {
-        //route to this.options[0].url
+      if(!this.viewOptions){
+        if(this.options.length > 1){
+          this.viewOptions = !this.viewOptions;
+        } else {
+          window.open(this.options[0].url);
+        }
       }
+    },
+    navToLink: function(url){
+      window.open(url);
     }
   },
   template: '\
     <div class="checkItOutButton" v-on:click="showViewOptions" :class="[{viewOptionsOpen: viewOptions}]">\
       <span v-if="!viewOptions">Check it out</span>\
-      <span v-if="viewOptions" class="link-option" v-for="option in options" :key="option.id">\
+      <span v-if="viewOptions" class="link-option" v-for="option in options" :key="option.id" v-on:click="navToLink(option.url)">\
         {{option.title}}\
+        <svg viewBox="0 0 64 64" width="20px" height="20px"><path d="M59.927 31.985l.073.076-16.233 17.072-3.247-3.593L51.324 34H4v-4h47.394L40.52 18.407l3.247-3.494L60 31.946l-.073.039z"></path></svg>\
       </span>\
     </div>\
   '
@@ -101,7 +149,7 @@ Vue.component('check-it-out', {
 Vue.component('desktop', {
   props: ['src'],
   template: '\
-	<div class="desktop-video">\
+	<div class="desktop-video" v-autofadedesktop>\
 		<img src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/macbook2X_noLabel.jpg">\
 		<div class="video-container">\
 			<video width="100%" height="auto" autoplay loop muted playsinline>\
@@ -109,22 +157,72 @@ Vue.component('desktop', {
 			</video>\
 		</div>\
 	</div>\
-	'
+	',
+	directives: {
+		autofadedesktop: {
+		  inViewport: function(el) {
+		    var rect = el.getBoundingClientRect()
+		    return !(rect.bottom < 0 || rect.right < 0 || 
+		             rect.left > window.innerWidth ||
+		             rect.top > window.innerHeight)
+		  },
+		  bind: function(el, binding) {
+
+		    el.classList.add('before-enter')
+		    el.$onScroll = function() {
+		      if (binding.def.inViewport(el)) {
+		        el.classList.add('enter')
+		        el.classList.remove('before-enter')
+
+		        //Select the video node and autoplay. 
+		        //If html changes this must change.
+		        el.childNodes[2].children[0].autoplay = true;
+		        el.childNodes[2].children[0].load();
+
+		        binding.def.unbind(el, binding)        
+		      }
+		    }
+		    document.addEventListener('scroll', el.$onScroll)
+		  },
+		  inserted: function(el, binding) {
+		    el.$onScroll() 
+		  },
+		  
+		  unbind: function(el, binding) { 
+		    document.removeEventListener('scroll', el.$onScroll)
+		    delete el.$onScroll
+		  }  
+		}
+	}
 });
 Vue.component('portfolio-feature-footer', {
   template: '\
-    <footer>\
-      <div class="center-content">\
-        <h1>Taylor Dotsikas</h1>\
-        <span>Get in touch</span>\
-      </div>\
+    <footer v-on:click="showEmail" v-bind:class="{ emailFooter: emailOn }">\
+		<div v-if="emailOn" class="email-display">\
+			<input type="text" onClick="this.setSelectionRange(0, this.value.length)" value="taylordotsikas@gmail.com">\
+		</div>\
+		<div v-else class="center-content">\
+			<h1>Taylor Dotsikas</h1>\
+			<span>Get in touch</span>\
+		</div>\
     </footer>\
-  '
+  ',
+  data: function(){
+  	return {
+  		emailOn: false
+  	}
+  },
+  methods: {
+  	showEmail: function(){
+  		this.emailOn = true;
+  	}
+  }
 });
 Vue.component('header-menu', {
   data: function(){
     return {
-      showFill: false
+      showFill: false,
+      route: undefined
     }
   },
   props: ['showMenu'],
@@ -137,12 +235,14 @@ Vue.component('header-menu', {
         </div>\
       </header>\
       <transition name="headerFade">\
-        <div v-if="showFill" class="rect-fill"></div>\
+        <div v-if="showFill" class="rect-fill">\
+          <h1>{{ route }}</h1>\
+        </div>\
       </transition>\
     </div>\
   ',
   created: function(){
-    console.log("scroll added");
+    this.route = this.$route.name;
     window.addEventListener('scroll', this.handleScroll);
   },
   destroyed: function(){
@@ -173,7 +273,56 @@ Vue.component('header-menu', {
         }
       }
     }
+  },
+  watch: {
+    '$route': function(to, from){
+      this.route = to.name;
+      if(this.route === 'home'){
+        this.showFill = false;
+      }
+    }
   }
+});
+
+
+Vue.component('ipad', {
+  props: ['src', 'landscape'],
+  template: '\
+	<div v-bind:class="[{ipadFeatureLandscape: landscape}, {ipadFeaturePortrait: !landscape}]" v-autofadeipad>\
+		<img :src="src">\
+	</div>\
+	',
+	directives: {
+		autofadeipad: {
+		  inViewport: function(el) {
+		    var rect = el.getBoundingClientRect()
+		    return !(rect.bottom < 0 || rect.right < 0 || 
+		             rect.left > window.innerWidth ||
+		             rect.top > window.innerHeight)
+		  },
+		  bind: function(el, binding) {
+
+		    el.classList.add('before-enter')
+		    el.$onScroll = function() {
+		      if (binding.def.inViewport(el)) {
+		        el.classList.add('enter')
+		        el.classList.remove('before-enter')
+
+		        binding.def.unbind(el, binding)        
+		      }
+		    }
+		    document.addEventListener('scroll', el.$onScroll)
+		  },
+		  inserted: function(el, binding) {
+		    el.$onScroll() 
+		  },
+		  
+		  unbind: function(el, binding) { 
+		    document.removeEventListener('scroll', el.$onScroll)
+		    delete el.$onScroll
+		  }  
+		}
+	}
 });
 
 Vue.component('iphone-component', {
@@ -244,23 +393,23 @@ Vue.component('nav-menu', {
         <div v-on:click="routeTo($event, sailDroneRoute )" class="feature animated fadeInUp">\
           <h2>Saildrone</h2>\
         </div>\
-        <div class="feature animated fadeInUp">\
+        <div v-on:click="routeTo($event, fifthlightRoute )" class="feature animated fadeInUp">\
           <h2>Fifthlight</h2>\
         </div>\
-        <div class="feature animated fadeInUp">\
+        <div v-on:click="routeTo($event, teabotRoute )" class="feature animated fadeInUp">\
           <h2>teaBot</h2>\
-        </div>\
-        <div class="feature animated fadeInUp">\
-          <h2>Art</h2>\
         </div>\
         <h1>taylordotsikas@gmail.com</h1>\
       </div>\
     </transition>\
     \
-    <div id="menuIcon" v-on:click="menuTrigger" v-bind:class="[{open: showMenu}]">\
-      <span></span>\
-      <span></span>\
-      <span></span>\
+    <div class="menu-button-container" v-on:click="menuTrigger">\
+      <div id="menuIcon"  v-bind:class="[{open: showMenu}]">\
+        <span></span>\
+        <span></span>\
+        <span></span>\
+      </div>\
+      <span id="workLabel" v-if="!showMenu">WORK</span>\
     </div>\
     \
     </div>\
@@ -269,6 +418,8 @@ Vue.component('nav-menu', {
     return {
       soccerRoute: 'soccer1',
       sailDroneRoute: 'saildrone',
+      fifthlightRoute: 'fifthlight',
+      teabotRoute: 'teabot',
       open: 'open'
     }
   },
@@ -281,6 +432,64 @@ Vue.component('nav-menu', {
       router.push(route);
       this.$emit('menuaction');
     }
+  }
+});
+Vue.component('scroll-indicator', {
+  template: '\
+	<div class="scroll-indicator">\
+		<svg class="animated bounce" version="1.1" width="512" height="512" viewBox="0 0 512 512">\
+			<path fill="#FFFFFF" d="M158.628 177.372l-45.256 45.256 142.628 142.627 142.627-142.628-45.254-45.254-97.373 97.372z"></path>\
+		</svg>\
+	</div>\
+  '
+});
+Vue.component('side-panel', {
+  template: '\
+  	<div>\
+		<div v-on:click="prevRoute" class="side-text-left">\
+			<svg version="1.1" width="512" height="512" viewBox="0 0 512 512">\
+				<path fill="#FFFFFF" d="M158.628 177.372l-45.256 45.256 142.628 142.627 142.627-142.628-45.254-45.254-97.373 97.372z"></path>\
+			</svg>\
+		</div>\
+		\
+		<div v-on:click="nextRoute" class="side-text-right">\
+			<svg version="1.1" width="512" height="512" viewBox="0 0 512 512">\
+				<path fill="#FFFFFF" d="M158.628 177.372l-45.256 45.256 142.628 142.627 142.627-142.628-45.254-45.254-97.373 97.372z"></path>\
+			</svg>\
+		</div>\
+	</div>\
+  ',
+  data: function(){
+  	return {
+  		route: null,
+  		routeOrder: ['Soccer-1', 'Saildrone', 'Fifthlight', 'teaBot'],
+  		urls: ['/soccer1', '/saildrone', '/fifthlight', '/teabot']
+  	}
+  },
+  created: function(){
+  	this.route = this.$route.name;
+  },
+  methods: {
+  	prevRoute: function(){
+  		var index = this.routeOrder.indexOf(this.route);
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
+
+		if(index === 0){
+			router.push(this.urls[this.urls.length-1]);
+		} else {
+			router.push(this.urls[index - 1]);
+		}
+  	},
+  	nextRoute: function(){
+  		var index = this.routeOrder.indexOf(this.route);
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
+
+		if(index === (this.routeOrder.length - 1)){
+			router.push(this.urls[0]);
+		} else {
+			router.push(this.urls[index + 1]);
+		}
+  	}
   }
 });
 Vue.component('tabbed-content', {
@@ -399,6 +608,14 @@ var app = new Vue({
         this.blurClass = 'blur';
         document.body.style.overflowY = "hidden";
       } else {
+        this.blurClass = null;
+        document.body.style.overflowY = "auto";
+      }
+    },
+    closemenu: function(){
+      //Used for when the menu is open and user clicks outside of menu
+      if(this.showMenu){
+        this.showMenu = !this.showMenu;
         this.blurClass = null;
         document.body.style.overflowY = "auto";
       }

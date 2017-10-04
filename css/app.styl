@@ -7,6 +7,8 @@ userSelectNone()
 curveTop()
   border-top-left-radius 4px
   border-top-right-radius 4px
+  @media (max-width: med)
+    border-radius 0px
   
 font = "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
 customFont = 'ITCAvantGardeStd-Demi', sans-serif;
@@ -60,7 +62,13 @@ p
   left 0
   right 0
   height 62px
-  background-color #333333
+  background-color #232327
+  display flex
+  h1
+    margin auto
+    color #FFF
+    margin-left 2.5em
+    font-size 1.414em
   @media (max-width: sml)
     height 50px
     
@@ -69,7 +77,7 @@ headerFadeTime = 0.5s;
 .headerFade-enter-active,.headerFade-leave-active 
   transition headerFadeTime
   transition-timing-function cubic-bezier(0, 1.24, 0.35, 0.98)
-  background-color #333333
+  background-color #232327
   opacity 1
 
 .headerFade-enter,.headerFade-leave-to
@@ -98,8 +106,8 @@ header
     userSelectNone()
     svg
       margin auto
-      width 2.5em
-      height 2.5em
+      width 1.8em
+      height 1.8em
       pointer-events none
       
 menuBarLightColor = #FFF;
@@ -117,7 +125,7 @@ menuTransition = 0.5s ease-in-out;
   position fixed
   z-index 7
   top 1.2em
-  right 1.2em
+  right 0.94em
   display flex
   width menuBarWidth
   height 1.188em
@@ -162,10 +170,31 @@ menuTransition = 0.5s ease-in-out;
       -ms-transform rotate(-135deg)
       transform rotate(-135deg)
       
+#workLabel
+  position fixed
+  z-index 7
+  top 1.05em
+  right 3.2em
+  font-weight 600
+  color #FFF
+  transition color menuTransition
+  cursor pointer
+      
 .homeScreen
   #menuIcon
     span
       background-color menuBarDarkColor
+  #workLabel
+    color #232327
+    
+.menu-button-container
+  position fixed
+  z-index 7
+  top 0
+  height 3em
+  right 0
+  width 8em
+  cursor pointer
 
 .hide-3d
   canvas
@@ -251,22 +280,24 @@ menuTransition = 0.5s ease-in-out;
   width 40%
   margin-left 0px
   padding 2em
-  background-color whitesmoke
-  border 1px solid #c5c5c5
   border-left none
   userSelectNone()
   h1
     float left
     padding-top 10%
-    border-right 3px solid #515151
+    border-right 3px solid #000000
     margin-right 10px
     height 3em
     padding-right 30px
     margin auto
-    font-size 1.5em
+    font-size 11.5em
     color #FFF
-    text-align center
+    text-align left
     font-family customFont
+    @media (max-width: med)
+      font-size 5em
+    @media (max-width: sml)
+      font-size 4em
   h2
     width 50%
     float right
@@ -283,13 +314,15 @@ menuTransition = 0.5s ease-in-out;
   z-index 6
   background-color rgba(255,255,255,1)
   top 0
-  left 0
+  width 50%
+  max-width 30em
   right 0
+  bottom 0
   display flex
   flex-direction column
   text-align center
   overflow-y hidden
-  box-shadow -6px 0px 11px rgba(0, 0, 0, 0.14)
+  box-shadow -9px 0px 18px rgba(0, 0, 0, 0.15)
   userSelectNone()
   h1
     margin auto
@@ -318,7 +351,7 @@ menuTransition = 0.5s ease-in-out;
         color #2196F3
   @media(max-width: sml)
     box-shadow none
-    left 0
+    width 100%
 
 
 
@@ -337,15 +370,26 @@ menuTransition = 0.5s ease-in-out;
       width 100%
       margin-left 0px
     position relative
-    top 95%
     background-color #FFF
     padding-bottom 1px
     curveTop()
+  .scrollUpBack
+    width 100%
+    position relative
+    top 85%
+    background-color #080808
+    padding-bottom 1px
+    background -webkit-linear-gradient(rgba(0, 0, 0, 0), black)
+    background -o-linear-gradient(rgba(0, 0, 0, 0), black)
+    background -moz-linear-gradient(rgba(0, 0, 0, 0), black)
+    background linear-gradient(rgba(0, 0, 0, 0), black)
   footer
     background-color #171717
+    transition background-color menuTransition
     height 7em
     margin-bottom -1px
     display flex
+    cursor pointer
     .center-content
       margin auto
       text-align center
@@ -356,28 +400,51 @@ menuTransition = 0.5s ease-in-out;
         margin-top 0em
       span
         font-size 0.8em
+  .emailFooter
+    background-color #4CAF50
+    .email-display
+      margin auto
+      input
+        margin auto
+        width 17em
+        text-align center
+        height 3em
+      
+    
         
 .unfocusedFeature
   opacity 0.3
         
 sideTextContainer()
   margin auto
-  width 2em
-  position relative
-  display inline-block
-  height auto
-  @media (max-width: sml)
+  width 3em
+  position fixed
+  height 100%
+  z-index 2
+  cursor pointer
+  @media (max-width: med)
     display none
-  span
+  svg
     position absolute
     top 50%
     left 50%
-    width 15em
+    width 2em
+    height 2em
     text-align center
-    padding-top 1em
     text-transform uppercase
     font-size 0.9em
     color #ababab
+    
+.side-text-left
+  sideTextContainer()
+  left 0
+  svg
+    transform translateX(-50%) translateY(-50%) rotate(90deg)
+.side-text-right
+  sideTextContainer()
+  right 0
+  svg
+    transform translateX(-50%) translateY(-50%) rotate(-90deg)
 
 .cover 
   top 0
@@ -390,16 +457,6 @@ sideTextContainer()
   background-position center
   background-size cover
   display flex
-  .side-text-left
-    sideTextContainer()
-    margin-left 0px
-    span
-      transform translateX(-50%) translateY(-50%) rotate(-90deg)
-  .side-text-right
-    sideTextContainer()
-    margin-right 0px
-    span
-      transform translateX(-50%) translateY(-50%) rotate(90deg)
   .cover-headline 
     margin auto
     color #FFF
@@ -417,6 +474,9 @@ sideTextContainer()
       letter-spacing 0.4em
       margin-top 0px
       font-weight 300
+    h3
+      font-weight 300
+      font-family customFont
     @media (max-width: sml)
       h1
         font-size 2em
@@ -443,17 +503,20 @@ sideTextContainer()
     text-align center
     position fixed
     z-index 2
-    bottom 7%
+    bottom 17%
     svg
       width 30px
       height 30px
       margin auto
+    @media (max-width: sml)
+      bottom 12%
 
 .overview-banner
   height auto
   padding 2em 0em
   background-color #F2F2F2
   display flex
+  curveTop()
   .banner-container
     width 80%
     margin auto
@@ -470,7 +533,7 @@ sideTextContainer()
 .content-section
   height auto
   width 100%
-  margin-top 5em
+  margin-top 4.54em
   @media (max-width: med)
     margin-top 3em
   .content-panel
@@ -512,7 +575,7 @@ sideTextContainer()
         float none
         margin-bottom 1em
       h1
-        width 100%
+        width 95%
         margin auto
         text-align center
         margin-bottom 1em
@@ -526,7 +589,7 @@ sideTextContainer()
       width 100%
       margin auto
       text-align center
-      margin-bottom 1em
+      margin-bottom 0.08em
     .description-area
       width 100%
     @media (max-width: sml)
@@ -539,7 +602,7 @@ sideTextContainer()
 .tabbed-content
   width 100%
   height auto
-  margin-top 2.5em
+  margin-top 2.05em
   .title-row
     display flex
     border-bottom 2px solid #e8e8e8
@@ -548,6 +611,8 @@ sideTextContainer()
     display flex
     margin-bottom 1em
     padding-bottom 0.2em
+    @media (max-width: sml)
+      padding-bottom 0px
     .tab-title
       font-weight 500
       color #B4B4B4
@@ -557,6 +622,7 @@ sideTextContainer()
       transition color 0.2s
       padding 0px 0.35em
       line-height 1.3em
+      margin-right 1em
       &:hover
         color #0070c9
     .activeTitle
@@ -568,12 +634,15 @@ sideTextContainer()
     width 100% 
   @media (max-width: med)
     .tab-title
-      margin-left auto !important
+      //margin-left auto !important
   @media (max-width: sml)
     margin-top 2em
+    margin-right auto
     .title-row
       .tab-title
         padding 0px .4em
+        margin-right auto
+        margin-bottom 1em
 
 
 .iphone-container
@@ -584,6 +653,8 @@ sideTextContainer()
   position relative
   display flex
   margin auto
+  margin-top -2.2em
+  margin-right 0.1em
   svg
     position absolute
     width 100%
@@ -597,9 +668,13 @@ sideTextContainer()
     video
       margin auto
       width 80%
+  @media (max-width: med)
+    margin-top auto
+    margin-right auto
 
 .desktop-video 
-  width 100%
+  margin-left 1em
+  margin-right 1em
   height auto
   position relative
   img
@@ -617,44 +692,92 @@ sideTextContainer()
       width 76%
       padding-right 5px
       padding-bottom 15px
+      
+.ipadFeatureLandscape
+  margin-left 1em
+  margin-right 1em
+  height auto
+  position relative
+  img
+    width 100%
+    margin 1em 0em
+    
+.ipadFeaturePortrait
+  margin-left 7em
+  margin-right 7em
+  height auto
+  position relative
+  img
+    width 100%
+    margin 1em 0em
+  @media (max-width: med)
+    margin-left 4em
+    margin-right 4em
+  @media (max-width: sml)
+    margin-left 1em
+    margin-right 1em
+  
   
 
   
 .checkItOutButton
-  margin-left 20%
-  margin-right 20%
+  margin auto
   margin-top 2em
-  height 2em
-  border-radius 4px
+  width 60%
+  max-width 260px
+  height 3em
+  border-radius 2px
   background-color #0E3C6A
   color #FFF
   display flex
   cursor pointer
+  border-bottom 5px solid #052c4b
+  transition width menuTransitionTime
   &:hover
     background-color #00609A
+  &:active
+    border-bottom none
   span
     margin auto
     pointer-events none
     font-size 0.9em
     userSelectNone()
-  @media (max-width: sml)
-    margin-left 10%
-    margin-right 10%
+
 
 
 .viewOptionsOpen
   flex-direction column
   height auto
   background-color #005382
+  max-width 310px
+  width 70%
+  border-bottom 0px
   &:hover
     background-color #005382
   span
     padding 1em 0em
-    margin-left 1em
-    userSelectNone()
-
-
-
+    margin 0px
+    text-align left
+    padding-left 1.5em
+    pointer-events auto
+    border-bottom 1px solid #093b62
+    display flex
+    svg
+      transition transform 0.2s
+    &:hover
+      background-color #1370b9
+      svg
+        -ms-transform translate(5px, 0px)
+        -webkit-transform translate(5px, 0px)
+        transform translate(5px,0px)
+    &:last-child
+      border-bottom 0px
+    svg
+      fill #FFF
+      margin auto
+      margin-right 1em
+  @media (max-width: sml)
+    width 100%
 
 
 
@@ -690,11 +813,12 @@ sideTextContainer()
   transition: menuTransitionTime;
 }
 .slide-enter {
-  transform: translate(0, -100%);
+  transform: translate(100%, 0);
 }
 .slide-leave-to {
-  transform: translate(0, -100%);
+  transform: translate(100%, 0);
 }
+
 
 
 .portfolio-transition-enter-active {

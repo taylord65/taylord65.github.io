@@ -1,7 +1,8 @@
 Vue.component('header-menu', {
   data: function(){
     return {
-      showFill: false
+      showFill: false,
+      route: undefined
     }
   },
   props: ['showMenu'],
@@ -14,12 +15,14 @@ Vue.component('header-menu', {
         </div>\
       </header>\
       <transition name="headerFade">\
-        <div v-if="showFill" class="rect-fill"></div>\
+        <div v-if="showFill" class="rect-fill">\
+          <h1>{{ route }}</h1>\
+        </div>\
       </transition>\
     </div>\
   ',
   created: function(){
-    console.log("scroll added");
+    this.route = this.$route.name;
     window.addEventListener('scroll', this.handleScroll);
   },
   destroyed: function(){
@@ -50,5 +53,14 @@ Vue.component('header-menu', {
         }
       }
     }
+  },
+  watch: {
+    '$route': function(to, from){
+      this.route = to.name;
+      if(this.route === 'home'){
+        this.showFill = false;
+      }
+    }
   }
 });
+

@@ -11,23 +11,23 @@ Vue.component('nav-menu', {
         <div v-on:click="routeTo($event, sailDroneRoute )" class="feature animated fadeInUp">\
           <h2>Saildrone</h2>\
         </div>\
-        <div class="feature animated fadeInUp">\
+        <div v-on:click="routeTo($event, fifthlightRoute )" class="feature animated fadeInUp">\
           <h2>Fifthlight</h2>\
         </div>\
-        <div class="feature animated fadeInUp">\
+        <div v-on:click="routeTo($event, teabotRoute )" class="feature animated fadeInUp">\
           <h2>teaBot</h2>\
-        </div>\
-        <div class="feature animated fadeInUp">\
-          <h2>Art</h2>\
         </div>\
         <h1>taylordotsikas@gmail.com</h1>\
       </div>\
     </transition>\
     \
-    <div id="menuIcon" v-on:click="menuTrigger" v-bind:class="[{open: showMenu}]">\
-      <span></span>\
-      <span></span>\
-      <span></span>\
+    <div class="menu-button-container" v-on:click="menuTrigger">\
+      <div id="menuIcon"  v-bind:class="[{open: showMenu}]">\
+        <span></span>\
+        <span></span>\
+        <span></span>\
+      </div>\
+      <span id="workLabel" v-if="!showMenu">WORK</span>\
     </div>\
     \
     </div>\
@@ -36,6 +36,8 @@ Vue.component('nav-menu', {
     return {
       soccerRoute: 'soccer1',
       sailDroneRoute: 'saildrone',
+      fifthlightRoute: 'fifthlight',
+      teabotRoute: 'teabot',
       open: 'open'
     }
   },

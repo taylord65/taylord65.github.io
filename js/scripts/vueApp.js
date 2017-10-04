@@ -69,6 +69,14 @@ var app = new Vue({
         document.body.style.overflowY = "auto";
       }
     },
+    closemenu: function(){
+      //Used for when the menu is open and user clicks outside of menu
+      if(this.showMenu){
+        this.showMenu = !this.showMenu;
+        this.blurClass = null;
+        document.body.style.overflowY = "auto";
+      }
+    },
     initScene: function(){
       container = document.getElementById( 'threeDisplay' );
 

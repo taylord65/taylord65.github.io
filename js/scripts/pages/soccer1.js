@@ -8,14 +8,6 @@ var Soccer1 = {
       src: 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png'
     }
   },
-  methods: {
-    closemenu: function(menuOpen){
-      if(menuOpen){
-        //emit close menu
-        this.$emit('menuaction');
-      }
-    }
-  },
   created: function(){
 
     $('<img/>').attr('src', this.src).on('load', function() {
