@@ -1,5 +1,7 @@
 import React from 'react';
-import * as THREE from 'three'
+import * as THREE from 'three';
+import * as POSTPROCESSING from 'postprocessing';
+import * as ORBIT from 'three-orbitcontrols';
 
 class ThreeScene extends React.Component {
 
@@ -12,8 +14,8 @@ class ThreeScene extends React.Component {
     }
 
     componentDidMount() {
-        const width = this.mount.clientWidth
-        const height = this.mount.clientHeight
+        const width = window.innerWidth
+        const height = window.innerHeight
 
         const scene = new THREE.Scene()
 
@@ -23,6 +25,11 @@ class ThreeScene extends React.Component {
             0.1,
             1000
         )
+
+        //CAMERA
+        // camera.position.z = 5061;
+        // camera.position.y = -1144;
+
         const renderer = new THREE.WebGLRenderer({ antialias: true })
         const geometry = new THREE.BoxGeometry(1, 1, 1)
         const material = new THREE.MeshBasicMaterial({ color: 0xff00ff })
@@ -39,11 +46,17 @@ class ThreeScene extends React.Component {
         this.material = material
         this.cube = cube
 
+        let composer = new POSTPROCESSING.EffectComposer( renderer );
+
+        this.updateDimensions();
+        window.addEventListener("resize", this.updateDimensions.bind(this));
+
         this.mount.appendChild(this.renderer.domElement)
         this.start()
     }
 
     componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions.bind(this));
         this.stop()
         this.mount.removeChild(this.renderer.domElement)
     }
@@ -66,16 +79,19 @@ class ThreeScene extends React.Component {
         this.frameId = window.requestAnimationFrame(this.animate)
     }
 
+    updateDimensions() {
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight)
+    }
+
     renderScene() {
-        this.renderer.render(this.scene, this.camera)
+      this.renderer.render(this.scene, this.camera)
     }
 
     render() {
         return (
-            <div
-                style={{ width: '400px', height: '400px' }}
-                ref={(mount) => { this.mount = mount }}
-            />
+          <div ref={(mount) => { this.mount = mount }} />
         )
     }
 }
