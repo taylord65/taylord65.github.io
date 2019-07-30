@@ -19,7 +19,7 @@ class ThreeScene extends React.Component {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000 );
-    const glitch = new GlitchEffect(64);
+    const glitch = new GlitchEffect({ delay: new THREE.Vector2( 0, 0 ) });
     const effectPass = new EffectPass(camera, glitch);
     effectPass.renderToScreen = true;
 
@@ -42,7 +42,7 @@ class ThreeScene extends React.Component {
     const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
     const cube = new THREE.Mesh(geometry, material);
 
-    camera.position.z = 10;
+    camera.position.z = 4;
     scene.add(cube);
     scene.background = new THREE.Color( 0xFFFFFF );
 
@@ -95,7 +95,7 @@ class ThreeScene extends React.Component {
 
   renderScene() {
     this.renderer.render(this.scene, this.camera)
-    this.composer.render(this.clock.getDelta());
+    //this.composer.render(this.clock.getDelta());
   }
 
   render() {
