@@ -1,6 +1,6 @@
 import React from 'react';
 import * as THREE from 'three';
-import { EffectComposer, EffectPass, RenderPass, GlitchEffect, NoiseEffect } from "postprocessing";
+import { EffectComposer, EffectPass, RenderPass, GlitchEffect, BlurPass } from "postprocessing";
 import * as ORBIT from 'three-orbitcontrols';
 
 class ThreeScene extends React.Component {
@@ -23,9 +23,15 @@ class ThreeScene extends React.Component {
     const effectPass = new EffectPass(camera, glitch);
     effectPass.renderToScreen = true;
 
+    //Blur
+    const blurPass = new BlurPass();
+    blurPass.scale = 100;
+    blurPass.enabled = true;
+    blurPass.opacity = 1;
+    blurPass.renderToScreen = true;
+    blurPass.setResolutionScale(0.46);
 
     const clock = new THREE.Clock();
-
 
     const renderer = new THREE.WebGLRenderer({ antialias: true});
     renderer.setSize(width, height);
@@ -33,10 +39,13 @@ class ThreeScene extends React.Component {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
 
-
+    //Composer
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
-    composer.addPass(effectPass);
+
+    //Add Passes
+    //composer.addPass(effectPass);
+    composer.addPass(blurPass);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
@@ -95,7 +104,9 @@ class ThreeScene extends React.Component {
 
   renderScene() {
     this.renderer.render(this.scene, this.camera)
-    //this.composer.render(this.clock.getDelta());
+
+    // Composer should only render if passes have been added
+    this.composer.render(this.clock.getDelta());
   }
 
   render() {
