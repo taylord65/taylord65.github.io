@@ -1,7 +1,7 @@
 import React from 'react';
 import * as THREE from 'three';
 import { EffectComposer, EffectPass, RenderPass, GlitchEffect, BlurPass } from "postprocessing";
-import * as ORBIT from 'three-orbitcontrols';
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 class ThreeScene extends React.Component {
 
@@ -14,6 +14,10 @@ class ThreeScene extends React.Component {
   }
 
   componentDidMount() {
+    this.sceneSetup();
+  }
+
+  sceneSetup() {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -39,6 +43,14 @@ class ThreeScene extends React.Component {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
 
+    const controls = new OrbitControls( camera, renderer.domElement );
+    controls.enabled = true;
+    controls.enableZoom = true;
+    controls.enablePan = false;
+    controls.enableDamping = false;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 10;
+
     //Composer
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
@@ -55,7 +67,6 @@ class ThreeScene extends React.Component {
     scene.add(cube);
     scene.background = new THREE.Color( 0xFFFFFF );
 
-
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
@@ -63,6 +74,7 @@ class ThreeScene extends React.Component {
     this.cube = cube;
     this.composer = composer;
     this.clock = clock;
+    this.controls = controls;
 
     window.addEventListener("resize", this.updateDimensions.bind(this));
 
@@ -104,9 +116,8 @@ class ThreeScene extends React.Component {
 
   renderScene() {
     this.renderer.render(this.scene, this.camera)
-
     // Composer should only render if passes have been added
-    this.composer.render(this.clock.getDelta());
+    //this.composer.render(this.clock.getDelta());
   }
 
   render() {
