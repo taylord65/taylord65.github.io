@@ -116,8 +116,10 @@ class ThreeScene extends React.Component {
 
   renderScene() {
     this.renderer.render(this.scene, this.camera)
-    // Composer should only render if passes have been added
-    //this.composer.render(this.clock.getDelta());
+
+    if(this.props.blurOn) {
+      this.composer.render(this.clock.getDelta());
+    };
   }
 
   render() {

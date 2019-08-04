@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import ThreeScene from './components/ThreeScene';
+import Header from './components/Header'
+import Main from './components/Main'
 
-function App() {
-  return (
-    <div className="App">
-        <ThreeScene/>
-    </div>
-  );
-}
+const App = () => (
+  <div className="App">
+    <Header />
+    <Main />
+  </div>
+)
 
 export default App;
