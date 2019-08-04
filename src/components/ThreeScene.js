@@ -123,7 +123,7 @@ class ThreeScene extends React.Component {
   }
 
   render() {
-    return (<div ref={(mount) => { this.mount = mount }} />)
+    return (<div id="three" ref={(mount) => { this.mount = mount }} />)
   }
 }
 

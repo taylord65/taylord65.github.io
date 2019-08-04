@@ -10,7 +10,7 @@ import ThreeScene from './ThreeScene'
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path='/' render={(props) => <ThreeScene {...props} blurOn={true} />}/>
+      <Route exact path='/' render={(props) => <ThreeScene {...props} blurOn={false} />}/>
     </Switch>
   </main>
 )
