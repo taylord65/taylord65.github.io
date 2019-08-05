@@ -60,7 +60,7 @@ class ThreeScene extends React.Component {
     composer.addPass(blurPass);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
+    const material = new THREE.MeshBasicMaterial({ color: 0x136c9e });
     const cube = new THREE.Mesh(geometry, material);
 
     camera.position.z = 4;
