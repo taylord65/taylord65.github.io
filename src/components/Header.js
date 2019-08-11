@@ -31,11 +31,12 @@ class Header extends React.Component {
 							<rect x="43.7" y="47.2" fill="#FFFFFF" width="6.2" height="6.2"/>
 						</svg>
 	        </Link>
-
 	      </header>
-		    <div className="rect-fill">
-		      <h1 className="animated fadeIn">{this.getHeaderTitle(this.props.currentRoute)}</h1>
-		    </div>
+	      {this.props.currentRoute !== '/' &&
+			    <div className="rect-fill">
+			      <h1 className="animated fadeIn">{this.getHeaderTitle(this.props.currentRoute)}</h1>
+			    </div>
+		  	}
 	    </div>
 	  );
 	}
