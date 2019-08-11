@@ -6,6 +6,8 @@ import Header from './components/Header'
 import Main from './components/Main'
 import Menu from './components/Menu'
 
+import { withRouter } from "react-router-dom"
+
 class App extends React.Component {
 
   constructor(props) {
@@ -18,6 +20,16 @@ class App extends React.Component {
     this.handleMenuIconClick = this.handleMenuIconClick.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      if (this.state.showMenu) {
+		    this.setState({
+		      showMenu: false
+		    })
+      }
+    }
+  }
+
   handleMenuIconClick() {
     this.setState({
       showMenu: !this.state.showMenu
@@ -27,7 +39,7 @@ class App extends React.Component {
   render() {
   	return (
 		  <div className="App">
-		  	<Header />
+		  	<Header currentRoute={this.props.location.pathname} />
 		  	<Menu onClick={this.handleMenuIconClick} showMenu={this.state.showMenu}/>
 		    <Main showMenu={this.state.showMenu} />
 		  </div>
@@ -35,4 +47,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(props => <App {...props} />);
