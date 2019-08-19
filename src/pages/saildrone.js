@@ -1,9 +1,13 @@
 import React from 'react'
+import SidePanel from './../components/small/sidePanel'
+import ScrollIndicator from './../components/small/scrollIndicator'
 
 class Saildrone extends React.Component {
   render() {
     return (
-          <div className="portfolio-feature">
+      <div className="portfolio-feature">
+
+        <SidePanel />
 
               <div className="cover" id="sd_background">
                   <div className="cover-headline">
@@ -11,6 +15,7 @@ class Saildrone extends React.Component {
                       <h2>Design and development</h2>
                       <h3>2016</h3>
                   </div>
+                  <ScrollIndicator />
               </div>
 
               <div className="scrollUpBack">

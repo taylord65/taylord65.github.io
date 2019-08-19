@@ -1,15 +1,20 @@
 import React from 'react'
+import SidePanel from './../components/small/sidePanel'
+import ScrollIndicator from './../components/small/scrollIndicator'
 
 class FifthLight extends React.Component {
   render() {
     return (
-  <div className="portfolio-feature">
+      <div className="portfolio-feature">
+
+        <SidePanel />
       <div className="cover" id="fl_background">
         <div className="cover-headline">
           <h1>Fifth light</h1>
           <h2>Design</h2>
           <h3>2015</h3>
         </div>
+        <ScrollIndicator />
       </div>
 
       <div className="scrollUpBack">
