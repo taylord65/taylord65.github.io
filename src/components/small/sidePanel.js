@@ -1,18 +1,49 @@
+/*
+* Arrows on either side of each page.
+* Click an arrow to navigate through the pages.
+*/
+
 import React from "react";
 
 class SidePanel extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+
+    this.state = {
+      route: this.props.routerProps.location.pathname,
+      urls: ['/soccer1', '/saildrone', '/fifthlight', '/teabot']
+    };
+
+    this.prevRoute = this.prevRoute.bind(this);
+    this.nextRoute = this.nextRoute.bind(this);
   }
 
-  //previous route
-  //next route 
+  prevRoute(){
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    let index = this.state.urls.indexOf(this.state.route);
+
+    if(index === 0){
+      this.props.routerProps.history.push(this.state.urls[this.state.urls.length-1]);
+    } else {
+      this.props.routerProps.history.push(this.state.urls[index - 1]);
+    }
+  }
+
+  nextRoute(){
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    let index = this.state.urls.indexOf(this.state.route);
+
+    if(index === (this.state.urls.length - 1)){
+      this.props.routerProps.history.push(this.state.urls[0]);
+    } else {
+      this.props.routerProps.history.push(this.state.urls[index + 1]);
+    }
+  }
 
   render() {
     return (
       <div>
-        <div className="side-text-left">
+        <div onClick={this.prevRoute} className="side-text-left">
           <svg version="1.1" width="512" height="512" viewBox="0 0 512 512">
             <path
               fill="#FFFFFF"
@@ -21,7 +52,7 @@ class SidePanel extends React.Component {
           </svg>
         </div>
 
-        <div className="side-text-right">
+        <div onClick={this.nextRoute} className="side-text-right">
           <svg version="1.1" width="512" height="512" viewBox="0 0 512 512">
             <path
               fill="#FFFFFF"

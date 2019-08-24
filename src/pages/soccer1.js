@@ -8,7 +8,7 @@ class Soccer1 extends React.Component {
     return (
       <div className="portfolio-feature">
 
-        <SidePanel/>
+        <SidePanel routerProps={this.props} />
 
         <div className="cover" id="s1_background">
           <div className="cover-headline">

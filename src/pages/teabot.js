@@ -6,7 +6,7 @@ class TeaBot extends React.Component {
   render() {
     return (
       <div className="portfolio-feature">
-        <SidePanel />
+        <SidePanel routerProps={this.props} />
 
         <div className="cover" id="tb_background">
           <div className="cover-headline">

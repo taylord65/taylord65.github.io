@@ -7,7 +7,7 @@ class Header extends React.Component {
             case "/slf":
                 return "Sun Life";
             case "/soccer1":
-                return "Soccer 1";
+                return "Soccer-1";
             case "/saildrone":
                 return "Saildrone";
             case "/fifthlight":

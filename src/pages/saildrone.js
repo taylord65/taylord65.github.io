@@ -7,7 +7,7 @@ class Saildrone extends React.Component {
     return (
       <div className="portfolio-feature">
 
-        <SidePanel />
+        <SidePanel routerProps={this.props} />
 
               <div className="cover" id="sd_background">
                   <div className="cover-headline">

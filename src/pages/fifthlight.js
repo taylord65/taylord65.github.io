@@ -7,7 +7,7 @@ class FifthLight extends React.Component {
     return (
       <div className="portfolio-feature">
 
-        <SidePanel />
+      <SidePanel routerProps={this.props} />
       <div className="cover" id="fl_background">
         <div className="cover-headline">
           <h1>Fifth light</h1>
