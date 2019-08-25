@@ -2,6 +2,7 @@ import React from "react";
 import SidePanel from './../components/small/sidePanel'
 import ScrollIndicator from './../components/small/scrollIndicator'
 import IphoneVideo from './../components/small/iphoneVideo'
+import TabbedContent from './../components/small/tabbedContent'
 
 class Soccer1 extends React.Component {
   render() {
@@ -46,16 +47,38 @@ class Soccer1 extends React.Component {
                     Using state of the art motion capture, the movements of professional
                     soccer players were recorded as they performed the fundamentals of the
                     game.
-         </p>
+                  </p>
                   <p className="quote">
                     If a user can understand to a high degree how a professional player
                     performs, then they can replicate the movement.
-         </p>
+                  </p>
                   <p>
                     I combined the motion capture data with the knowledge from the sports
                     science team to create an experience that helps the user improve their
                     kicking, passing, dribbling, and much more.
-         </p>
+                  </p>
+
+                  <TabbedContent tabdata={[
+                      {
+                        title: '360 degree view',
+                        id: 0,
+                        isActive: true, 
+                        text: 'If you are learning a soccer move from a video, you can only see what the camera shows you. With a 3D environment, the user has full control over the camera position. For example, the user can move the camera and zoom in on the kicking foot to see exactly where to strike the ball to deliver the most power.'
+                      },
+                      {
+                        title: 'Motion control',
+                        id: 1,
+                        isActive: false,
+                        text: 'If you are watching a video of a soccer move, you will find yourself pausing and rewinding to analyze a specific moment. Adding the motion controller enables the user with complete fine grained control over viewing every moment during the move.'
+                      },
+                      {
+                        title: 'Hologram assist',
+                        id: 2,
+                        isActive: false,
+                        text: '3D hologram elements were added to highlight the importance of certain aspects of a move. This proved to be more effective and engaging rather than overlaying descriptive text on the 3D model. I wrote the code to be performant and scalable so it could be applied to all the motion capture data and run smoothly on a mobile phone. The elements were refined through user feedback until users understood what the elements were highlighting.'
+                      }
+                    ]}>
+                  </TabbedContent>
                 </div>
               </div>
 
