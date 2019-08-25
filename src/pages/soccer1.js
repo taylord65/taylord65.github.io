@@ -62,19 +62,16 @@ class Soccer1 extends React.Component {
                       {
                         title: '360 degree view',
                         id: 0,
-                        isActive: true, 
                         text: 'If you are learning a soccer move from a video, you can only see what the camera shows you. With a 3D environment, the user has full control over the camera position. For example, the user can move the camera and zoom in on the kicking foot to see exactly where to strike the ball to deliver the most power.'
                       },
                       {
                         title: 'Motion control',
                         id: 1,
-                        isActive: false,
                         text: 'If you are watching a video of a soccer move, you will find yourself pausing and rewinding to analyze a specific moment. Adding the motion controller enables the user with complete fine grained control over viewing every moment during the move.'
                       },
                       {
                         title: 'Hologram assist',
                         id: 2,
-                        isActive: false,
                         text: '3D hologram elements were added to highlight the importance of certain aspects of a move. This proved to be more effective and engaging rather than overlaying descriptive text on the 3D model. I wrote the code to be performant and scalable so it could be applied to all the motion capture data and run smoothly on a mobile phone. The elements were refined through user feedback until users understood what the elements were highlighting.'
                       }
                     ]}>
@@ -167,7 +164,20 @@ class Soccer1 extends React.Component {
                     Soccer-1 decided to explore the coaching space. Groups were introduced
                     to the social network as a means for coaches to organize their players
                     and view player data.
-         </p>
+                  </p>
+                  <TabbedContent tabdata={[
+                    {
+                      title: 'Coach Dashboard',
+                      id: 0,
+                      text: 'Player data is accessible to the coach through a clear layout accessible from the group page. If a soccer team trains with the app, then the coach will receive valuable data which can be used to coach players more effectively.'
+                    },
+                    {
+                      title: 'Location based organization',
+                      id: 1,
+                      text: 'It was decided that groups and coaches would be discoverable to players by location. I implemented a simple map interface with Google Maps Javascript API to accomplish this. A group can invite a coach to join them or a coach can request to coach a group.'
+                    }
+                  ]}>
+                  </TabbedContent>
                 </div>
               </div>
 
