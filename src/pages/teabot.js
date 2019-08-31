@@ -1,6 +1,7 @@
 import React from "react";
 import SidePanel from "./../components/small/sidePanel";
 import ScrollIndicator from './../components/small/scrollIndicator'
+import Ipad from './../components/small/ipad'
 
 class TeaBot extends React.Component {
   render() {
@@ -40,6 +41,9 @@ class TeaBot extends React.Component {
                 style={{ minHeight: "auto" }}
               >
                 <h1>Quick and easy customer experience</h1>
+
+                <Ipad src={'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/tb/menu.png'} landscape={false} />
+
                 <div className="description-area">
                   <p>
                     The customer approaches the machine and the menu screen is displayed
@@ -60,6 +64,9 @@ class TeaBot extends React.Component {
                 style={{ minHeight: "auto" }}
               >
                 <h1>Simple customization</h1>
+
+                <Ipad src={'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/tb/customize.png'} landscape={false} />
+
                 <div className="description-area">
                   <p>
                     The customer has the ability to create their own blend of tea. Up to
@@ -84,6 +91,9 @@ class TeaBot extends React.Component {
                 style={{ minHeight: "auto" }}
               >
                 <h1>Checkout</h1>
+
+                <Ipad src={'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/tb/checkout.png'} landscape={false} />
+
                 <div className="description-area">
                   <p>
                     Tapping a blend, or confirming your customized blend brings you to the

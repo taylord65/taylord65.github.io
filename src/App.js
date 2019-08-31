@@ -23,6 +23,7 @@ class App extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       if (this.state.showMenu) {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
 		    this.setState({
 		      showMenu: false
 		    })
