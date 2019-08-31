@@ -15,12 +15,18 @@ curveTop()
   border-top-right-radius 4px
   @media (max-width: med)
     border-radius 0px
+    
   
 font = "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
-customFont = 'ITCAvantGardeStd-Demi', sans-serif;
+customFont = 'ITCAvantGardeStd-Demi'
 maxContainerWidth = 1246px;
 med = 1130px;
 sml = 480px;
+
+ @font-face
+   font-family customFont
+   font-style sans-serif
+   src local('ITCAvantGardeStd-Demi'), url(./../fonts/ITCAvantGardeStd-Demi.otf) format('otf')
 
 menuTransitionTime = 0.2s;
 
@@ -221,7 +227,6 @@ menuTransition = 0.2s ease-in-out;
   right 0
   width 8em
   cursor pointer
-  display none
 
 .hide-3d
   canvas
@@ -980,16 +985,16 @@ sideTextContainer()
   opacity: 0
 }
 
-.slide-leave-active,
-.slide-enter-active {
-  transition: menuTransitionTime;
-}
-.slide-enter {
-  transform: translate(100%, 0);
-}
-.slide-leave-to {
-  transform: translate(100%, 0);
-}
+// .slide-leave-active,
+// .slide-enter-active {
+//   transition: menuTransitionTime;
+// }
+// .slide-enter {
+//   transform: translate(100%, 0);
+// }
+// .slide-leave-to {
+//   transform: translate(100%, 0);
+// }
 
 
 .portfolio-transition-enter-active {
@@ -1016,3 +1021,20 @@ sideTextContainer()
 
 
 
+.slide-enter {
+  transform: translate(100%, 0);
+  transition: menuTransitionTime cubic-bezier(0, 1, 0.5, 1);
+
+  &.slide-enter-active {
+    transform: translateX(0%);
+  }
+}
+
+.slide-leave {
+  transform: translate(100%, 0);
+  transition: menuTransitionTime cubic-bezier(0, 1, 0.5, 1);
+
+  &.slide-leave-active {
+    transform: translateX(100%);
+  }
+}
