@@ -2,6 +2,7 @@ import React from 'react'
 import SidePanel from './../components/small/sidePanel'
 import ScrollIndicator from './../components/small/scrollIndicator'
 import TabbedContent from './../components/small/tabbedContent'
+import Desktop from './../components/small/desktop'
 
 class Saildrone extends React.Component {
   render() {
@@ -41,6 +42,8 @@ class Saildrone extends React.Component {
                         <div className="content-panel full-width-content" style={{ minHeight: 'auto' }}>
                               <h1>Define your data mission</h1>
 
+                              <Desktop src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/sd/sd_first.mp4"} />
+
                               <div className="description-area">
                                 <p>
                                     Defining your mission is broken down into 3 simple steps. Answer
@@ -68,6 +71,8 @@ class Saildrone extends React.Component {
                       <div className="content-section">
                         <div className="content-panel full-width-content" style={{ minHeight: 'auto' }}>
                               <h1>Map based planning</h1>
+
+                              <Desktop src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/saildroneVideo.mp4"} />
 
                               <div className="description-area">
                                   <p>

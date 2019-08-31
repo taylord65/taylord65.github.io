@@ -19,8 +19,8 @@ class Menu extends React.Component {
 						<div className="feature-list">
 							<Link to="/slf" className="feature">
 								<div className="feature-info">
-									<h1><div className="indicator"></div>Sun Life Alexa</h1>
-									<span>Development</span>
+									<h1><div className="indicator"></div>Sun Life</h1>
+									<span>Voice Development</span>
 									</div>
 									<div className="feature-date">
 									<span>Current</span>
