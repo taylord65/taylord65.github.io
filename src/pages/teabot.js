@@ -4,11 +4,16 @@ import ScrollIndicator from './../components/small/scrollIndicator'
 
 class TeaBot extends React.Component {
   render() {
+    const imgUrl = 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/tb/tb_new_cover.jpg';
+
+    const coverStyle = {
+      backgroundImage: `url(${imgUrl})`
+    };
     return (
       <div className="portfolio-feature">
         <SidePanel routerProps={this.props} />
 
-        <div className="cover" id="tb_background">
+        <div className="cover" id="tb_background" style={coverStyle}>
           <div className="cover-headline">
             <h1>teabot</h1>
             <h2>Design</h2>

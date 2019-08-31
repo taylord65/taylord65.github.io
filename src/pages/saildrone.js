@@ -5,12 +5,17 @@ import TabbedContent from './../components/small/tabbedContent'
 
 class Saildrone extends React.Component {
   render() {
+    const imgUrl = 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/sd/sd_cover.jpg';
+
+    const coverStyle = {
+      backgroundImage: `url(${imgUrl})`
+    };
     return (
       <div className="portfolio-feature">
 
         <SidePanel routerProps={this.props} />
 
-              <div className="cover" id="sd_background">
+              <div className="cover" id="sd_background" style={coverStyle}>
                   <div className="cover-headline">
                       <h1>Saildrone mission builder</h1>
                       <h2>Design and development</h2>

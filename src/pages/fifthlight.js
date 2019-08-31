@@ -4,11 +4,16 @@ import ScrollIndicator from './../components/small/scrollIndicator'
 
 class FifthLight extends React.Component {
   render() {
+    const imgUrl = 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/fl/fl_cover_dark.jpg';
+
+    const coverStyle = {
+      backgroundImage: `url(${imgUrl})`
+    };
     return (
       <div className="portfolio-feature">
 
       <SidePanel routerProps={this.props} />
-      <div className="cover" id="fl_background">
+      <div className="cover" id="fl_background" style={coverStyle}>
         <div className="cover-headline">
           <h1>Fifth light</h1>
           <h2>Design</h2>

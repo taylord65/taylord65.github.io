@@ -6,12 +6,18 @@ import TabbedContent from './../components/small/tabbedContent'
 
 class Soccer1 extends React.Component {
   render() {
+    const imgUrl = 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png';
+
+    const coverStyle = {
+      backgroundImage: `url(${imgUrl})`
+    };
+
     return (
       <div className="portfolio-feature">
 
         <SidePanel routerProps={this.props} />
 
-        <div className="cover" id="s1_background">
+        <div className="cover" id="s1_background" style={coverStyle}>
           <div className="cover-headline">
             <h1>Soccer-1</h1>
             <h2>Design and development</h2>
