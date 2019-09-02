@@ -1,11 +1,6 @@
 import React from "react";
 
 class ScrollIndicator extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
-
   //display on or off
   //size is off
 
