@@ -11,7 +11,7 @@ class FifthLight extends React.Component {
       backgroundImage: `url(${imgUrl})`
     };
     return (
-      <div className="portfolio-feature">
+      <div className={`portfolio-feature ${this.props.showMenu ? 'unfocusedFeature' : ''}`}>
 
       <SidePanel routerProps={this.props} />
       <div className="cover" id="fl_background" style={coverStyle}>

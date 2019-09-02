@@ -13,10 +13,10 @@ class Main extends React.Component {
 		  <main>
 		    <Switch>
 		      <Route exact path='/' render={(props) => <ThreeScene {...props} blurOn={this.props.showMenu} />}/>
-		      <Route path='/soccer1' render={(props) => <Soccer1 {...props} />}/>
-		      <Route path='/fifthlight' render={(props) => <FifthLight {...props} />}/>
-		      <Route path='/saildrone' render={(props) => <Saildrone {...props} />}/>
-		      <Route path='/teabot' render={(props) => <TeaBot {...props} />}/>
+		      <Route path='/soccer1' render={(props) => <Soccer1 {...props} showMenu={this.props.showMenu} />}/>
+		      <Route path='/fifthlight' render={(props) => <FifthLight {...props} showMenu={this.props.showMenu} />}/>
+		      <Route path='/saildrone' render={(props) => <Saildrone {...props} showMenu={this.props.showMenu} />}/>
+		      <Route path='/teabot' render={(props) => <TeaBot {...props} showMenu={this.props.showMenu} />}/>
 		    </Switch>
 		  </main>
 		)

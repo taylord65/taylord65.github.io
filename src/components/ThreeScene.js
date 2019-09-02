@@ -116,14 +116,14 @@ class ThreeScene extends React.Component {
 
   renderScene() {
     this.renderer.render(this.scene, this.camera)
-
+    //this.controls.update();
     if(this.props.blurOn) {
       this.composer.render(this.clock.getDelta());
     };
   }
 
   render() {
-    return (<div id="three" ref={(mount) => { this.mount = mount }} />)
+    return (<div id="three" className={`${this.props.blurOn ? 'blur' : '' }`} ref={(mount) => { this.mount = mount }} />)
   }
 }
 

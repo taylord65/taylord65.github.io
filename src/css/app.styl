@@ -39,7 +39,7 @@ menuTransitionTime = 0.2s;
 html, body, #root, .App, main 
   margin 0
   height 100%
-  background-color #FFF
+  background-color #000
   padding 0px
   font-size 20px
   font-family font
@@ -410,6 +410,7 @@ highlightColor = #4682b4
   text-align center
   overflow-y hidden
   box-shadow -9px 0px 18px rgba(0, 0, 0, 0.15)
+  will-change transform, transition
   userSelectNone()
   .menu-header
     height 15%
@@ -542,6 +543,7 @@ highlightColor = #4682b4
   height 100%
   opacity 1
   transition opacity 0.25s
+  will-change opacity
   .scrollUpSection
     width calc(100% - 6.34em)
     margin-left 3.17em
@@ -1022,7 +1024,7 @@ sideTextContainer()
 
 
 .slide-enter {
-  transform: translate(100%, 0);
+  transform: translateX(100%);
   transition: menuTransitionTime cubic-bezier(0, 1, 0.5, 1);
 
   &.slide-enter-active {
@@ -1031,8 +1033,9 @@ sideTextContainer()
 }
 
 .slide-leave {
-  transform: translate(100%, 0);
+  transform: translateX(100%);
   transition: menuTransitionTime cubic-bezier(0, 1, 0.5, 1);
+  box-shadow: none;
 
   &.slide-leave-active {
     transform: translateX(100%);

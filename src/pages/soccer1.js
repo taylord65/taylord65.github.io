@@ -13,7 +13,7 @@ class Soccer1 extends React.Component {
     };
 
     return (
-      <div className="portfolio-feature">
+      <div className={`portfolio-feature ${this.props.showMenu ? 'unfocusedFeature' : ''}`}>
 
         <SidePanel routerProps={this.props} />
 
