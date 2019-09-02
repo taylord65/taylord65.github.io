@@ -2,6 +2,7 @@ import React from "react";
 import SidePanel from "./../components/small/sidePanel";
 import ScrollIndicator from './../components/small/scrollIndicator'
 import Ipad from './../components/small/ipad'
+import Footer from './../components/Footer'
 
 class TeaBot extends React.Component {
   render() {
@@ -107,6 +108,7 @@ class TeaBot extends React.Component {
                 </div>
               </div>
             </div>
+            <Footer />
           </div>
         </div>
       </div>

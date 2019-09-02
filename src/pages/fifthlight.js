@@ -2,6 +2,7 @@ import React from 'react'
 import SidePanel from './../components/small/sidePanel'
 import ScrollIndicator from './../components/small/scrollIndicator'
 import Ipad from './../components/small/ipad'
+import Footer from './../components/Footer'
 
 class FifthLight extends React.Component {
   render() {
@@ -69,7 +70,8 @@ class FifthLight extends React.Component {
                 <p>The application assists the worker during every step of the job allowing them to finish on time.</p> 
               </div>         
             </div>
-          </div>        
+          </div>
+          <Footer />        
         </div>
       </div>
   </div>

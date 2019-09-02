@@ -3,6 +3,7 @@ import SidePanel from './../components/small/sidePanel'
 import ScrollIndicator from './../components/small/scrollIndicator'
 import IphoneVideo from './../components/small/iphoneVideo'
 import TabbedContent from './../components/small/tabbedContent'
+import Footer from './../components/Footer'
 
 class Soccer1 extends React.Component {
   render() {
@@ -205,6 +206,7 @@ class Soccer1 extends React.Component {
                 </div>
               </div>
             </div>
+            <Footer />
           </div>
         </div>
       </div>

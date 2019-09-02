@@ -3,6 +3,7 @@ import SidePanel from './../components/small/sidePanel'
 import ScrollIndicator from './../components/small/scrollIndicator'
 import TabbedContent from './../components/small/tabbedContent'
 import Desktop from './../components/small/desktop'
+import Footer from './../components/Footer'
 
 class Saildrone extends React.Component {
   render() {
@@ -108,6 +109,7 @@ class Saildrone extends React.Component {
                               </div>
                           </div>
                       </div>
+                      <Footer />
                   </div>
               </div>
           </div>
