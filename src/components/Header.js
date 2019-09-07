@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//On route change from home sometimes the details show at the top
+//on route change should set details to show as false
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +31,7 @@ class Header extends React.Component {
         return '';
     }
   }
-
+  
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
   }
