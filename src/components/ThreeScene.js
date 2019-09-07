@@ -22,7 +22,18 @@ class ThreeScene extends React.Component {
     const height = window.innerHeight;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000 );
+    const camera = new THREE.PerspectiveCamera(70, width / height, 1, this.cubeSize*3 );
+
+    camera.position.z = 5061;
+    camera.position.y = -1144;
+
+    let light = new THREE.SpotLight( 0xffffff, 0.3 );
+    light.position.set(0, 5000, 0 );
+    scene.add( light );
+
+    scene.add( new THREE.AmbientLight( 0xc5c5c5 ) );
+    
+
     const glitch = new GlitchEffect({ delay: new THREE.Vector2( 0, 0 ) });
     const effectPass = new EffectPass(camera, glitch);
     effectPass.renderToScreen = true;
