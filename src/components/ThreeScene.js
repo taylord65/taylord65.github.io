@@ -14,6 +14,7 @@ class ThreeScene extends React.Component {
     this.cubeSize = 10500;
     this.cubeHeight = 3900;
     this.floorPositionY = -3000;
+    this.glitchEnabled = false;
   }
 
   componentDidMount() {
@@ -21,6 +22,8 @@ class ThreeScene extends React.Component {
     this.generateSceneObjects();
     this.generateFloor();
     this.generateGrid();
+
+    this.glitch(400);
   }
 
   // generateSceneElements(){
@@ -291,19 +294,16 @@ class ThreeScene extends React.Component {
     controls.enableZoom = true;
     controls.enablePan = false;
     controls.enableDamping = false;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 10;
-    controls.rotateSpeed = 1;
     controls.maxDistance = 6000;
 
     //Composer
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
-
-    //Add Passes
-    //Both do not work at the same time.
-    //composer.addPass(glitchEffect);
     composer.addPass(blurPass);
+
+    const composer2 = new EffectComposer(renderer);
+    composer2.addPass(new RenderPass(scene, camera));
+    composer2.addPass(glitchEffect);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0x136c9e });
@@ -318,6 +318,7 @@ class ThreeScene extends React.Component {
     this.material = material;
     this.cube = cube;
     this.composer = composer;
+    this.composer2 = composer2;
     this.clock = clock;
     this.controls = controls;
     this.objects = [];
@@ -343,7 +344,17 @@ class ThreeScene extends React.Component {
     cancelAnimationFrame(this.frameId)
   }
 
+  glitch(time) {
+    this.glitchEnabled = true;
+
+    let self = this;
+    setTimeout(function(){
+      self.glitchEnabled = false;
+    }, time);
+  }
+
   animate() {
+    //single small cube is working
     this.cube.rotation.x += 0.01
     this.cube.rotation.y += 0.01
 
@@ -360,15 +371,19 @@ class ThreeScene extends React.Component {
   }
 
   renderScene() {
-    this.renderer.render(this.scene, this.camera)
-    //this.controls.update();
+    this.controls.update();
+
     if(this.props.blurOn) {
       this.composer.render(this.clock.getDelta());
-    };
+    } else if (this.glitchEnabled) {
+      this.composer2.render(this.clock.getDelta());
+    } else {
+      this.renderer.render(this.scene, this.camera);
+    }
   }
 
   render() {
-    return (<div id="three" className={`${this.props.blurOn ? 'blur' : '' }`} ref={(mount) => { this.mount = mount }} />)
+    return (<div id="three" className={`animated fadeIn ${this.props.blurOn ? 'blur' : '' }`} ref={(mount) => { this.mount = mount }} />)
   }
 }
 
