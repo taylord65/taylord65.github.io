@@ -18,6 +18,7 @@ class App extends React.Component {
     };
 
     this.handleMenuIconClick = this.handleMenuIconClick.bind(this);
+    this.handleOffMenuClick = this.handleOffMenuClick.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -35,12 +36,17 @@ class App extends React.Component {
     this.setState({showMenu: !this.state.showMenu});
   }
 
+  handleOffMenuClick() {
+    if (this.state.showMenu) this.setState({showMenu: false});
+  }
+
+
   render() {
   	return (
 		  <div className="App">
 		  	<Header location={this.props.location} />
 		  	<Menu onClick={this.handleMenuIconClick} showMenu={this.state.showMenu}/>
-		    <Main showMenu={this.state.showMenu} />
+		    <Main onClick={this.handleOffMenuClick} showMenu={this.state.showMenu} />
 		  </div>
   	)
   }

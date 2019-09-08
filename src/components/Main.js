@@ -10,7 +10,7 @@ class Main extends React.Component {
 
 	render() {
 		return (
-		  <main>
+		  <main onClick={this.props.onClick}>
 		    <Switch>
 		      <Route exact path='/' render={(props) => <ThreeScene {...props} blurOn={this.props.showMenu} />}/>
 		      <Route path='/soccer1' render={(props) => <Soccer1 {...props} showMenu={this.props.showMenu} />}/>
