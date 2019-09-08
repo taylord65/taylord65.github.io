@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-//On route change from home sometimes the details show at the top
-//on route change should set details to show as false
-
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -38,6 +35,15 @@ class Header extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  componentDidUpdate(prevProps){
+    if (this.props.location !== prevProps.location) {
+      // Route Change
+      this.setState({
+        showHeaderDetails: false
+      });
+    }
   }
 
   handleScroll(event) {
@@ -78,10 +84,10 @@ class Header extends React.Component {
           </Link>
         </header>
 
-        {(this.props.currentRoute !== "/" && this.state.showHeaderDetails) && (
+        {(this.props.location.pathname !== "/" && this.state.showHeaderDetails) && (
           <div className="rect-fill">
             <h1 className="animated fadeIn">
-              {this.getHeaderTitle(this.props.currentRoute)}
+              {this.getHeaderTitle(this.props.location.pathname)}
             </h1>
           </div>
         )}
