@@ -2,6 +2,7 @@ import React from 'react';
 import * as THREE from 'three';
 import { EffectComposer, EffectPass, RenderPass, GlitchEffect, BlurPass } from "postprocessing";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import TWEEN from "@tweenjs/tween.js";
 
 class ThreeScene extends React.Component {
 
@@ -353,6 +354,13 @@ class ThreeScene extends React.Component {
     }, time);
   }
 
+  zoomCamera(amount) {
+    //could do x y z maybe
+    let zoomEnd = this.camera.position.z + amount;
+    let tween = new TWEEN.Tween(this.camera.position).to({ z: zoomEnd }, 200).start();
+    return tween;
+  }
+
   animate() {
     //single small cube is working
     this.cube.rotation.x += 0.01
@@ -360,7 +368,19 @@ class ThreeScene extends React.Component {
 
     this.renderScene()
 
+    TWEEN.update();
+
     this.frameId = window.requestAnimationFrame(this.animate)
+  }
+
+  componentDidUpdate(prevProps){
+    if (this.props.blurOn !== prevProps.blurOn) {
+      if (this.props.blurOn) {
+        this.zoomCamera(200);
+      } else {
+        this.zoomCamera(-200);
+      }
+    }
   }
 
   updateDimensions() {
