@@ -276,7 +276,7 @@ class ThreeScene extends React.Component {
 
     //Blur
     const blurPass = new BlurPass();
-    blurPass.scale = 100;
+    blurPass.scale = 500;
     blurPass.enabled = true;
     blurPass.opacity = 1;
     blurPass.renderToScreen = true;
@@ -354,10 +354,23 @@ class ThreeScene extends React.Component {
     }, time);
   }
 
-  zoomCamera(amount) {
-    //could do x y z maybe
-    let zoomEnd = this.camera.position.z + amount;
-    let tween = new TWEEN.Tween(this.camera.position).to({ z: zoomEnd }, 200).start();
+  zoomCamera(direction) {
+    const center = new THREE.Vector3(0,0,0);
+    const zoomAmount = 400;
+    let newLength;
+
+    let cameraPositionClone = new THREE.Vector3(this.camera.position.x , this.camera.position.y, this.camera.position.z);
+    let distanceFromCenterToCamera = center.distanceTo(cameraPositionClone);
+
+    if (direction > 0) {
+      newLength = distanceFromCenterToCamera + zoomAmount;
+    } else {
+      newLength = distanceFromCenterToCamera - zoomAmount;
+    }
+    
+    let destinationPosition = cameraPositionClone.sub(center).setLength(newLength).add(center);
+
+    let tween = new TWEEN.Tween(this.camera.position).to(destinationPosition, 120).start();
     return tween;
   }
 
@@ -376,9 +389,9 @@ class ThreeScene extends React.Component {
   componentDidUpdate(prevProps){
     if (this.props.blurOn !== prevProps.blurOn) {
       if (this.props.blurOn) {
-        this.zoomCamera(200);
+        this.zoomCamera(1);
       } else {
-        this.zoomCamera(-200);
+        this.zoomCamera(-1);
       }
     }
   }
