@@ -406,9 +406,7 @@ class ThreeScene extends React.Component {
   renderScene() {
     this.controls.update();
 
-    if(this.props.blurOn) {
-      this.composer.render(this.clock.getDelta());
-    } else if (this.glitchEnabled) {
+    if (this.glitchEnabled) {
       this.composer2.render(this.clock.getDelta());
     } else {
       this.renderer.render(this.scene, this.camera);
@@ -416,7 +414,9 @@ class ThreeScene extends React.Component {
   }
 
   render() {
-    return (<div id="three" className={`animated fadeIn ${this.props.blurOn ? 'blur' : '' }`} ref={(mount) => { this.mount = mount }} />)
+    return (
+      <div id="three" className={`${this.props.blurOn ? 'blur' : '' }`} ref={(mount) => { this.mount = mount }} />
+    )
   }
 }
 

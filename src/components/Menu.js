@@ -69,7 +69,7 @@ class Menu extends React.Component {
 						</div>
 
 						<div className="menu-footer">
-						<span>Get in touch</span>
+						<span>Contact</span>
 						<span className="email-link">taylordotsikas@gmail.com</span>
 						</div>
 					</div>
