@@ -9,76 +9,39 @@ class ThreeScene extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      cubeSize: 10500,
+      cubeHeight: 3900,
+      floorPositionY: -3000,
+      glitchEnabled: false,
+      showWebGLNotice: false,
+    };
+
+    this.animate = this.animate.bind(this)
     this.start = this.start.bind(this)
     this.stop = this.stop.bind(this)
-    this.animate = this.animate.bind(this)
-    this.cubeSize = 10500;
-    this.cubeHeight = 3900;
-    this.floorPositionY = -3000;
-    this.glitchEnabled = false;
   }
 
   componentDidMount() {
-    this.sceneSetup();
-    this.generateSceneObjects();
-    this.generateFloor();
-    this.generateGrid();
+    if (window.WebGLRenderingContext) {
+      this.sceneSetup();
+      this.generateSceneObjects();
+      this.generateFloor();
+      this.generateGrid();
+      this.glitch(500);
+    } else {
+      console.log("Unable to initialize WebGL. Your browser or machine may not support it.");
 
-    this.glitch(400);
+      let span = document.createElement("span");
+      let textContent = document.createTextNode("Unable to initialize WebGL. Your browser or machine may not support it.");
+      span.appendChild(textContent);
+
+      this.mount.appendChild(span);
+      this.setState({
+        showWebGLNotice: true
+      });
+    }
   }
-
-  // generateSceneElements(){
-  //   var geo = new THREE.BoxBufferGeometry( cubeSize/2, 200, cubeSize );
-  //   var materials = [];
-
-  //   for(var i=0; i<6; i++){
-  //     var mat;
-  //     if(i == 2){
-  //         mat = new THREE.MeshLambertMaterial( {color: 0x2196f3, opacity: 0.2, transparent: true} );
-  //     } else {
-  //         mat = new THREE.MeshLambertMaterial( {color: 0x2196f3, opacity: 0.3, transparent: true} );
-  //     }
-  //     materials.push(mat);
-  //   }
-
-  //   var cube = new THREE.Mesh(geo, materials);
-
-  //   cube.position.y = floorPositionY + 200;
-  //   cube.position.x = cubeSize/4;
-  //   cube.name = "water";
-
-  //   scene.add( cube );
-
-
-  //   var sandmaterials = [];
-
-  //   for(var i=0; i<6; i++){
-  //     var mat;
-  //     if(i == 2){
-
-  //       var texture = new THREE.TextureLoader().load('https://d1mly9lp7y5o9.cloudfront.net/59c3781d5ee0cafa55cd1064649b6951?filename=Grass.jpg');
-
-  //       texture.wrapS = THREE.RepeatWrapping;
-  //       texture.wrapT = THREE.RepeatWrapping;
-  //       texture.anisotropy = 16;
-
-  //       texture.minFilter = THREE.NearestMipMapLinearFilter;
-  //       texture.repeat.set( 10, 10 );
-
-  //       mat = new THREE.MeshPhongMaterial({map: texture});  
-
-  //     } else {
-  //       mat = new THREE.MeshLambertMaterial( {color: 0x2196f3, opacity: 0.3, transparent: true} );
-  //     }
-  //     sandmaterials.push(mat);
-  //   }
-
-  //   var sand = new THREE.Mesh(geo, sandmaterials);
-
-  //   sand.position.y = floorPositionY + 200;
-  //   sand.position.x = -cubeSize/4;
-  //   scene.add(sand);
-  // }
 
   generateGrid(){
     let material = new THREE.LineBasicMaterial({
@@ -92,27 +55,27 @@ class ThreeScene extends React.Component {
 
       switch(i) {
         case 0:
-          x = this.cubeSize/2;
-          z = this.cubeSize/2;
+          x = this.state.cubeSize/2;
+          z = this.state.cubeSize/2;
           break;
         case 1:
-          x = (-1) * this.cubeSize/2;
-          z = this.cubeSize/2;
+          x = (-1) * this.state.cubeSize/2;
+          z = this.state.cubeSize/2;
           break;
         case 2:
-          x = (-1) * this.cubeSize/2;
-          z = (-1) * this.cubeSize/2;
+          x = (-1) * this.state.cubeSize/2;
+          z = (-1) * this.state.cubeSize/2;
           break;
         case 3:
-          x = this.cubeSize/2;
-          z = (-1) * this.cubeSize/2;
+          x = this.state.cubeSize/2;
+          z = (-1) * this.state.cubeSize/2;
           break;
         default:
       }
 
       geometry.vertices.push(
-        new THREE.Vector3(x, this.cubeHeight, z),
-        new THREE.Vector3(x, this.floorPositionY, z)
+        new THREE.Vector3(x, this.state.cubeHeight, z),
+        new THREE.Vector3(x, this.state.floorPositionY, z)
       );
 
       let line = new THREE.Line( geometry, material );
@@ -125,39 +88,39 @@ class ThreeScene extends React.Component {
 
       switch(i) {
         case 0:
-          x1 = (-1) * this.cubeSize/2;
-          z1 = this.cubeSize/2;
+          x1 = (-1) * this.state.cubeSize/2;
+          z1 = this.state.cubeSize/2;
 
-          x2 = this.cubeSize/2;
-          z2 = this.cubeSize/2;
+          x2 = this.state.cubeSize/2;
+          z2 = this.state.cubeSize/2;
           break;
         case 1:
-          x1 = this.cubeSize/2;
-          z1 = this.cubeSize/2;
+          x1 = this.state.cubeSize/2;
+          z1 = this.state.cubeSize/2;
 
-          x2 = this.cubeSize/2;
-          z2 = (-1) * this.cubeSize/2;
+          x2 = this.state.cubeSize/2;
+          z2 = (-1) * this.state.cubeSize/2;
           break;
         case 2:
-          x1 = this.cubeSize/2;
-          z1 = (-1) * this.cubeSize/2;
+          x1 = this.state.cubeSize/2;
+          z1 = (-1) * this.state.cubeSize/2;
 
-          x2 = (-1) * this.cubeSize/2;
-          z2 = (-1) * this.cubeSize/2;
+          x2 = (-1) * this.state.cubeSize/2;
+          z2 = (-1) * this.state.cubeSize/2;
           break;
         case 3:
-          x1 = (-1) * this.cubeSize/2;
-          z1 = (-1) * this.cubeSize/2;
+          x1 = (-1) * this.state.cubeSize/2;
+          z1 = (-1) * this.state.cubeSize/2;
 
-          x2 = (-1) * this.cubeSize/2;
-          z2 = this.cubeSize/2;
+          x2 = (-1) * this.state.cubeSize/2;
+          z2 = this.state.cubeSize/2;
           break;
         default:
       }
 
       geometry.vertices.push(
-        new THREE.Vector3(x1, this.cubeHeight, z1),
-        new THREE.Vector3(x2, this.cubeHeight, z2)
+        new THREE.Vector3(x1, this.state.cubeHeight, z1),
+        new THREE.Vector3(x2, this.state.cubeHeight, z2)
       );
 
       let line = new THREE.Line( geometry, material );
@@ -245,11 +208,11 @@ class ThreeScene extends React.Component {
       texture.repeat.set( 25, 25 ); 
 
       let material = new THREE.MeshLambertMaterial({ map : texture });
-      let geometry = new THREE.PlaneGeometry(self.cubeSize, self.cubeSize, 8, 8);
+      let geometry = new THREE.PlaneGeometry(self.state.cubeSize, self.state.cubeSize, 8, 8);
       let plane = new THREE.Mesh( geometry, material );
 
       plane.rotateX( - Math.PI / 2);
-      plane.position.y = self.floorPositionY;
+      plane.position.y = self.state.floorPositionY;
       self.scene.add( plane );
     });
   }
@@ -259,7 +222,7 @@ class ThreeScene extends React.Component {
     const height = window.innerHeight;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(70, width / height, 1, this.cubeSize*3 );
+    const camera = new THREE.PerspectiveCamera(70, width / height, 1, this.state.cubeSize*3 );
 
     camera.position.z = 5061;
     camera.position.y = -1144;
@@ -330,9 +293,11 @@ class ThreeScene extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
-    this.stop()
-    this.mount.removeChild(this.renderer.domElement)
+    if (!this.state.showWebGLNotice) {
+      window.removeEventListener("resize", this.updateDimensions.bind(this));
+      this.stop()
+      this.mount.removeChild(this.renderer.domElement)
+    }
   }
 
   start() {
@@ -346,11 +311,12 @@ class ThreeScene extends React.Component {
   }
 
   glitch(time) {
-    this.glitchEnabled = true;
+    this.setState({glitchEnabled: true});
 
-    let self = this;
-    setTimeout(function(){
-      self.glitchEnabled = false;
+    setTimeout(() => {
+      this.setState({
+        glitchEnabled: false
+      });
     }, time);
   }
 
@@ -370,7 +336,7 @@ class ThreeScene extends React.Component {
     
     let destinationPosition = cameraPositionClone.sub(center).setLength(newLength).add(center);
 
-    let tween = new TWEEN.Tween(this.camera.position).to(destinationPosition, 120).start();
+    let tween = new TWEEN.Tween(this.camera.position).to(destinationPosition, 150).start();
     return tween;
   }
 
@@ -387,11 +353,13 @@ class ThreeScene extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    if (this.props.blurOn !== prevProps.blurOn) {
-      if (this.props.blurOn) {
-        this.zoomCamera(1);
-      } else {
-        this.zoomCamera(-1);
+    if (!this.state.showWebGLNotice) {
+      if (this.props.blurOn !== prevProps.blurOn) {
+        if (this.props.blurOn) {
+          this.zoomCamera(1);
+        } else {
+          this.zoomCamera(-1);
+        }
       }
     }
   }
@@ -406,7 +374,7 @@ class ThreeScene extends React.Component {
   renderScene() {
     this.controls.update();
 
-    if (this.glitchEnabled) {
+    if (this.state.glitchEnabled) {
       this.composer2.render(this.clock.getDelta());
     } else {
       this.renderer.render(this.scene, this.camera);
@@ -415,7 +383,7 @@ class ThreeScene extends React.Component {
 
   render() {
     return (
-      <div id="three" className={`${this.props.blurOn ? 'blur' : '' }`} ref={(mount) => { this.mount = mount }} />
+      <div id="three" className={`${this.state.showWebGLNotice ? 'webgl-notice' : ''} ${this.props.blurOn ? 'blur' : '' }`} ref={(mount) => { this.mount = mount }} />
     )
   }
 }
