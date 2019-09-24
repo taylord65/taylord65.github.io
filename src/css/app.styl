@@ -59,15 +59,6 @@ canvas
   
 #root, .App, main
   height 100%
-  
-  
-    
-.app-container 
-  position relative
-  height 100%
-
-#app 
-  height 100%
     
 p
   line-height 1.62em
@@ -142,7 +133,7 @@ header
       display none
       
 menuBarLightColor = #FFF;
-menuBarDarkColor = #000;
+menuBarDarkColor = #101010;
 
 menuBarHeight = 0.17em;
 menuBarWidth = 1.5em;
@@ -845,7 +836,6 @@ sideTextContainer()
 
 
 .iphone-container
-  opacity 1
   width 375px
   height 667px
   float right
@@ -915,69 +905,6 @@ sideTextContainer()
   @media (max-width: sml)
     margin-left 1em
     margin-right 1em
-  
-  
-
-  
-.checkItOutButton
-  margin auto
-  margin-top 1em
-  width 90%
-  max-width 260px
-  height 3em
-  border-radius 2px
-  background-color #0E3C6A
-  color #FFF
-  display flex
-  cursor pointer
-  border-bottom 3px solid #052c4b
-  transition height menuTransitionTime
-  &:hover
-    background-color #00609A
-  &:active
-    border-bottom none
-  span
-    margin auto
-    pointer-events none
-    font-size 0.9em
-    userSelectNone()
-
-
-
-.viewOptionsOpen
-  flex-direction column
-  height auto
-  background-color #005382
-  max-width 310px
-  width 100%
-  border-bottom 0px
-  &:hover
-    background-color #005382
-  span
-    padding 1em 0em
-    margin 0px
-    text-align left
-    padding-left 1.5em
-    pointer-events auto
-    border-bottom 1px solid #093b62
-    display flex
-    svg
-      transition transform 0.2s
-    &:hover
-      background-color #1370b9
-      svg
-        -ms-transform translate(5px, 0px)
-        -webkit-transform translate(5px, 0px)
-        transform translate(5px,0px)
-    &:last-child
-      border-bottom 0px
-    svg
-      fill #FFF
-      margin auto
-      margin-right 1em
-  @media (max-width: sml)
-    width 100%
-
       
 
 .fade-enter-active, .fade-leave-active {
