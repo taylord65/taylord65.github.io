@@ -44,8 +44,8 @@ class App extends React.Component {
   render() {
   	return (
 		  <div className="App">
-		  	<Header location={this.props.location} />
-		  	<Menu location={this.props.location} onClick={this.handleMenuIconClick} showMenu={this.state.showMenu}/>
+		  	<Header routerProps={this.props} />
+		  	<Menu location={this.props} onClick={this.handleMenuIconClick} showMenu={this.state.showMenu}/>
 		    <Main onClick={this.handleOffMenuClick} showMenu={this.state.showMenu} />
 		  </div>
   	)
