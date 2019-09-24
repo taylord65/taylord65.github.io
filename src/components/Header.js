@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 class Header extends React.Component {
   constructor(props) {
@@ -10,6 +9,7 @@ class Header extends React.Component {
     };
 
     this.handleScroll = this.handleScroll.bind(this);
+    this.routeTo = this.routeTo.bind(this);
   }
 
   getHeaderTitle(currentRoute) {
@@ -38,12 +38,16 @@ class Header extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    if (this.props.location !== prevProps.location) {
-      // Route Change
+    if (this.props.routerProps.location.pathname !== prevProps.routerProps.location.pathname) {
+      // Route Change. Avoid black bar from showing again
       this.setState({
         showHeaderDetails: false
       });
     }
+  }
+
+  routeTo() {
+    this.props.routerProps.history.push('/');
   }
 
   handleScroll(event) {
@@ -64,7 +68,7 @@ class Header extends React.Component {
     return (
       <div>
         <header>
-          <Link to="/" className="home-icon">
+          <div onClick={this.routeTo} className="home-icon">
             <svg
               version="1.1"
               x="0px"
@@ -81,13 +85,13 @@ class Header extends React.Component {
               </g>
               <rect x="43.7" y="47.2" fill="#FFFFFF" width="6.2" height="6.2" />
             </svg>
-          </Link>
+          </div>
         </header>
 
-        {(this.props.location.pathname !== "/" && this.state.showHeaderDetails) && (
+        {(this.props.routerProps.location.pathname !== "/" && this.state.showHeaderDetails) && (
           <div className="rect-fill">
             <h1 className="animated fadeIn">
-              {this.getHeaderTitle(this.props.location.pathname)}
+              {this.getHeaderTitle(this.props.routerProps.location.pathname)}
             </h1>
           </div>
         )}
