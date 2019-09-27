@@ -163,6 +163,8 @@ class ThreeScene extends React.Component {
     let geometry = new THREE.BoxGeometry( 40, 30, 40 );
     let numObjects = 120;
 
+    //maybe have 1 mesh
+
     for ( let i = 0; i < numObjects; i ++ ) {
       let object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({
           color: this.getRandomColor()
@@ -218,85 +220,120 @@ class ThreeScene extends React.Component {
   }
 
   sceneSetup() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(70, width / height, 1, this.state.cubeSize*3 );
+    window.addEventListener("resize", this.updateDimensions.bind(this));
 
-    camera.position.z = 5061;
-    camera.position.y = -1144;
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(70, width / height, 1, this.state.cubeSize*3 );
+
+    this.camera.position.z = 5061;
+    this.camera.position.y = -1144;
 
     let light = new THREE.SpotLight( 0xffffff, 0.3 );
     let ambientLight = new THREE.AmbientLight( 0xc5c5c5 );
     light.position.set(0, 5000, 0 );
-    scene.add( light );
-    scene.add( ambientLight );
+
+    this.scene.add(light);
+    this.scene.add(ambientLight);
     
-    const glitch = new GlitchEffect({ delay: new THREE.Vector2( 0, 0 ) });
-    const glitchEffect = new EffectPass(camera, glitch);
+    let glitch = new GlitchEffect({ delay: new THREE.Vector2( 0, 0 ) });
+    let glitchEffect = new EffectPass(this.camera, glitch);
     glitchEffect.renderToScreen = true;
 
     //Blur
-    const blurPass = new BlurPass();
+    let blurPass = new BlurPass();
     blurPass.scale = 500;
     blurPass.enabled = true;
     blurPass.opacity = 1;
     blurPass.renderToScreen = true;
     blurPass.setResolutionScale(0.46);
 
-    const clock = new THREE.Clock();
+    this.clock = new THREE.Clock();
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true});
-    renderer.setSize(width, height);
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFShadowMap;
+    this.renderer = new THREE.WebGLRenderer({ antialias: true});
+    this.renderer.setSize(width, height);
+    this.renderer.setPixelRatio( window.devicePixelRatio );
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFShadowMap;
 
-    const controls = new OrbitControls( camera, renderer.domElement );
-    controls.enabled = true;
-    controls.enableZoom = true;
-    controls.enablePan = false;
-    controls.enableDamping = false;
-    controls.maxDistance = 6000;
+    this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+    this.controls.enabled = true;
+    this.controls.enableZoom = true;
+    this.controls.enablePan = false;
+    this.controls.enableDamping = false;
+    this.controls.maxDistance = 6000;
 
     //Composer
-    const composer = new EffectComposer(renderer);
-    composer.addPass(new RenderPass(scene, camera));
-    composer.addPass(blurPass);
+    this.composer = new EffectComposer(this.renderer);
+    this.composer.addPass(new RenderPass(this.scene, this.camera));
+    this.composer.addPass(blurPass);
 
-    const composer2 = new EffectComposer(renderer);
-    composer2.addPass(new RenderPass(scene, camera));
-    composer2.addPass(glitchEffect);
+    this.composer2 = new EffectComposer(this.renderer);
+    this.composer2.addPass(new RenderPass(this.scene, this.camera));
+    this.composer2.addPass(glitchEffect);
 
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0x136c9e });
-    const cube = new THREE.Mesh(geometry, material);
+    let geometry = new THREE.BoxGeometry(1, 1, 1);
+    let material = new THREE.MeshBasicMaterial({ color: 0x136c9e });
+    this.cube = new THREE.Mesh(geometry, material);
 
-    scene.add(cube);
-    scene.background = new THREE.Color( 0xFFFFFF );
+    this.scene.add(this.cube);
+    this.scene.background = new THREE.Color( 0xFFFFFF );
 
-    this.scene = scene;
-    this.camera = camera;
-    this.renderer = renderer;
-    this.material = material;
-    this.cube = cube;
-    this.composer = composer;
-    this.composer2 = composer2;
-    this.clock = clock;
-    this.controls = controls;
     this.objects = [];
 
-    window.addEventListener("resize", this.updateDimensions.bind(this));
     this.mount.appendChild(this.renderer.domElement);
     this.start();
   }
 
   componentWillUnmount() {
+    const cleanMaterial = material => {
+      //console.log('dispose material!')
+      material.dispose()
+
+      //missing texture displose?
+
+      // dispose textures
+      for (const key of Object.keys(material)) {
+        const value = material[key]
+        if (value && typeof value === 'object' && 'minFilter' in value) {
+          //console.log('dispose texture!')
+          value.dispose()
+        }
+      }
+    }
+
     if (!this.state.showWebGLNotice) {
       window.removeEventListener("resize", this.updateDimensions.bind(this));
-      this.stop()
-      this.mount.removeChild(this.renderer.domElement)
+      this.stop();
+      this.mount.removeChild(this.renderer.domElement);
+
+      this.renderer.dispose();
+      this.composer.dispose();
+      this.composer2.dispose();
+
+      this.scene.traverse(object => {
+        if (!object.isMesh) return
+        
+        object.geometry.dispose()
+
+        if (object.material.isMaterial) {
+          cleanMaterial(object.material)
+        } else {
+          for (const material of object.material) cleanMaterial(material)
+        }
+      });
+
+      for (let i = this.scene.children.length - 1; i >= 0; i--) {
+        this.scene.remove(this.scene.children[i])
+      }
+
+      console.log(this.scene);
+
+      this.scene.dispose();
+      this.scene = null;
+      this.objects = [];
     }
   }
 
@@ -365,7 +402,6 @@ class ThreeScene extends React.Component {
   }
 
   updateDimensions() {
-    //this.composer.setSize(window.innerWidth, window.innerHeight);
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight)
