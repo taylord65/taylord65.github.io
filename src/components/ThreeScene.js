@@ -1,11 +1,21 @@
 import React from 'react';
 import * as THREE from 'three';
-import { EffectComposer, EffectPass, RenderPass, GlitchEffect, BlurPass } from "postprocessing";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import TWEEN from "@tweenjs/tween.js";
 
-class ThreeScene extends React.Component {
+const cleanMaterial = material => {
+  material.dispose()
+  for (const key of Object.keys(material)) {
+    const value = material[key]
+    if (value && typeof value === 'object' && 'minFilter' in value) {
+      value.dispose()
+    }
+  }
+}
 
+//Move cubeSize, cubeHeight, floorPositionY to constants
+
+class ThreeScene extends React.Component {
   constructor(props) {
     super(props)
 
@@ -16,10 +26,6 @@ class ThreeScene extends React.Component {
       glitchEnabled: false,
       showWebGLNotice: false,
     };
-
-    this.animate = this.animate.bind(this)
-    this.start = this.start.bind(this)
-    this.stop = this.stop.bind(this)
   }
 
   componentDidMount() {
@@ -28,22 +34,66 @@ class ThreeScene extends React.Component {
       this.generateSceneObjects();
       this.generateFloor();
       this.generateGrid();
-      this.glitch(500);
-    } else {
-      console.log("Unable to initialize WebGL. Your browser or machine may not support it.");
+      
+      this.setState(() => ({ 
+        glitchEnabled: true 
+      }));
 
-      let span = document.createElement("span");
-      let textContent = document.createTextNode("Unable to initialize WebGL. Your browser or machine may not support it.");
+      this.startAnimationLoop();
+      window.addEventListener("resize", this.updateDimensions);
+    } else {
+      const span = document.createElement("span");
+      const message = "Unable to initialize WebGL. Your browser or machine may not support it.";
+      const textContent = document.createTextNode(message);
       span.appendChild(textContent);
 
       this.mount.appendChild(span);
-      this.setState({
-        showWebGLNotice: true
-      });
+      this.setState({showWebGLNotice: true});
     }
   }
 
-  generateGrid(){
+  componentWillUnmount() {
+    if (!this.state.showWebGLNotice) {
+      clearTimeout(this.turnOffGlitchTimeout);
+      window.removeEventListener("resize", this.updateDimensions);
+      window.cancelAnimationFrame(this.frameId);
+
+      this.controls.dispose();
+
+      this.scene.traverse(object => {
+        if (!object.isMesh) return
+        
+        object.geometry.dispose()
+
+        if (object.material.isMaterial) {
+          cleanMaterial(object.material)
+        } else {
+          for (const material of object.material) cleanMaterial(material)
+        }
+      });
+
+      for (let i = this.scene.children.length - 1; i >= 0; i--) {
+        this.scene.remove(this.scene.children[i])
+      }
+
+      this.scene.dispose();
+      this.scene = null;
+    }
+  }
+
+  componentDidUpdate(prevProps){
+    if (!this.state.showWebGLNotice) {
+      if (this.props.blurOn !== prevProps.blurOn) {
+        if (this.props.blurOn) {
+          this.zoomCamera(1);
+        } else {
+          this.zoomCamera(-1);
+        }
+      }
+    }
+  }
+
+  generateGrid = () => {
     let material = new THREE.LineBasicMaterial({
       color: 0xc9c9c9
     });
@@ -126,9 +176,9 @@ class ThreeScene extends React.Component {
       let line = new THREE.Line( geometry, material );
       this.scene.add( line );
     }
-  }
+  };
 
-  getRandomColor(customThemeName){
+  getRandomColor = (customThemeName) => {
     let randomColor;
     let Theme = 'WHITE';
 
@@ -156,9 +206,9 @@ class ThreeScene extends React.Component {
     }
 
     return parseInt('0x' + randomColor);
-  }
+  };
 
-  generateSceneObjects(){
+  generateSceneObjects = () => {
     let group = new THREE.Object3D();
     let geometry = new THREE.BoxGeometry( 40, 30, 40 );
     let numObjects = 120;
@@ -196,9 +246,9 @@ class ThreeScene extends React.Component {
     }
 
     this.scene.add(group);
-  }
+  };
 
-  generateFloor(){
+  generateFloor = () => {
     let loader = new THREE.TextureLoader();
     let self = this;
     const url = 'https://i.imgur.com/OV4o87l.jpg';
@@ -217,13 +267,11 @@ class ThreeScene extends React.Component {
       plane.position.y = self.state.floorPositionY;
       self.scene.add( plane );
     });
-  }
+  };
 
-  sceneSetup() {
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+  sceneSetup = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(70, width / height, 1, this.state.cubeSize*3 );
@@ -231,27 +279,13 @@ class ThreeScene extends React.Component {
     this.camera.position.z = 5061;
     this.camera.position.y = -1144;
 
-    let light = new THREE.SpotLight( 0xffffff, 0.3 );
-    let ambientLight = new THREE.AmbientLight( 0xc5c5c5 );
+    const light = new THREE.SpotLight( 0xffffff, 0.3 );
+    const ambientLight = new THREE.AmbientLight( 0xc5c5c5 );
     light.position.set(0, 5000, 0 );
 
     this.scene.add(light);
     this.scene.add(ambientLight);
-    
-    let glitch = new GlitchEffect({ delay: new THREE.Vector2( 0, 0 ) });
-    let glitchEffect = new EffectPass(this.camera, glitch);
-    glitchEffect.renderToScreen = true;
-
-    //Blur
-    let blurPass = new BlurPass();
-    blurPass.scale = 500;
-    blurPass.enabled = true;
-    blurPass.opacity = 1;
-    blurPass.renderToScreen = true;
-    blurPass.setResolutionScale(0.46);
-
-    this.clock = new THREE.Clock();
-
+  
     this.renderer = new THREE.WebGLRenderer({ antialias: true});
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -265,99 +299,28 @@ class ThreeScene extends React.Component {
     this.controls.enableDamping = false;
     this.controls.maxDistance = 6000;
 
-    //Composer
-    this.composer = new EffectComposer(this.renderer);
-    this.composer.addPass(new RenderPass(this.scene, this.camera));
-    this.composer.addPass(blurPass);
-
-    this.composer2 = new EffectComposer(this.renderer);
-    this.composer2.addPass(new RenderPass(this.scene, this.camera));
-    this.composer2.addPass(glitchEffect);
-
-    let geometry = new THREE.BoxGeometry(1, 1, 1);
-    let material = new THREE.MeshBasicMaterial({ color: 0x136c9e });
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0x136c9e });
     this.cube = new THREE.Mesh(geometry, material);
-
     this.scene.add(this.cube);
-    this.scene.background = new THREE.Color( 0xFFFFFF );
 
+    this.scene.background = new THREE.Color( 0xFFFFFF );
     this.objects = [];
 
     this.mount.appendChild(this.renderer.domElement);
-    this.start();
-  }
+  };
 
-  componentWillUnmount() {
-    const cleanMaterial = material => {
-      //console.log('dispose material!')
-      material.dispose()
+  startAnimationLoop = () => {
+    this.cube.rotation.x += 0.01
+    this.cube.rotation.y += 0.01
 
-      //missing texture displose?
+    this.renderer.render(this.scene, this.camera);
 
-      // dispose textures
-      for (const key of Object.keys(material)) {
-        const value = material[key]
-        if (value && typeof value === 'object' && 'minFilter' in value) {
-          //console.log('dispose texture!')
-          value.dispose()
-        }
-      }
-    }
+    TWEEN.update();
+    this.frameId = window.requestAnimationFrame(this.startAnimationLoop);
+  };
 
-    if (!this.state.showWebGLNotice) {
-      window.removeEventListener("resize", this.updateDimensions.bind(this));
-      this.stop();
-      this.mount.removeChild(this.renderer.domElement);
-
-      this.renderer.dispose();
-      this.composer.dispose();
-      this.composer2.dispose();
-
-      this.scene.traverse(object => {
-        if (!object.isMesh) return
-        
-        object.geometry.dispose()
-
-        if (object.material.isMaterial) {
-          cleanMaterial(object.material)
-        } else {
-          for (const material of object.material) cleanMaterial(material)
-        }
-      });
-
-      for (let i = this.scene.children.length - 1; i >= 0; i--) {
-        this.scene.remove(this.scene.children[i])
-      }
-
-      console.log(this.scene);
-
-      this.scene.dispose();
-      this.scene = null;
-      this.objects = [];
-    }
-  }
-
-  start() {
-    if (!this.frameId) {
-      this.frameId = requestAnimationFrame(this.animate)
-    }
-  }
-
-  stop() {
-    cancelAnimationFrame(this.frameId)
-  }
-
-  glitch(time) {
-    this.setState({glitchEnabled: true});
-
-    setTimeout(() => {
-      this.setState({
-        glitchEnabled: false
-      });
-    }, time);
-  }
-
-  zoomCamera(direction) {
+  zoomCamera = (direction) => {
     const center = new THREE.Vector3(0,0,0);
     const zoomAmount = 400;
     let newLength;
@@ -375,51 +338,18 @@ class ThreeScene extends React.Component {
 
     let tween = new TWEEN.Tween(this.camera.position).to(destinationPosition, 150).start();
     return tween;
-  }
+  };
 
-  animate() {
-    //single small cube is working
-    this.cube.rotation.x += 0.01
-    this.cube.rotation.y += 0.01
+  updateDimensions = () => {
+    this.renderer.setSize(window.innerWidth, window.innerHeight)
 
-    this.renderScene()
-
-    TWEEN.update();
-
-    this.frameId = window.requestAnimationFrame(this.animate)
-  }
-
-  componentDidUpdate(prevProps){
-    if (!this.state.showWebGLNotice) {
-      if (this.props.blurOn !== prevProps.blurOn) {
-        if (this.props.blurOn) {
-          this.zoomCamera(1);
-        } else {
-          this.zoomCamera(-1);
-        }
-      }
-    }
-  }
-
-  updateDimensions() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
-  }
-
-  renderScene() {
-    this.controls.update();
-
-    if (this.state.glitchEnabled) {
-      this.composer2.render(this.clock.getDelta());
-    } else {
-      this.renderer.render(this.scene, this.camera);
-    }
-  }
+  };
 
   render() {
     return (
-      <div id="three" className={`${this.state.showWebGLNotice ? 'webgl-notice' : ''} ${this.props.blurOn ? 'blur' : '' }`} ref={(mount) => { this.mount = mount }} />
+      <div id="three" className={`${this.state.showWebGLNotice ? 'webgl-notice' : ''} ${this.props.blurOn ? 'blur' : '' }`} ref={mount => (this.mount = mount)} />
     )
   }
 }
