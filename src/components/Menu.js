@@ -44,7 +44,12 @@ class Menu extends React.Component {
   }
 
   routeTo(feature) {
-  	this.props.location.history.push(feature.path);
+  	if (this.props.location.location.pathname === feature.path) {
+  		//Close the menu
+  		return this.props.onClick();
+  	} else {
+  		this.props.location.history.push(feature.path);
+  	}
   }
 
 	render() {
