@@ -4,17 +4,16 @@ import ScrollIndicator from './../components/small/scrollIndicator'
 import IphoneVideo from './../components/small/iphoneVideo'
 import TabbedContent from './../components/small/tabbedContent'
 import Footer from './../components/Footer'
+import cover from './../images/s1_cover_faded.png'
 
 class Soccer1 extends React.Component {
   render() {
-    const imgUrl = 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1_cover_faded.png';
-
     const coverStyle = {
-      backgroundImage: `url(${imgUrl})`
+      backgroundImage: `url(${cover})`
     };
 
     return (
-      <div className={`portfolio-feature ${this.props.showMenu ? 'unfocusedFeature' : ''}`}>
+      <div className="portfolio-feature">
 
         <SidePanel routerProps={this.props} />
 

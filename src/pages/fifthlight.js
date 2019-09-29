@@ -3,16 +3,16 @@ import SidePanel from './../components/small/sidePanel'
 import ScrollIndicator from './../components/small/scrollIndicator'
 import Ipad from './../components/small/ipad'
 import Footer from './../components/Footer'
+import cover from './../images/fl_cover_dark.jpg'
 
 class FifthLight extends React.Component {
   render() {
-    const imgUrl = 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/fl/fl_cover_dark.jpg';
-
     const coverStyle = {
-      backgroundImage: `url(${imgUrl})`
+      backgroundImage: `url(${cover})`
     };
+
     return (
-      <div className={`portfolio-feature ${this.props.showMenu ? 'unfocusedFeature' : ''}`}>
+      <div className="portfolio-feature">
 
       <SidePanel routerProps={this.props} />
       <div className="cover" id="fl_background" style={coverStyle}>

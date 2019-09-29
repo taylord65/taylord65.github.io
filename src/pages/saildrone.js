@@ -4,16 +4,16 @@ import ScrollIndicator from './../components/small/scrollIndicator'
 import TabbedContent from './../components/small/tabbedContent'
 import Desktop from './../components/small/desktop'
 import Footer from './../components/Footer'
+import cover from './../images/sd_cover.jpg'
 
 class Saildrone extends React.Component {
   render() {
-    const imgUrl = 'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/sd/sd_cover.jpg';
-
     const coverStyle = {
-      backgroundImage: `url(${imgUrl})`
+      backgroundImage: `url(${cover})`
     };
+
     return (
-      <div className={`portfolio-feature ${this.props.showMenu ? 'unfocusedFeature' : ''}`}>
+      <div className="portfolio-feature">
 
         <SidePanel routerProps={this.props} />
 
