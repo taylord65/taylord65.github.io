@@ -15,7 +15,7 @@ class TeaBot extends React.Component {
       <div className="portfolio-feature">
         <SidePanel routerProps={this.props} />
 
-        <div className="cover" id="tb_background" style={coverStyle}>
+        <div className="animated fadeIn cover" id="tb_background" style={coverStyle}>
           <div className="cover-headline">
             <h1>teabot</h1>
             <h2>Design</h2>

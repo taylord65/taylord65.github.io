@@ -17,7 +17,7 @@ class Saildrone extends React.Component {
 
         <SidePanel routerProps={this.props} />
 
-              <div className="cover" id="sd_background" style={coverStyle}>
+              <div className="animated fadeIn cover" id="sd_background" style={coverStyle}>
                   <div className="cover-headline">
                       <h1>Saildrone mission builder</h1>
                       <h2>Design and development</h2>

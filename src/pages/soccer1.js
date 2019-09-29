@@ -5,6 +5,7 @@ import IphoneVideo from './../components/small/iphoneVideo'
 import TabbedContent from './../components/small/tabbedContent'
 import Footer from './../components/Footer'
 import cover from './../images/s1_cover_faded.png'
+import vid1 from './../videos/3dModel2.mp4'
 
 class Soccer1 extends React.Component {
   render() {
@@ -17,7 +18,7 @@ class Soccer1 extends React.Component {
 
         <SidePanel routerProps={this.props} />
 
-        <div className="cover" id="s1_background" style={coverStyle}>
+        <div className="animated fadeIn cover" id="s1_background" style={coverStyle}>
           <div className="cover-headline">
             <h1>Soccer-1</h1>
             <h2>Design and development</h2>
@@ -47,7 +48,7 @@ class Soccer1 extends React.Component {
             <div className="content-section">
               <div className="content-panel">
                 <h1>An engaging learning experience</h1>
-                <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3dModel2.mp4"}/>
+                <IphoneVideo src={vid1}/>
                 <div className="description-area">
                   <p>
                     Using state of the art motion capture, the movements of professional

@@ -1,6 +1,6 @@
 import React from 'react'
 import { CSSTransitionGroup } from 'react-transition-group'
-
+//<div className="indicator"></div>
 class Menu extends React.Component {
   constructor(props) {
     super(props);
@@ -92,6 +92,9 @@ class Menu extends React.Component {
 					}
 				</div>
 
+				{this.props.showMenu &&
+					<div className="animated fadeIn faster black-curtain" onClick={this.props.onClick}></div>
+				}
 			</div>
 		)
 	}

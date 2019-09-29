@@ -23,12 +23,8 @@ maxContainerWidth = 1246px;
 med = 1130px;
 sml = 480px;
 
- // @font-face
- //   font-family customFont
- //   font-style sans-serif
- //   src local('ITCAvantGardeStd-Demi'), url(./../fonts/ITCAvantGardeStd-Demi.otf) format('otf')
-
-menuTransitionTime = 0.2s;
+menuTransitionTime = 0.5s;
+featureTransitionTime = 0.1s
 
 
 //stylus -w -c app.styl -o app.css
@@ -40,7 +36,7 @@ menuTransitionTime = 0.2s;
 html, body, #root, .App, main 
   margin 0
   height 100%
-  background-color #000
+  background-color #FFF
   padding 0px
   font-size 20px
   font-family font
@@ -322,7 +318,7 @@ menuTransition = 0.2s ease-in-out;
     margin auto
     font-size 2em
     color #FFF
-    font-family customFont
+    font-family font
     margin-bottom 0.25em
   .secondary-headline-row
     width 91%
@@ -381,9 +377,15 @@ rightAllignment()
   @media (max-width: sml)
     margin-right 10px
 
-featureTransitionTime = 0.2s
 
 highlightColor = #4682b4
+
+.black-curtain
+  position fixed
+  z-index 5
+  background-color rgba(0,0,0,0.7)
+  width 100%
+  height 100%
 
 .menu
   position fixed
@@ -398,7 +400,7 @@ highlightColor = #4682b4
   flex-direction column
   text-align center
   overflow-y hidden
-  box-shadow -9px 0px 18px rgba(0, 0, 0, 0.15)
+  //box-shadow -9px 0px 18px rgba(0, 0, 0, 0.15)
   will-change transform, transition
   //userSelectNone()
   .menu-header
@@ -534,6 +536,7 @@ highlightColor = #4682b4
   opacity 1
   transition opacity 0.25s
   will-change opacity
+  background-color #000
   .scrollUpSection
     width calc(100% - 6.34em)
     margin-left 3.17em
@@ -640,17 +643,22 @@ sideTextContainer()
       font-size 3.998em
       font-weight 600
       margin-bottom 0.3em
+      userSelectNone()
     h2
       text-transform uppercase
       font-size 1.414em
       letter-spacing 0.2em
       margin-top 0px
       font-weight 300
-      font-family customFont
+      font-family font
+      color #ffffffbf
+      userSelectNone()
     h3
       font-size 1em
       font-weight 300
-      font-family customFont
+      font-family font
+      color #ffffffbf
+      userSelectNone()
     @media (max-width: sml)
       width 100%
       h1
@@ -736,7 +744,6 @@ sideTextContainer()
       p
         color #404040
       .quote
-        color #000000
         font-style italic
     h1
       width 50%

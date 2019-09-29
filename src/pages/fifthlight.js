@@ -15,7 +15,7 @@ class FifthLight extends React.Component {
       <div className="portfolio-feature">
 
       <SidePanel routerProps={this.props} />
-      <div className="cover" id="fl_background" style={coverStyle}>
+      <div className="animated fadeIn cover" id="fl_background" style={coverStyle}>
         <div className="cover-headline">
           <h1>Fifth light</h1>
           <h2>Design</h2>

@@ -349,7 +349,10 @@ class ThreeScene extends React.Component {
 
   render() {
     return (
-      <div id="three" className={`${this.state.showWebGLNotice ? 'webgl-notice' : ''} ${this.props.blurOn ? 'blur' : '' }`} ref={mount => (this.mount = mount)} />
+      <div id="three" 
+          className={`animated fadeIn ${this.state.showWebGLNotice ? 'webgl-notice' : ''}`} 
+          ref={mount => (this.mount = mount)} 
+      />
     )
   }
 }
