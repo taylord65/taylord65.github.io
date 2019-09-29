@@ -467,6 +467,8 @@ highlightColor = #4682b4
             width 0px
             background-color highlightColor
             transition width featureTransitionTime
+            @media (max-width: sml)
+              display none !important
         span
           margin auto
           leftAllignment()
@@ -714,6 +716,7 @@ sideTextContainer()
     max-width maxContainerWidth
     p
       color #333333
+      userSelectNone()
       &:first-child
         margin-top 0px
       &:last-child
@@ -920,11 +923,22 @@ sideTextContainer()
     margin-right 1em
       
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .2s
+.fade-enter {
+  opacity: 0.01;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms cubic-bezier(0, 1, 0.5, 1);
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms cubic-bezier(0, 1, 0.5, 1);
 }
 
 // .slide-leave-active,

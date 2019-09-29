@@ -4,13 +4,12 @@ import ScrollIndicator from './../components/small/scrollIndicator'
 import IphoneVideo from './../components/small/iphoneVideo'
 import TabbedContent from './../components/small/tabbedContent'
 import Footer from './../components/Footer'
-import cover from './../images/s1_cover_faded.png'
 import vid1 from './../videos/3dModel2.mp4'
 
 class Soccer1 extends React.Component {
   render() {
     const coverStyle = {
-      backgroundImage: `url(${cover})`
+      backgroundImage: `url(${this.props.cover})`
     };
 
     return (

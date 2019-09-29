@@ -3,12 +3,11 @@ import SidePanel from './../components/small/sidePanel'
 import ScrollIndicator from './../components/small/scrollIndicator'
 import Ipad from './../components/small/ipad'
 import Footer from './../components/Footer'
-import cover from './../images/fl_cover_dark.jpg'
 
 class FifthLight extends React.Component {
   render() {
     const coverStyle = {
-      backgroundImage: `url(${cover})`
+      backgroundImage: `url(${this.props.cover})`
     };
 
     return (

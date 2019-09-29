@@ -25,6 +25,7 @@ class ThreeScene extends React.Component {
       floorPositionY: -3000,
       glitchEnabled: false,
       showWebGLNotice: false,
+      colorThemeName: 'WHITE'
     };
   }
 
@@ -180,7 +181,7 @@ class ThreeScene extends React.Component {
 
   getRandomColor = (customThemeName) => {
     let randomColor;
-    let Theme = 'WHITE';
+    let Theme = this.state.colorThemeName;
 
     let colorTheme = {
       BLACK: {
@@ -350,7 +351,7 @@ class ThreeScene extends React.Component {
   render() {
     return (
       <div id="three" 
-          className={`animated fadeIn ${this.state.showWebGLNotice ? 'webgl-notice' : ''}`} 
+          className={`animated fadeIn faster ${this.state.showWebGLNotice ? 'webgl-notice' : ''}`} 
           ref={mount => (this.mount = mount)} 
       />
     )

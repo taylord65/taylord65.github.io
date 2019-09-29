@@ -92,9 +92,14 @@ class Menu extends React.Component {
 					}
 				</div>
 
+	    <CSSTransitionGroup
+	      transitionName="fade"
+	      transitionEnterTimeout={500}
+	      transitionLeaveTimeout={300}>
 				{this.props.showMenu &&
-					<div className="animated fadeIn faster black-curtain" onClick={this.props.onClick}></div>
+					<div className="black-curtain" onClick={this.props.onClick}></div>
 				}
+		</CSSTransitionGroup>
 			</div>
 		)
 	}

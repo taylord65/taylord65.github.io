@@ -4,12 +4,11 @@ import ScrollIndicator from './../components/small/scrollIndicator'
 import TabbedContent from './../components/small/tabbedContent'
 import Desktop from './../components/small/desktop'
 import Footer from './../components/Footer'
-import cover from './../images/sd_cover.jpg'
 
 class Saildrone extends React.Component {
   render() {
     const coverStyle = {
-      backgroundImage: `url(${cover})`
+      backgroundImage: `url(${this.props.cover})`
     };
 
     return (
