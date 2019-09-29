@@ -5,6 +5,7 @@ import Soccer1 from './../pages/soccer1'
 import FifthLight from './../pages/fifthlight'
 import Saildrone  from './../pages/saildrone'
 import TeaBot from './../pages/teabot'
+import SunLife from './../pages/sunlife'
 
 import flCover from './../images/fl_cover_dark.jpg'
 import sdCover from './../images/sd_cover.jpg'
@@ -18,6 +19,7 @@ class Main extends React.Component {
 		    <Switch>
 		      <Route exact path='/' render={(props) => <ThreeScene {...props} blurOn={this.props.showMenu} />}/>
 
+		      <Route path='/sunlife' render={(props) => <SunLife {...props} showMenu={this.props.showMenu}/>}/>
 		      <Route path='/soccer1' render={(props) => <Soccer1 {...props} showMenu={this.props.showMenu} cover={s1Cover} />}/>
 		      <Route path='/fifthlight' render={(props) => <FifthLight {...props} showMenu={this.props.showMenu} cover={flCover} />}/>
 		      <Route path='/saildrone' render={(props) => <Saildrone {...props} showMenu={this.props.showMenu} cover={sdCover} />}/>

@@ -337,7 +337,7 @@ class ThreeScene extends React.Component {
     
     let destinationPosition = cameraPositionClone.sub(center).setLength(newLength).add(center);
 
-    let tween = new TWEEN.Tween(this.camera.position).to(destinationPosition, 150).start();
+    let tween = new TWEEN.Tween(this.camera.position).to(destinationPosition, 200).start();
     return tween;
   };
 

@@ -11,7 +11,7 @@ class SidePanel extends React.Component {
 
     this.state = {
       route: this.props.routerProps.location.pathname,
-      urls: ['/soccer1', '/saildrone', '/fifthlight', '/teabot']
+      urls: ['/sunlife', '/soccer1', '/saildrone', '/fifthlight', '/teabot']
     };
 
     this.prevRoute = this.prevRoute.bind(this);

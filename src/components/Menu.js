@@ -1,6 +1,6 @@
 import React from 'react'
 import { CSSTransitionGroup } from 'react-transition-group'
-//<div className="indicator"></div>
+
 class Menu extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +11,7 @@ class Menu extends React.Component {
     			label: 'Sun Life',
     			subLabel: 'Voice Development',
     			date: 'Current',
-    			path: '/slf'
+    			path: '/sunlife'
     		},
     		{
     			label: 'Soccer-1',
@@ -53,7 +53,7 @@ class Menu extends React.Component {
 
 	    <CSSTransitionGroup
 	      transitionName="slide"
-	      transitionEnterTimeout={500}
+	      transitionEnterTimeout={300}
 	      transitionLeaveTimeout={300}>
 				{this.props.showMenu &&
 					<div key="menu" className="menu">
@@ -94,7 +94,7 @@ class Menu extends React.Component {
 
 	    <CSSTransitionGroup
 	      transitionName="fade"
-	      transitionEnterTimeout={500}
+	      transitionEnterTimeout={300}
 	      transitionLeaveTimeout={300}>
 				{this.props.showMenu &&
 					<div className="black-curtain" onClick={this.props.onClick}></div>
