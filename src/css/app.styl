@@ -167,7 +167,7 @@ menuTransition = 0.2s ease-in-out;
     -webkit-transform rotate(0deg)
     -ms-transform  rotate(0deg)
     transform rotate(0deg)
-    transition menuTransition
+    transition menuTransition*2
     &:nth-child(1)
       top 0
     &:nth-child(2)
@@ -637,6 +637,7 @@ sideTextContainer()
   background-position center
   background-size cover
   display flex
+  will-change opacity
   .cover-headline 
     margin auto
     color #FFF

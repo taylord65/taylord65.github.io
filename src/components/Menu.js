@@ -51,6 +51,7 @@ class Menu extends React.Component {
   		this.props.onClick();
 		setTimeout(function() { 
 			this.props.location.history.push(feature.path);
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
 		}.bind(this), 320)
   	}
   }
