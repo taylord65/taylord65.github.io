@@ -301,7 +301,7 @@ class ThreeScene extends React.Component {
     this.controls.maxDistance = 6000;
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0x136c9e });
+    const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
     this.cube = new THREE.Mesh(geometry, material);
     this.scene.add(this.cube);
 
@@ -315,6 +315,7 @@ class ThreeScene extends React.Component {
     this.cube.rotation.x += 0.01
     this.cube.rotation.y += 0.01
 
+    this.rotateBlocks();
     this.renderer.render(this.scene, this.camera);
 
     TWEEN.update();
@@ -340,6 +341,17 @@ class ThreeScene extends React.Component {
     let tween = new TWEEN.Tween(this.camera.position).to(destinationPosition, 200).start();
     return tween;
   };
+
+  rotateBlocks = () => {
+    this.objects.forEach((object) => {
+      object.rotateX(0.0008);
+      object.rotateY(0.0008);
+      object.rotateZ(0.0008);
+    });
+    this.scene.children[0].rotateY(0.0004);
+    this.scene.children[0].rotateX(0.0004);
+    this.scene.children[0].rotateZ(-0.0004);
+  }
 
   updateDimensions = () => {
     this.renderer.setSize(window.innerWidth, window.innerHeight)

@@ -397,17 +397,15 @@ highlightColor = #4682b4
   z-index 6
   background-color rgba(255,255,255,1)
   top 0
-  width 50%
+  width 65%
   max-width 30em
   right 0
   bottom 0
   display flex
   flex-direction column
   text-align center
-  overflow-y hidden
-  //box-shadow -9px 0px 18px rgba(0, 0, 0, 0.15)
-  will-change transform, transition
-  //userSelectNone()
+  overflow hidden
+  will-change transform
   .menu-header
     height 15%
     width 100%
@@ -993,7 +991,6 @@ sideTextContainer()
 .slide-leave {
   transform: translateX(100%);
   transition: menuTransitionTime cubic-bezier(0, 1, 0.5, 1);
-  box-shadow: none;
 
   &.slide-leave-active {
     transform: translateX(100%);

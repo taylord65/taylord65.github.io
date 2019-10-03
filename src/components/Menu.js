@@ -48,7 +48,10 @@ class Menu extends React.Component {
   		//Close the menu
   		return this.props.onClick();
   	} else {
-  		this.props.location.history.push(feature.path);
+  		this.props.onClick();
+		setTimeout(function() { 
+			this.props.location.history.push(feature.path);
+		}.bind(this), 320)
   	}
   }
 
