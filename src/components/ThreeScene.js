@@ -3,6 +3,10 @@ import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import TWEEN from "@tweenjs/tween.js";
 
+const cubeSize = 10500;
+const cubeHeight = 3900;
+const floorPositionY = -3000;
+
 const cleanMaterial = material => {
   material.dispose()
   for (const key of Object.keys(material)) {
@@ -13,16 +17,11 @@ const cleanMaterial = material => {
   }
 }
 
-//Move cubeSize, cubeHeight, floorPositionY to constants
-
 class ThreeScene extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      cubeSize: 10500,
-      cubeHeight: 3900,
-      floorPositionY: -3000,
       glitchEnabled: false,
       showWebGLNotice: false,
       colorThemeName: 'WHITE'
@@ -106,27 +105,27 @@ class ThreeScene extends React.Component {
 
       switch(i) {
         case 0:
-          x = this.state.cubeSize/2;
-          z = this.state.cubeSize/2;
+          x = cubeSize/2;
+          z = cubeSize/2;
           break;
         case 1:
-          x = (-1) * this.state.cubeSize/2;
-          z = this.state.cubeSize/2;
+          x = (-1) * cubeSize/2;
+          z = cubeSize/2;
           break;
         case 2:
-          x = (-1) * this.state.cubeSize/2;
-          z = (-1) * this.state.cubeSize/2;
+          x = (-1) * cubeSize/2;
+          z = (-1) * cubeSize/2;
           break;
         case 3:
-          x = this.state.cubeSize/2;
-          z = (-1) * this.state.cubeSize/2;
+          x = cubeSize/2;
+          z = (-1) * cubeSize/2;
           break;
         default:
       }
 
       geometry.vertices.push(
-        new THREE.Vector3(x, this.state.cubeHeight, z),
-        new THREE.Vector3(x, this.state.floorPositionY, z)
+        new THREE.Vector3(x, cubeHeight, z),
+        new THREE.Vector3(x, floorPositionY, z)
       );
 
       let line = new THREE.Line( geometry, material );
@@ -139,39 +138,39 @@ class ThreeScene extends React.Component {
 
       switch(i) {
         case 0:
-          x1 = (-1) * this.state.cubeSize/2;
-          z1 = this.state.cubeSize/2;
+          x1 = (-1) * cubeSize/2;
+          z1 = cubeSize/2;
 
-          x2 = this.state.cubeSize/2;
-          z2 = this.state.cubeSize/2;
+          x2 = cubeSize/2;
+          z2 = cubeSize/2;
           break;
         case 1:
-          x1 = this.state.cubeSize/2;
-          z1 = this.state.cubeSize/2;
+          x1 = cubeSize/2;
+          z1 = cubeSize/2;
 
-          x2 = this.state.cubeSize/2;
-          z2 = (-1) * this.state.cubeSize/2;
+          x2 = cubeSize/2;
+          z2 = (-1) * cubeSize/2;
           break;
         case 2:
-          x1 = this.state.cubeSize/2;
-          z1 = (-1) * this.state.cubeSize/2;
+          x1 = cubeSize/2;
+          z1 = (-1) * cubeSize/2;
 
-          x2 = (-1) * this.state.cubeSize/2;
-          z2 = (-1) * this.state.cubeSize/2;
+          x2 = (-1) * cubeSize/2;
+          z2 = (-1) * cubeSize/2;
           break;
         case 3:
-          x1 = (-1) * this.state.cubeSize/2;
-          z1 = (-1) * this.state.cubeSize/2;
+          x1 = (-1) * cubeSize/2;
+          z1 = (-1) * cubeSize/2;
 
-          x2 = (-1) * this.state.cubeSize/2;
-          z2 = this.state.cubeSize/2;
+          x2 = (-1) * cubeSize/2;
+          z2 = cubeSize/2;
           break;
         default:
       }
 
       geometry.vertices.push(
-        new THREE.Vector3(x1, this.state.cubeHeight, z1),
-        new THREE.Vector3(x2, this.state.cubeHeight, z2)
+        new THREE.Vector3(x1, cubeHeight, z1),
+        new THREE.Vector3(x2, cubeHeight, z2)
       );
 
       let line = new THREE.Line( geometry, material );
@@ -261,11 +260,11 @@ class ThreeScene extends React.Component {
       texture.repeat.set( 25, 25 ); 
 
       let material = new THREE.MeshLambertMaterial({ map : texture });
-      let geometry = new THREE.PlaneGeometry(self.state.cubeSize, self.state.cubeSize, 8, 8);
+      let geometry = new THREE.PlaneGeometry(cubeSize, cubeSize, 8, 8);
       let plane = new THREE.Mesh( geometry, material );
 
       plane.rotateX( - Math.PI / 2);
-      plane.position.y = self.state.floorPositionY;
+      plane.position.y = floorPositionY;
       self.scene.add( plane );
     });
   };
@@ -275,7 +274,7 @@ class ThreeScene extends React.Component {
     const height = window.innerHeight;
 
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(70, width / height, 1, this.state.cubeSize*3 );
+    this.camera = new THREE.PerspectiveCamera(70, width / height, 1, cubeSize*3 );
 
     this.camera.position.z = 5061;
     this.camera.position.y = -1144;
