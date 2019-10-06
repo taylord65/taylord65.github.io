@@ -1,4 +1,6 @@
-import React from "react";
+import React from "react"
+import { animateCSS } from '../helpers/animateCSS'
+import { setBackgroundToBlack } from '../helpers/setBackgroundToBlack'
 
 class Header extends React.Component {
   constructor(props) {
@@ -47,7 +49,16 @@ class Header extends React.Component {
   }
 
   routeTo() {
-    this.props.routerProps.history.push('/');
+    this.setState({
+      showHeaderDetails: false
+    });
+    
+    setBackgroundToBlack();
+
+    let animations = ['fadeOut', 'faster'];
+    animateCSS('.portfolio-feature', animations, () => {
+      this.props.routerProps.history.push('/');
+    });
   }
 
   handleScroll(event) {

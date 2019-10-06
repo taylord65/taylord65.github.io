@@ -2,6 +2,8 @@ import React from 'react';
 import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import TWEEN from "@tweenjs/tween.js";
+import { animateCSS } from '../helpers/animateCSS'
+import { setBackgroundToBlack } from '../helpers/setBackgroundToBlack'
 
 const cubeSize = 10500;
 const cubeHeight = 3900;
@@ -22,7 +24,6 @@ class ThreeScene extends React.Component {
     super(props)
 
     this.state = {
-      glitchEnabled: false,
       showWebGLNotice: false,
       colorThemeName: 'WHITE'
     };
@@ -34,11 +35,11 @@ class ThreeScene extends React.Component {
       this.generateSceneObjects();
       this.generateFloor();
       this.generateGrid();
-      
-      this.setState(() => ({ 
-        glitchEnabled: true 
-      }));
 
+      animateCSS('#three', ['fadeIn'], () => {
+        setBackgroundToBlack();
+      });
+      
       this.startAnimationLoop();
       window.addEventListener("resize", this.updateDimensions);
     } else {
@@ -362,7 +363,7 @@ class ThreeScene extends React.Component {
   render() {
     return (
       <div id="three" 
-          className={`animated fadeIn faster ${this.state.showWebGLNotice ? 'webgl-notice' : ''}`} 
+          className={`${this.state.showWebGLNotice ? 'webgl-notice' : ''}`} 
           ref={mount => (this.mount = mount)} 
       />
     )

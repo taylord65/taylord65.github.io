@@ -1,5 +1,6 @@
 import React from 'react'
 import { CSSTransitionGroup } from 'react-transition-group'
+import { animateCSS } from '../helpers/animateCSS'
 
 class Menu extends React.Component {
   constructor(props) {
@@ -43,23 +44,35 @@ class Menu extends React.Component {
     this.routeTo = this.routeTo.bind(this);
   }
 
-  routeTo(feature) {
-  	if (this.props.location.location.pathname === feature.path) {
-  		//Close the menu
+  routeTo = (feature) => {
+  	let currentPathName = this.props.location.location.pathname;
+
+  	if (currentPathName === feature.path) {
   		return this.props.onClick();
   	} else {
   		this.props.onClick();
-		setTimeout(function() { 
-			this.props.location.history.push(feature.path);
-			document.body.scrollTop = document.documentElement.scrollTop = 0;
-		}.bind(this), 320)
+  		
+			setTimeout(function() { 
+				if (currentPathName === '/') {
+					/*
+					*	On the home page, add the fade out
+					* and then route to the new page when the animation is finished
+					*/
+					let animations = ['fadeOut', 'faster'];
+					animateCSS('#three', animations, () => {
+						this.props.location.history.push(feature.path);
+					});
+				} else {
+					this.props.location.history.push(feature.path); // Route to the new page
+					document.body.scrollTop = document.documentElement.scrollTop = 0; //Scroll to top
+				}
+			}.bind(this), 320)
   	}
-  }
+  };
 
 	render() {
 		return (
 			<div>
-
 	    <CSSTransitionGroup
 	      transitionName="slide"
 	      transitionEnterTimeout={300}
@@ -101,14 +114,14 @@ class Menu extends React.Component {
 					}
 				</div>
 
-	    <CSSTransitionGroup
-	      transitionName="fade"
-	      transitionEnterTimeout={300}
-	      transitionLeaveTimeout={300}>
-				{this.props.showMenu &&
-					<div className="black-curtain" onClick={this.props.onClick}></div>
-				}
-		</CSSTransitionGroup>
+		    <CSSTransitionGroup
+		      transitionName="fade"
+		      transitionEnterTimeout={300}
+		      transitionLeaveTimeout={300}>
+					{this.props.showMenu &&
+						<div className="black-curtain" onClick={this.props.onClick}></div>
+					}
+				</CSSTransitionGroup>
 			</div>
 		)
 	}
