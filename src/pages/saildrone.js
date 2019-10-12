@@ -4,7 +4,7 @@ import ScrollIndicator from './../components/small/scrollIndicator'
 import TabbedContent from './../components/small/tabbedContent'
 import Desktop from './../components/small/desktop'
 import Footer from './../components/Footer'
-import Fade from 'react-reveal'
+import Fade from 'react-reveal/Fade'
 
 class Saildrone extends React.Component {
   render() {

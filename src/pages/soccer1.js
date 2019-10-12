@@ -4,7 +4,7 @@ import ScrollIndicator from './../components/small/scrollIndicator'
 import IphoneVideo from './../components/small/iphoneVideo'
 import TabbedContent from './../components/small/tabbedContent'
 import Footer from './../components/Footer'
-import Fade from 'react-reveal'
+import Fade from 'react-reveal/Fade'
 
 class Soccer1 extends React.Component {
   render() {

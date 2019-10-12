@@ -3,7 +3,7 @@ import SidePanel from "./../components/small/sidePanel";
 import ScrollIndicator from './../components/small/scrollIndicator'
 import Ipad from './../components/small/ipad'
 import Footer from './../components/Footer'
-import Fade from 'react-reveal'
+import Fade from 'react-reveal/Fade'
 
 class TeaBot extends React.Component {
   render() {
