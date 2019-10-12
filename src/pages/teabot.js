@@ -3,6 +3,7 @@ import SidePanel from "./../components/small/sidePanel";
 import ScrollIndicator from './../components/small/scrollIndicator'
 import Ipad from './../components/small/ipad'
 import Footer from './../components/Footer'
+import Fade from 'react-reveal/Fade'
 
 class TeaBot extends React.Component {
   render() {
@@ -30,21 +31,21 @@ class TeaBot extends React.Component {
                 <p>
                   teaBOT creates and deploys custom tea making machines. I worked closely
                   with the co founders and application developers to improve the UI and
-         UX of the tablet application that controls the machine.{" "}
+                  UX of the tablet application that controls the machine.{" "}
                 </p>
               </div>
             </div>
 
             <div className="content-section">
-              <div
-                className="content-panel full-width-content"
-                style={{ minHeight: "auto" }}
-              >
-                <h1>Quick and easy customer experience</h1>
+              <div className="content-panel full-width-content" style={{ minHeight: "auto" }}>
+                <Fade>
+                  <h1>Quick and easy customer experience</h1>
+                </Fade>
 
                 <Ipad src={'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/tb/menu.png'} landscape={false} />
 
                 <div className="description-area">
+                  <Fade>
                   <p>
                     The customer approaches the machine and the menu screen is displayed
                     on the tablet. From here, a custom blend can be created, or one of the
@@ -53,21 +54,22 @@ class TeaBot extends React.Component {
                     enjoy. Pre made blends are ordered by popularity. The screen can be
                     swiped to reveal more. Each blend is color coded for the type of tea
                     it is comprised of.
-         </p>
+                  </p>
+                  </Fade>
                 </div>
               </div>
             </div>
 
             <div className="content-section">
-              <div
-                className="content-panel full-width-content"
-                style={{ minHeight: "auto" }}
-              >
-                <h1>Simple customization</h1>
+              <div className="content-panel full-width-content" style={{ minHeight: "auto" }}>
+                <Fade>
+                  <h1>Simple customization</h1>
+                </Fade>
 
                 <Ipad src={'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/tb/customize.png'} landscape={false} />
 
                 <div className="description-area">
+                  <Fade>
                   <p>
                     The customer has the ability to create their own blend of tea. Up to
                     three blends can be added and their proportions can be configured with
@@ -75,35 +77,37 @@ class TeaBot extends React.Component {
                     resulting blend is displayed graphically with progress bars.
                     Condiments can can also be added to the tea with the plus and minus
                     buttons.
-         </p>
+                  </p>
                   <p>
                     Finally, the thermometer on the right defaults to the optimal
                     temperature setting. The customer has the ability to drag the line up
                     or down to adjust the temperature.
-         </p>
+                  </p>
+                  </Fade>
                 </div>
               </div>
             </div>
 
             <div className="content-section">
-              <div
-                className="content-panel full-width-content"
-                style={{ minHeight: "auto" }}
-              >
-                <h1>Checkout</h1>
+              <div className="content-panel full-width-content" style={{ minHeight: "auto" }}>
+                <Fade>
+                  <h1>Checkout</h1>
+                </Fade>
 
                 <Ipad src={'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/tb/checkout.png'} landscape={false} />
 
                 <div className="description-area">
-                  <p>
-                    Tapping a blend, or confirming your customized blend brings you to the
-                    Checkout page. From here, the user can customize their pre made
-                    selection or tap “Make Blend” to tell the machine to begin pouring.
-         </p>
-                  <p>
-                    Every detail of the order is clearly displayed on the page for the
-                    customer to review.
-         </p>
+                  <Fade>
+                    <p>
+                      Tapping a blend, or confirming your customized blend brings you to the
+                      Checkout page. From here, the user can customize their pre made
+                      selection or tap “Make Blend” to tell the machine to begin pouring.
+                    </p>
+                    <p>
+                      Every detail of the order is clearly displayed on the page for the
+                      customer to review.
+                    </p>
+                  </Fade>
                 </div>
               </div>
             </div>

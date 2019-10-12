@@ -4,6 +4,7 @@ import ScrollIndicator from './../components/small/scrollIndicator'
 import IphoneVideo from './../components/small/iphoneVideo'
 import TabbedContent from './../components/small/tabbedContent'
 import Footer from './../components/Footer'
+import Fade from 'react-reveal/Fade'
 
 class Soccer1 extends React.Component {
   render() {
@@ -32,22 +33,25 @@ class Soccer1 extends React.Component {
                 <p>
                   Soccer-1 is a mobile application for improving your soccer skills and
                   connecting with other players and coaches.
-        </p>
+                </p>
                 <p>
                   The project called for combining a 3D learning experience, a regimented
                   personalized training assistant, an extensive social network, and a
                   tool for soccer coaches into one application. A high degree of
                   organization and consistency was required to bring all of these
                   features together.
-        </p>
+                </p>
               </div>
             </div>
 
             <div className="content-section">
               <div className="content-panel">
-                <h1>An engaging learning experience</h1>
+                <Fade>
+                  <h1>An engaging learning experience</h1>
+                </Fade>
                 <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3dModel2.mp4"}/>
                 <div className="description-area">
+                  <Fade>
                   <p>
                     Using state of the art motion capture, the movements of professional
                     soccer players were recorded as they performed the fundamentals of the
@@ -81,19 +85,23 @@ class Soccer1 extends React.Component {
                       }
                     ]}>
                   </TabbedContent>
+                  </Fade>
                 </div>
               </div>
 
               <div className="content-panel alt-content-panel">
-                <h1>Personalized Training</h1>
+                <Fade>
+                  <h1>Personalized Training</h1>
+                </Fade>
                 <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/trainingVideo.mp4"} />
                 <div className="description-area">
+                  <Fade>
                   <p>
                     Tapping the soccer ball in the bottom left corner opens up a
                     customized training program. The skill training facilitates practicing
                     and asks for the user’s personal feedback each time a technique is
                     completed. The feedback generates corrective exercises to address the
-          user’s problem areas.{" "}
+                    user’s problem areas.{" "}
                   </p>
                   <p>
                     A bright theme was applied to make it easier to read for the primary
@@ -101,70 +109,86 @@ class Soccer1 extends React.Component {
                     displayed up front so the user’s workload can be understood at a
                     glance. Illustrations were added as a visual assist to the text in the
                     detail view.
-         </p>
+                  </p>
+                  </Fade>
                 </div>
               </div>
 
               <div className="content-panel">
-                <h1>Your training schedule at a glance</h1>
+                <Fade>
+                  <h1>Your training schedule at a glance</h1>
+                </Fade>
                 <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/calVideo.mp4"} />
 
                 <div className="description-area">
+                  <Fade>
                   <p>
                     Training sessions are scheduled so that your body is resting in
                     between sessions for the optimal amount of time.
-         </p>
+                  </p>
                   <p>
                     The calendar view displays markers on selected dates to give the user
                     an overview of their training schedule.
-         </p>
+                  </p>
                   <p>
                     When a day is selected, everything you need to know about that day is
                     shown in the detail section.
-         </p>
+                  </p>
+                  </Fade>
                 </div>
               </div>
 
               <div className="content-panel alt-content-panel">
-                <h1>A community for soccer</h1>
+                <Fade>
+                  <h1>A community for soccer</h1>
+                </Fade>
                 <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/newPost.mp4"} />
 
                 <div className="description-area">
+                  <Fade>
                   <p>
                     Tapping the newsfeed icon in the bottom right corner opens up the
                     community. Soccer-1 values the ability for users to connect with each
                     other. Multimedia sharing between users was a priority since the
                     beginning of development.
-         </p>
+                  </p>
                   <p>
                     Users can login and register with social media, upload a profile
                     picture, and post content to their feeds.
-         </p>
+                  </p>
+                  </Fade>
                 </div>
               </div>
 
               <div className="content-panel">
-                <h1>Customizable profiles</h1>
+                <Fade>
+                  <h1>Customizable profiles</h1>
+                </Fade>
                 <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/newJerseyChange.mp4"} />
                 <div className="description-area">
+                  <Fade>
                   <p>
                     Soccer players identify with their number and uniform. A customized
                     jersey can be added to style your profile. This proved to be a feature
                     users identified with. This also helped differentiate our social
                     network.
-         </p>
+                  </p>
                   <p>
                     Change your jersey and the player in the 3D model will instantly wear
                     your custom jersey.
-         </p>
+                  </p>
+                  </Fade>
                 </div>
               </div>
 
               <div className="content-panel alt-content-panel">
-                <h1>A tool for coaches</h1>
+                <Fade>
+                  <h1>A tool for coaches</h1>
+                </Fade>
                 <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/coachTool.mp4"} />
 
                 <div className="description-area">
+                  <Fade>
                   <p>
                     Soccer-1 decided to explore the coaching space. Groups were introduced
                     to the social network as a means for coaches to organize their players
@@ -183,24 +207,29 @@ class Soccer1 extends React.Component {
                     }
                   ]}>
                   </TabbedContent>
+                  </Fade>
                 </div>
               </div>
 
               <div className="content-panel">
-                <h1>Explore the app as a visitor</h1>
+                <Fade>
+                  <h1>Explore the app as a visitor</h1>
+                </Fade>
                 <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/visitor.mp4"} />
 
                 <div className="description-area">
+                  <Fade>
                   <p>
                     Getting users to adopt your application is a challenge for any client
                     facing business. A good first impression needs to be made in order to
                     convert a visitor to a real user.
-         </p>
+                  </p>
                   <p>
                     Technical and business limitations restricted us from doing away with
                     a login system all together. As a designer, I had to do the best I
                     could to open up the application to visitors.
-         </p>
+                  </p>
+                  </Fade>
                 </div>
               </div>
             </div>
