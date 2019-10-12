@@ -9,7 +9,9 @@
     "@tweenjs/tween.js": "^18.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
+    "react-reveal": "^1.2.2",
+    "react-router-dom": "^5.1.1",
+    "react-router-transition": "^1.3.0",
     "react-scripts": "3.0.1",
     "react-transition-group": "^1.2.1",
     "three": "^0.106.2"
