@@ -63,10 +63,18 @@ class Menu extends React.Component {
 						this.props.location.history.push(feature.path);
 					});
 				} else {
-    			//window.scrollTo({top: 0, behavior: 'smooth'});
-    			document.documentElement.scrollTop = 0;
-    			
-					this.props.location.history.push(feature.path); // Route to the new page
+					/*
+					*	On feature pages
+					* Scroll to the top,
+					* Then fade out the cover photo,
+					* Then route to the new page
+					*/
+  				document.body.scrollTop = document.documentElement.scrollTop = 0;
+
+					let animations = ['fadeOut', 'faster'];
+					animateCSS('.cover', animations, () => {
+						this.props.location.history.push(feature.path);
+					});    			
 				}
 			}.bind(this), 320)
   	}

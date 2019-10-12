@@ -4,6 +4,9 @@
 */
 
 import React from "react";
+import { animateCSS } from '../../helpers/animateCSS'
+
+const animations = ['fadeOut', 'faster'];
 
 class SidePanel extends React.Component {
   constructor(props) {
@@ -22,22 +25,26 @@ class SidePanel extends React.Component {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     let index = this.state.urls.indexOf(this.state.route);
 
-    if(index === 0){
-      this.props.routerProps.history.push(this.state.urls[this.state.urls.length-1]);
-    } else {
-      this.props.routerProps.history.push(this.state.urls[index - 1]);
-    }
+    animateCSS('.cover', animations, () => {
+      if(index === 0){
+        this.props.routerProps.history.push(this.state.urls[this.state.urls.length-1]);
+      } else {
+        this.props.routerProps.history.push(this.state.urls[index - 1]);
+      }
+    });   
   }
 
   nextRoute(){
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     let index = this.state.urls.indexOf(this.state.route);
 
-    if(index === (this.state.urls.length - 1)){
-      this.props.routerProps.history.push(this.state.urls[0]);
-    } else {
-      this.props.routerProps.history.push(this.state.urls[index + 1]);
-    }
+    animateCSS('.cover', animations, () => {
+      if(index === (this.state.urls.length - 1)){
+        this.props.routerProps.history.push(this.state.urls[0]);
+      } else {
+        this.props.routerProps.history.push(this.state.urls[index + 1]);
+      }
+    });
   }
 
   render() {
