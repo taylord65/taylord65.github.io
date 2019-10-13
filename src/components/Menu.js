@@ -52,7 +52,8 @@ class Menu extends React.Component {
   	} else {
   		this.props.onClick();
   		
-			setTimeout(function() { 
+			setTimeout(function() {
+				// Wait for menu to close 
 				if (currentPathName === '/') {
 					/*
 					*	On the home page, add the fade out
@@ -85,8 +86,8 @@ class Menu extends React.Component {
 			<div>
 	    <CSSTransitionGroup
 	      transitionName="slide"
-	      transitionEnterTimeout={300}
-	      transitionLeaveTimeout={300}>
+	      transitionEnterTimeout={280}
+	      transitionLeaveTimeout={230}>
 				{this.props.showMenu &&
 					<div key="menu" className="menu">
 						<div className="menu-header"></div>
