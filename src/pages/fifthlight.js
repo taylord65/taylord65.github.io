@@ -28,7 +28,7 @@ class FifthLight extends React.Component {
         <div className="scrollUpSection">
           <div className="overview-banner">
             <div className="banner-container">
-              <p>Fifth Light installs electrical devices in buildings and connects them to their management software for maintenance and control. I developed the UI and UX for a tablet application that assists a worker in installing electrical devices in a building.</p>
+              <p>Fifth Light installs electrical devices in buildings and connects them to their management software for maintenance and control. I designed the user interface for a tablet application that assists a worker with installing the electrical devices.</p>
               <p>In the application, there is a tool for adding devices to the system, and a tool that scans the system to make sure everything was installed correctly.</p>
             </div>
           </div>
@@ -41,7 +41,7 @@ class FifthLight extends React.Component {
               <Ipad src={'https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/fl/addresser.png'} landscape={true} />
               <div className="description-area">
                 <Fade>
-                  <p>The client wanted an interface that would speed up the process of adding devices to the system. A fast installation saves the company money. A tablet was selected as the best device for the worker to hold while walking around a building during the setup process.</p>
+                  <p>The client wanted an interface that would speed up the process of adding devices to the system. A tablet was selected as the best device for the worker to hold while walking around a building during the setup process.</p>
                   <p>The installed devices appear in a list on the left side of the screen. Up and down arrow buttons are used to select devices in the list. The buttons are placed in close proximity to the worker’s left hand for ergonomic comfort and ease of use.</p> 
                   <p>The primary use case is pressing the down arrow button to highlight a device in the list, and then tapping the device on the floor plan (not shown) to add its address ID into the field.</p>
                 </Fade>

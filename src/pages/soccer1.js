@@ -31,8 +31,8 @@ class Soccer1 extends React.Component {
             <div className="overview-banner">
               <div className="banner-container">
                 <p>
-                  Soccer-1 is a mobile application for improving your soccer skills and
-                  connecting with other players and coaches.
+                  Soccer-1 was a mobile application for improving your soccer skills and
+                  connecting with players and coaches.
                 </p>
                 <p>
                   The project called for combining a 3D learning experience, a regimented
@@ -101,7 +101,7 @@ class Soccer1 extends React.Component {
                     customized training program. The skill training facilitates practicing
                     and asks for the user’s personal feedback each time a technique is
                     completed. The feedback generates corrective exercises to address the
-                    user’s problem areas.{" "}
+                    user’s problem areas.
                   </p>
                   <p>
                     A bright theme was applied to make it easier to read for the primary
@@ -148,7 +148,7 @@ class Soccer1 extends React.Component {
                   <Fade>
                   <p>
                     Tapping the newsfeed icon in the bottom right corner opens up the
-                    community. Soccer-1 values the ability for users to connect with each
+                    community. Soccer-1 valued the ability for users to connect with each
                     other. Multimedia sharing between users was a priority since the
                     beginning of development.
                   </p>
@@ -169,9 +169,7 @@ class Soccer1 extends React.Component {
                   <Fade>
                   <p>
                     Soccer players identify with their number and uniform. A customized
-                    jersey can be added to style your profile. This proved to be a feature
-                    users identified with. This also helped differentiate our social
-                    network.
+                    jersey can be added to style your profile.
                   </p>
                   <p>
                     Change your jersey and the player in the 3D model will instantly wear
@@ -203,7 +201,7 @@ class Soccer1 extends React.Component {
                     {
                       title: 'Location based organization',
                       id: 1,
-                      text: 'It was decided that groups and coaches would be discoverable to players by location. I implemented a simple map interface with Google Maps Javascript API to accomplish this. A group can invite a coach to join them or a coach can request to coach a group.'
+                      text: 'Groups and coaches were deiscoverable to players by location. I implemented a simple map interface with Google Maps Javascript API to accomplish this. A group can invite a coach to join them or a coach can request to coach a group.'
                     }
                   ]}>
                   </TabbedContent>
@@ -223,11 +221,6 @@ class Soccer1 extends React.Component {
                     Getting users to adopt your application is a challenge for any client
                     facing business. A good first impression needs to be made in order to
                     convert a visitor to a real user.
-                  </p>
-                  <p>
-                    Technical and business limitations restricted us from doing away with
-                    a login system all together. As a designer, I had to do the best I
-                    could to open up the application to visitors.
                   </p>
                   </Fade>
                 </div>

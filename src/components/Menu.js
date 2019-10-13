@@ -10,7 +10,7 @@ class Menu extends React.Component {
     	features: [
     		{
     			label: 'Sun Life',
-    			subLabel: 'Voice Development',
+    			subLabel: 'Development',
     			date: 'Current',
     			path: '/sunlife'
     		},

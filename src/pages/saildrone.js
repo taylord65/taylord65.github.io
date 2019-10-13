@@ -30,8 +30,7 @@ class Saildrone extends React.Component {
               <div className="banner-container">
                 <p>
                   Saildrone utilizes a fleet of autonomous drone sailboats to collect
-                  high resolution ocean data. I worked closely with the COO to create
-                  a desktop web application that clients can use to easily plan and
+                  high resolution ocean data. I created a desktop web application that clients can use to easily plan and
                   manage their ocean data collection missions.
                 </p>
               </div>

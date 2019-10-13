@@ -1,6 +1,5 @@
 import React from "react";
 import SidePanel from './../components/small/sidePanel'
-import Footer from './../components/Footer'
 
 class SunLife extends React.Component {
   render() {

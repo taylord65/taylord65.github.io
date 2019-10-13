@@ -29,9 +29,8 @@ class TeaBot extends React.Component {
             <div className="overview-banner">
               <div className="banner-container">
                 <p>
-                  teaBOT creates and deploys custom tea making machines. I worked closely
-                  with the co founders and application developers to improve the UI and
-                  UX of the tablet application that controls the machine.{" "}
+                  teaBOT created and deployed custom tea making machines. I redesigned the user interface
+                  of the tablet application that controled the machine.
                 </p>
               </div>
             </div>
@@ -49,9 +48,7 @@ class TeaBot extends React.Component {
                   <p>
                     The customer approaches the machine and the menu screen is displayed
                     on the tablet. From here, a custom blend can be created, or one of the
-                    pre made blends can be chosen. Pre made options are displayed for
-                    customers who don’t know how to create a custom blend that they will
-                    enjoy. Pre made blends are ordered by popularity. The screen can be
+                    pre made blends can be chosen. Pre made blends are ordered by popularity. The screen can be
                     swiped to reveal more. Each blend is color coded for the type of tea
                     it is comprised of.
                   </p>
