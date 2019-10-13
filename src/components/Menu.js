@@ -2,6 +2,8 @@ import React from 'react'
 import { CSSTransitionGroup } from 'react-transition-group'
 import { animateCSS } from '../helpers/animateCSS'
 
+const mobileWidth = 480;
+
 class Menu extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +40,9 @@ class Menu extends React.Component {
     			date: '2014',
     			path: '/teabot'
     		}
-    	]
+    	],
+    	enterTimeout: 280,
+    	leaveTimeout: 230
     };
 
     this.routeTo = this.routeTo.bind(this);
@@ -90,8 +94,8 @@ class Menu extends React.Component {
 			<div>
 	    <CSSTransitionGroup
 	      transitionName="slide"
-	      transitionEnterTimeout={280}
-	      transitionLeaveTimeout={230}>
+	      transitionEnterTimeout={this.state.enterTimeout}
+	      transitionLeaveTimeout={this.state.leaveTimeout}>
 				{this.props.showMenu &&
 					<div key="menu" className="menu">
 						<div className="menu-header"></div>
@@ -131,8 +135,8 @@ class Menu extends React.Component {
 
 		    <CSSTransitionGroup
 		      transitionName="fade"
-		      transitionEnterTimeout={300}
-		      transitionLeaveTimeout={300}>
+		      transitionEnterTimeout={this.state.enterTimeout}
+		      transitionLeaveTimeout={this.state.leaveTimeout}>
 					{this.props.showMenu &&
 						<div className="black-curtain" onClick={this.props.onClick}></div>
 					}
