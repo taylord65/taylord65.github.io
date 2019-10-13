@@ -67,15 +67,19 @@ class Menu extends React.Component {
 					/*
 					*	On feature pages
 					* Scroll to the top,
+					* Wait
 					* Then fade out the cover photo,
 					* Then route to the new page
 					*/
+					let delayForScroll = window.scrollY === 0 ? 0 : 220;
+
   				document.body.scrollTop = document.documentElement.scrollTop = 0;
 
-					let animations = ['fadeOut', 'faster'];
-					animateCSS('.cover', animations, () => {
-						this.props.location.history.push(feature.path);
-					});    			
+  				setTimeout(() => {
+						animateCSS('.cover', ['fadeOut', 'faster'], () => {
+							this.props.location.history.push(feature.path);
+						}); 
+					}, delayForScroll);
 				}
 			}.bind(this), 320)
   	}
