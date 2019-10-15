@@ -289,7 +289,7 @@ class ThreeScene extends React.Component {
   
     this.renderer = new THREE.WebGLRenderer({ antialias: true});
     this.renderer.setSize(width, height);
-    this.renderer.setPixelRatio( window.devicePixelRatio );
+    this.renderer.setPixelRatio(1);
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
 
