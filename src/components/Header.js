@@ -52,14 +52,18 @@ class Header extends React.Component {
   }
 
   routeTo() {
-    this.setState({
-      showHeaderDetails: false
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth'
     });
-    
+
     setBackgroundToBlack();
 
-    let animations = ['fadeOut', 'faster'];
-    animateCSS('.portfolio-feature', animations, () => {
+    animateCSS('.portfolio-feature', ['fadeOut', 'faster'], () => {
+      this.setState({
+        showHeaderDetails: false
+      });
+
       this.props.routerProps.history.push('/');
     });
   }
