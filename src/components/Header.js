@@ -9,8 +9,8 @@ class Header extends React.Component {
 
     this.state = {
       showHeaderDetails: false,
-      enterTimeout: 500,
-      leaveTimeout: 500
+      enterTimeout: 1000,
+      leaveTimeout: 230
     };
 
     this.handleScroll = this.handleScroll.bind(this);
@@ -87,7 +87,7 @@ class Header extends React.Component {
             transitionEnterTimeout={this.state.enterTimeout}
             transitionLeaveTimeout={this.state.leaveTimeout}>
             {this.props.routerProps.location.pathname !== "/" && 
-            <div onClick={this.routeTo} className="animated fadeIn home-icon">
+            <div onClick={this.routeTo} className="home-icon">
               <svg
                 version="1.1"
                 x="0px"
