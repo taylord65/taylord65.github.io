@@ -2,22 +2,16 @@ import React from 'react';
 import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import TWEEN from "@tweenjs/tween.js";
+
 import { animateCSS } from '../helpers/animateCSS'
 import { setBackgroundToBlack } from '../helpers/setBackgroundToBlack'
+import { cleanMaterial } from '../helpers/cleanMaterial'
 
 const cubeSize = 10500;
 const cubeHeight = 3900;
 const floorPositionY = -3000;
-
-const cleanMaterial = material => {
-  material.dispose()
-  for (const key of Object.keys(material)) {
-    const value = material[key]
-    if (value && typeof value === 'object' && 'minFilter' in value) {
-      value.dispose()
-    }
-  }
-}
+const clusterRotateSpeed = 0.0002;
+const blockRotateSpeed = 0.0008;
 
 class ThreeScene extends React.Component {
   constructor(props) {
@@ -307,7 +301,6 @@ class ThreeScene extends React.Component {
 
     this.scene.background = new THREE.Color( 0xFFFFFF );
     this.objects = [];
-
     this.mount.appendChild(this.renderer.domElement);
   };
 
@@ -344,13 +337,13 @@ class ThreeScene extends React.Component {
 
   rotateBlocks = () => {
     this.objects.forEach((object) => {
-      object.rotateX(0.0008);
-      object.rotateY(0.0008);
-      object.rotateZ(0.0008);
+      object.rotateX(blockRotateSpeed);
+      object.rotateY(blockRotateSpeed);
+      object.rotateZ(blockRotateSpeed);
     });
-    this.scene.children[0].rotateY(0.0004);
-    this.scene.children[0].rotateX(0.0004);
-    this.scene.children[0].rotateZ(-0.0004);
+    this.scene.children[3].rotateY(clusterRotateSpeed);
+    this.scene.children[3].rotateX(clusterRotateSpeed);
+    this.scene.children[3].rotateZ(-1 * clusterRotateSpeed);
   }
 
   updateDimensions = () => {
