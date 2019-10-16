@@ -7,6 +7,7 @@ import Main from './components/Main'
 import Menu from './components/Menu'
 
 import { withRouter } from "react-router-dom"
+import { setBackgroundToBlack } from './helpers/setBackgroundToBlack'
 
 class App extends React.Component {
 
@@ -28,6 +29,13 @@ class App extends React.Component {
 		      showMenu: false
 		    })
       }
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.location.pathname !== '/') {
+      // The app loaded not on the home page, need to set the background to black
+      setBackgroundToBlack();
     }
   }
 
