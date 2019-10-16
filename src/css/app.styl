@@ -114,7 +114,6 @@ header
   z-index 10
   display flex
   background-color transparent
-  transition background-color 0.2s
   .home-icon 
     margin auto
     margin-left 0px
@@ -531,6 +530,11 @@ highlightColor = #4682b4
         max-width 80%
         max-height 90%
         padding-bottom 2em
+        
+.three-feature
+  background-color rgba(0,0,0,0) !important
+  .cover
+    overflow-y hidden !important
 
 
 .portfolio-feature 
@@ -942,16 +946,26 @@ sideTextContainer()
   transition: opacity 230ms cubic-bezier(0, 1, 0.5, 1);
 }
 
-// .slide-leave-active,
-// .slide-enter-active {
-//   transition: menuTransitionTime;
-// }
-// .slide-enter {
-//   transform: translate(100%, 0);
-// }
-// .slide-leave-to {
-//   transform: translate(100%, 0);
-// }
+
+
+
+.homeicon-enter {
+  opacity: 0.01;
+}
+
+.homeicon-enter.homeicon-enter-active {
+  opacity: 1;
+  transition: opacity 300ms cubic-bezier(0, 1, 0.5, 1);
+}
+
+.homeicon-leave {
+  opacity: 1;
+}
+
+.homeicon-leave.homeicon-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms cubic-bezier(0, 1, 0.5, 1);
+}
 
 
 .portfolio-transition-enter-active {
@@ -996,5 +1010,4 @@ sideTextContainer()
     transform: translateX(100%);
   }
 }
-
 

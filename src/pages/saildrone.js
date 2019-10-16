@@ -43,29 +43,29 @@ class Saildrone extends React.Component {
                   </Fade>
                   
                   <Desktop src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/sd/sd_first.mp4"} />
-                  <Fade>
                   <div className="description-area">
+                  <Fade>
                     <p>
                       Defining your mission is broken down into 3 simple steps. Answer
                       some questions, define coordinates, and submit your mission by
                       creating an account.
                     </p>
+                  </Fade>
 
-                    <TabbedContent tabdata={[
-                        {
-                          title: 'State Awareness',
-                          id: 0,
-                          text: 'The user is always aware of what step they are on by viewing the navigation at the top. At the bottom of the fixed panel, there are back and next buttons that let the user anticipate what has to be done next and smoothly guide them through the process.'
-                        },
-                        {
-                          title: 'Explorable interface',
-                          id: 1,
-                          text: 'The user doesn’t need to create an account until the very end. They are free to begin with filling out the form or defining coordinates. The path of least resistance is outlined to the user, but those who wish to explore are free to do so.'
-                        }
-                      ]}>
-                    </TabbedContent>
+                  <TabbedContent tabdata={[
+                      {
+                        title: 'State Awareness',
+                        id: 0,
+                        text: 'The user is always aware of what step they are on by viewing the navigation at the top. At the bottom of the fixed panel, there are back and next buttons that let the user anticipate what has to be done next and smoothly guide them through the process.'
+                      },
+                      {
+                        title: 'Explorable interface',
+                        id: 1,
+                        text: 'The user doesn’t need to create an account until the very end. They are free to begin with filling out the form or defining coordinates. The path of least resistance is outlined to the user, but those who wish to explore are free to do so.'
+                      }
+                    ]}>
+                  </TabbedContent>
                   </div>
-                </Fade>
               </div>
             </div>
 
@@ -96,20 +96,20 @@ class Saildrone extends React.Component {
                         mission as well as an administrator panel for the Saildrone team
                         to proceed with conducting the submitted missions.
                     </p>
-                    <TabbedContent tabdata={[
-                        {
-                          title: 'Always allow undo',
-                          id: 0,
-                          text: 'Each action can be undone with the undo button. You can also click and drag data points on the map to move them and expand areas by adding points to them. Doing so will automatically update the coordinates in the side panel.'
-                        },
-                        {
-                          title: 'Simple submission',
-                          id: 1,
-                          text: 'To submit your mission you simply supply your email and password!'
-                        }
-                      ]}>
-                    </TabbedContent>
                   </Fade>
+                  <TabbedContent tabdata={[
+                      {
+                        title: 'Always allow undo',
+                        id: 0,
+                        text: 'Each action can be undone with the undo button. You can also click and drag data points on the map to move them and expand areas by adding points to them. Doing so will automatically update the coordinates in the side panel.'
+                      },
+                      {
+                        title: 'Simple submission',
+                        id: 1,
+                        text: 'To submit your mission you simply supply your email and password!'
+                      }
+                    ]}>
+                  </TabbedContent>
                 </div>
 
               </div>

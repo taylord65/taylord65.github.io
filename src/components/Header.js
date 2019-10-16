@@ -1,13 +1,16 @@
 import React from "react"
 import { animateCSS } from '../helpers/animateCSS'
 import { setBackgroundToBlack } from '../helpers/setBackgroundToBlack'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showHeaderDetails: false
+      showHeaderDetails: false,
+      enterTimeout: 500,
+      leaveTimeout: 500
     };
 
     this.handleScroll = this.handleScroll.bind(this);
@@ -79,24 +82,31 @@ class Header extends React.Component {
     return (
       <div>
         <header>
-          <div onClick={this.routeTo} className="home-icon">
-            <svg
-              version="1.1"
-              x="0px"
-              y="0px"
-              viewBox="0 0 64 64"
-              enableBackground="new 0 0 64 64"
-              xmlSpace="preserve"
-            >
-              <g>
-                <path
-                  fill="#FFFFFF"
-                  d="M25.6,53.4V21.9H14.1V10.6h35.8v11.3H38.5v31.5H25.6z"
-                />
-              </g>
-              <rect x="43.7" y="47.2" fill="#FFFFFF" width="6.2" height="6.2" />
-            </svg>
-          </div>
+          <CSSTransitionGroup
+            transitionName="homeicon"
+            transitionEnterTimeout={this.state.enterTimeout}
+            transitionLeaveTimeout={this.state.leaveTimeout}>
+            {this.props.routerProps.location.pathname !== "/" && 
+            <div onClick={this.routeTo} className="animated fadeIn home-icon">
+              <svg
+                version="1.1"
+                x="0px"
+                y="0px"
+                viewBox="0 0 64 64"
+                enableBackground="new 0 0 64 64"
+                xmlSpace="preserve"
+              >
+                <g>
+                  <path
+                    fill="#FFFFFF"
+                    d="M25.6,53.4V21.9H14.1V10.6h35.8v11.3H38.5v31.5H25.6z"
+                  />
+                </g>
+                <rect x="43.7" y="47.2" fill="#FFFFFF" width="6.2" height="6.2" />
+              </svg>
+            </div>
+            }
+          </CSSTransitionGroup>
         </header>
 
         {(this.props.routerProps.location.pathname !== "/" && this.state.showHeaderDetails) && (
