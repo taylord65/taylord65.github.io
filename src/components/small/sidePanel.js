@@ -21,38 +21,40 @@ class SidePanel extends React.Component {
     this.nextRoute = this.nextRoute.bind(this);
   }
 
-  prevRoute(){
+  routeTo(nextRoute){
     let delayForScroll = window.scrollY === 0 ? 0 : 220;
-
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    let index = this.state.urls.indexOf(this.state.route);
 
     setTimeout(() => {
+      if (nextRoute === '/sunlife') {
+        // Going to sun life, need to fade out the .scrollUpBack
+        animateCSS('.scrollUpBack', ['fadeOutDown', 'faster']); 
+      }
+
       animateCSS('.cover', animations, () => {
-        if(index === 0){
-          this.props.routerProps.history.push(this.state.urls[this.state.urls.length-1]);
-        } else {
-          this.props.routerProps.history.push(this.state.urls[index - 1]);
-        }
+        this.props.routerProps.history.push(nextRoute);
       }); 
     }, delayForScroll);
   }
 
-  nextRoute(){
-    let delayForScroll = window.scrollY === 0 ? 0 : 220;
-
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  prevRoute(){
     let index = this.state.urls.indexOf(this.state.route);
 
-    setTimeout(() => {
-      animateCSS('.cover', animations, () => {
-        if(index === (this.state.urls.length - 1)){
-          this.props.routerProps.history.push(this.state.urls[0]);
-        } else {
-          this.props.routerProps.history.push(this.state.urls[index + 1]);
-        }
-      });
-    }, delayForScroll);
+    if(index === 0) {
+      this.routeTo(this.state.urls[this.state.urls.length-1]);
+    } else {
+      this.routeTo(this.state.urls[index - 1]);
+    }
+  }
+
+  nextRoute(){
+    let index = this.state.urls.indexOf(this.state.route);
+
+    if(index === (this.state.urls.length - 1)){
+      this.routeTo(this.state.urls[0]);
+    } else {
+      this.routeTo(this.state.urls[index + 1]);
+    }
   }
 
   render() {

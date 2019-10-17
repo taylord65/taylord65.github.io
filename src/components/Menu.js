@@ -2,8 +2,6 @@ import React from 'react'
 import { CSSTransitionGroup } from 'react-transition-group'
 import { animateCSS } from '../helpers/animateCSS'
 
-const mobileWidth = 480;
-
 class Menu extends React.Component {
   constructor(props) {
     super(props);
@@ -79,11 +77,21 @@ class Menu extends React.Component {
 
   				document.body.scrollTop = document.documentElement.scrollTop = 0;
 
-  				setTimeout(() => {
-						animateCSS('.cover', ['fadeOut', 'faster'], () => {
-							this.props.location.history.push(feature.path);
-						}); 
-					}, delayForScroll);
+  				if (feature.path === '/sunlife') {
+  					// Going to sun life, need to fade out the .scrollUpBack
+	  				setTimeout(() => {
+							animateCSS('.scrollUpBack', ['fadeOutDown', 'faster']); 
+							animateCSS('.cover', ['fadeOut', 'faster'], () => {
+								this.props.location.history.push(feature.path);
+							}); 
+						}, delayForScroll);
+  				} else {
+	  				setTimeout(() => {
+							animateCSS('.cover', ['fadeOut', 'faster'], () => {
+								this.props.location.history.push(feature.path);
+							}); 
+						}, delayForScroll);
+  				}
 				}
 			}.bind(this), 320)
   	}
