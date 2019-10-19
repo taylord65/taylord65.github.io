@@ -54,7 +54,7 @@ class Menu extends React.Component {
   		return this.props.onClick(); //Close the MENU
   	} else {
   		this.props.onClick(); //Close the MENU
-			goToRoute(currentPathName, feature.path, this.props.location.history, animateCSS);
+		goToRoute(currentPathName, feature.path, this.props.location.history, animateCSS);
   	}
   };
 

@@ -8,6 +8,8 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
   const routesWithoutScrollUp = ['/', '/sunlife'];
   const menuCloseTime = isTClick ? 0 : 320;
 
+  const panelClass = '.scrollUpSection';
+
   setTimeout(() => {
     // Wait for menu to close 
     if (currentRoute === '/') {
@@ -20,7 +22,7 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
 
         if (!routesWithoutScrollUp.includes(nextRoute)) {
           history.push(nextRoute);
-          animateCSS('.scrollUpBack', ['fadeInUp', 'faster']);
+          animateCSS(panelClass, ['fadeInUp', 'faster']);
         } else {
           history.push(nextRoute);
         }
@@ -32,18 +34,17 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
 
       setTimeout(() => {
         if (nextRoute === '/sunlife') {
-
           // Going to sun life, need to fade out the .scrollUpBack
 
-          animateCSS('.scrollUpBack', ['fadeOutDown', 'faster']); 
-          animateCSS('.cover', ['fadeOut', 'faster'], () => {
+          animateCSS('.cover', ['fadeOut', 'faster']); 
+          animateCSS(panelClass, ['fadeOutDown', 'faster'], () => {
             history.push(nextRoute);
           }); 
         } else if (nextRoute === '/' && !routesWithoutScrollUp.includes(currentRoute)) {
           // Going from a page with scroll up to Home page
 
           animateCSS('.portfolio-feature', ['fadeOut', 'faster']);
-          animateCSS('.scrollUpBack', ['fadeOutDown', 'faster'], () => {
+          animateCSS(panelClass, ['fadeOutDown', 'faster'], () => {
             history.push(nextRoute);
           }); 
         } else {
@@ -54,7 +55,7 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
 
             // Fade in up the scroll up section if it appears for the first time
             if (!routesWithoutScrollUp.includes(nextRoute) && routesWithoutScrollUp.includes(currentRoute)) {
-              animateCSS('.scrollUpBack', ['fadeInUp', 'faster']); 
+              animateCSS(panelClass, ['fadeInUp', 'faster']); 
             }
           }); 
         }
