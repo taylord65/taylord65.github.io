@@ -31,14 +31,14 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
         }
       });
     } else {
-      let delayForScroll = window.scrollY === 0 ? 0 : 220;
+      let delayForScroll = window.scrollY === 0 ? 0 : 300;
 
       document.body.scrollTop = document.documentElement.scrollTop = 0;
 
       setTimeout(() => {
         if (nextRoute === '/sunlife') {
           // Going to sun life, need to fade out the .scrollUpBack
-          
+
           animateCSS('.cover', ['fadeOut', panelSpeed]); 
           animateCSS(panelClass, ['fadeOutDown', panelSpeed], () => {
             history.push(nextRoute);
