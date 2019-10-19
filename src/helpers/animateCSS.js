@@ -6,6 +6,11 @@
 const animateCSS = function (element, animationNames, callback) {
   const node = document.querySelector(element)
 
+  if (!node) {
+    // Null check for when people spam next route.
+    return;
+  }
+
   node.classList.add('animated');
 
   animationNames.forEach((animation) => {

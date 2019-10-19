@@ -5,8 +5,7 @@
 
 import React from "react";
 import { animateCSS } from '../../helpers/animateCSS'
-
-const routesWithoutScrollUp = ['/', '/sunlife'];
+import { goToRoute } from '../../helpers/goToRoute'
 
 class SidePanel extends React.Component {
   constructor(props) {
@@ -22,29 +21,7 @@ class SidePanel extends React.Component {
   }
 
   routeTo(nextRoute){
-    let delayForScroll = window.scrollY === 0 ? 0 : 220;
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-
-    setTimeout(() => {
-      if (nextRoute === '/sunlife') {
-        // Going to sun life, need to fade out the .scrollUpBack
-
-        animateCSS('.cover', ['fadeOut', 'faster']);
-        animateCSS('.scrollUpBack', ['fadeOutDown', 'faster'], () => {
-          this.props.routerProps.history.push(nextRoute);
-        }); 
-      } else {
-        animateCSS('.cover', ['fadeOut', 'faster'], () => {
-          this.props.routerProps.history.push(nextRoute);
-
-          // Fade in up the scroll up section if it appears for the first time
-          if (!routesWithoutScrollUp.includes(nextRoute) && routesWithoutScrollUp.includes(this.state.route)) {
-            animateCSS('.scrollUpBack', ['fadeInUp', 'faster']); 
-          }
-        }); 
-      }
-
-    }, delayForScroll);
+    goToRoute(this.state.route, nextRoute, this.props.routerProps.history, animateCSS);
   }
 
   prevRoute(){

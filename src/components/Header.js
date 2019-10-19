@@ -2,6 +2,7 @@ import React from "react"
 import { animateCSS } from '../helpers/animateCSS'
 import { setBackgroundToBlack } from '../helpers/setBackgroundToBlack'
 import { CSSTransitionGroup } from 'react-transition-group'
+import { goToRoute } from '../helpers/goToRoute'
 
 class Header extends React.Component {
   constructor(props) {
@@ -59,13 +60,11 @@ class Header extends React.Component {
 
     setBackgroundToBlack();
 
-    animateCSS('.portfolio-feature', ['fadeOut', 'faster'], () => {
-      this.setState({
-        showHeaderDetails: false
-      });
-
-      this.props.routerProps.history.push('/');
+    this.setState({
+      showHeaderDetails: false
     });
+
+    goToRoute(this.props.routerProps.location.pathname, '/', this.props.routerProps.history, animateCSS, true);
   }
 
   handleScroll(event) {

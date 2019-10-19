@@ -1,8 +1,7 @@
 import React from 'react'
 import { CSSTransitionGroup } from 'react-transition-group'
 import { animateCSS } from '../helpers/animateCSS'
-
-const routesWithoutScrollUp = ['/', '/sunlife'];
+import { goToRoute } from '../helpers/goToRoute'
 
 class Menu extends React.Component {
   constructor(props) {
@@ -52,55 +51,10 @@ class Menu extends React.Component {
   	let currentPathName = this.props.location.location.pathname;
 
   	if (currentPathName === feature.path) {
-  		return this.props.onClick();
+  		return this.props.onClick(); //Close the MENU
   	} else {
-  		this.props.onClick();
-  		
-			setTimeout(function() {
-				// Wait for menu to close 
-				if (currentPathName === '/') {
-					/*
-					*	On the home page, add the fade out
-					* and then route to the new page when the animation is finished
-					*/
-					let animations = ['fadeOut', 'faster'];
-					animateCSS('#three', animations, () => {
-						this.props.location.history.push(feature.path);
-					});
-				} else {
-					/*
-					*	On feature pages
-					* Scroll to the top,
-					* Wait
-					* Then fade out the cover photo,
-					* Then route to the new page
-					*/
-					let delayForScroll = window.scrollY === 0 ? 0 : 220;
-
-  				document.body.scrollTop = document.documentElement.scrollTop = 0;
-
-  				if (feature.path === '/sunlife') {
-  					// Going to sun life, need to fade out the .scrollUpBack
-	  				setTimeout(() => {
-							animateCSS('.scrollUpBack', ['fadeOutDown', 'faster']); 
-							animateCSS('.cover', ['fadeOut', 'faster'], () => {
-								this.props.location.history.push(feature.path);
-							}); 
-						}, delayForScroll);
-  				} else {
-	  				setTimeout(() => {
-							animateCSS('.cover', ['fadeOut', 'faster'], () => {
-								this.props.location.history.push(feature.path);
-
-        				// Fade in up the scroll up section if it appears for the first time
-				        if (!routesWithoutScrollUp.includes(feature.path) && routesWithoutScrollUp.includes(currentPathName)) {
-				          animateCSS('.scrollUpBack', ['fadeInUp', 'faster']); 
-				        }
-							}); 
-						}, delayForScroll);
-  				}
-				}
-			}.bind(this), 320)
+  		this.props.onClick(); //Close the MENU
+			goToRoute(currentPathName, feature.path, this.props.location.history, animateCSS);
   	}
   };
 
