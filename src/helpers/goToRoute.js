@@ -10,6 +10,9 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
 
   const panelClass = '.scrollUpSection';
 
+  const coverSpeed = 'faster';
+  const panelSpeed = 'fast';
+
   setTimeout(() => {
     // Wait for menu to close 
     if (currentRoute === '/') {
@@ -18,11 +21,11 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
       * and then route to the new page when the animation is finished
       * Would  be cool if the three scene dismantled with some animation and then did this.
       */
-      animateCSS('#three', ['fadeOut', 'faster'], () => {
+      animateCSS('#three', ['fadeOut', panelSpeed], () => {
 
         if (!routesWithoutScrollUp.includes(nextRoute)) {
           history.push(nextRoute);
-          animateCSS(panelClass, ['fadeInUp', 'faster']);
+          animateCSS(panelClass, ['fadeInUp', panelSpeed]);
         } else {
           history.push(nextRoute);
         }
@@ -35,27 +38,27 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
       setTimeout(() => {
         if (nextRoute === '/sunlife') {
           // Going to sun life, need to fade out the .scrollUpBack
-
-          animateCSS('.cover', ['fadeOut', 'faster']); 
-          animateCSS(panelClass, ['fadeOutDown', 'faster'], () => {
+          
+          animateCSS('.cover', ['fadeOut', panelSpeed]); 
+          animateCSS(panelClass, ['fadeOutDown', panelSpeed], () => {
             history.push(nextRoute);
           }); 
         } else if (nextRoute === '/' && !routesWithoutScrollUp.includes(currentRoute)) {
           // Going from a page with scroll up to Home page
 
-          animateCSS('.portfolio-feature', ['fadeOut', 'faster']);
-          animateCSS(panelClass, ['fadeOutDown', 'faster'], () => {
+          animateCSS('.portfolio-feature', ['fadeOut', panelSpeed]);
+          animateCSS(panelClass, ['fadeOutDown', panelSpeed], () => {
             history.push(nextRoute);
           }); 
         } else {
-          animateCSS('.cover', ['fadeOut', 'faster'], () => {
+          animateCSS('.cover', ['fadeOut', coverSpeed], () => {
             // Going from page without scroll up to Home page
 
             history.push(nextRoute);
 
             // Fade in up the scroll up section if it appears for the first time
             if (!routesWithoutScrollUp.includes(nextRoute) && routesWithoutScrollUp.includes(currentRoute)) {
-              animateCSS(panelClass, ['fadeInUp', 'faster']); 
+              animateCSS(panelClass, ['fadeInUp', panelSpeed]); 
             }
           }); 
         }

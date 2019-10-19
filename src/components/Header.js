@@ -69,14 +69,21 @@ class Header extends React.Component {
 
   handleScroll(event) {
     if (document.getElementsByClassName("scrollUpSection")[0]) {
+      const node = document.querySelector('.cover');
+
       if (document.getElementsByClassName("scrollUpSection")[0].getBoundingClientRect().top - document.getElementsByTagName("header")[0].offsetHeight < 0) {
         this.setState({
           showHeaderDetails: true
         });
+        node.classList.remove('animated');
+        node.classList.remove('fadeIn');
+        node.classList.add('hidden-cover');
       } else {
         this.setState({
           showHeaderDetails: false
         });
+
+        node.classList.remove('hidden-cover');
       }
     }
   }

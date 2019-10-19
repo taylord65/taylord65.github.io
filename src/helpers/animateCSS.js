@@ -14,7 +14,9 @@ const animateCSS = function (element, animationNames, callback) {
   node.classList.add('animated');
 
   animationNames.forEach((animation) => {
-    node.classList.add(animation)
+    if (animation) {
+      node.classList.add(animation)
+    }
   }); 
 
   function handleAnimationEnd() {

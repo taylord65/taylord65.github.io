@@ -547,14 +547,14 @@ highlightColor = #4682b4
   .scrollUpSection
     width calc(100% - 6.34em)
     margin-left 3.17em
-    @media (max-width: med)
-      width 100%
-      margin-left 0px
     position relative
     background-color #FFF
     padding-bottom 1px
     will-change transform, opacity
     curveTop()
+    @media (max-width: med)
+      width 100%
+      margin-left 0px
   .scrollUpBack
     width 100%
     position relative
@@ -705,6 +705,10 @@ sideTextContainer()
       margin auto
     @media (max-width: sml)
       bottom 14%
+      
+.hidden-cover
+  @media (max-width: med)
+    display none
 
 .overview-banner
   height auto
