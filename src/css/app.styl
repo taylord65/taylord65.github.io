@@ -1,3 +1,5 @@
+//stylus -w -c app.styl -o app.css
+
 userSelectNone()
   -webkit-user-select: none; /* Chrome, Opera, Safari */
   -moz-user-select: none; /* Firefox 2+ */
@@ -21,17 +23,13 @@ curveTop()
   src url("./../fonts/MyFont.otf") format('opentype')
       
 font = "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif
-customFont = 'MyFont'
+customFont = 'MyFont', font
 maxContainerWidth = 1246px;
 med = 1130px;
 sml = 480px;
 
 menuTransitionTime = 0.5s;
 featureTransitionTime = 0.1s
-
-
-//stylus -w -c app.styl -o app.css
-
 
 // .darkHeader
 //   background-color #333333
