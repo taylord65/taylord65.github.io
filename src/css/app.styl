@@ -16,14 +16,12 @@ curveTop()
   @media (max-width: med)
     border-radius 0px
     
- // @font-face
- //   font-family 'ITCAvantGardeStd-Demi'
- //   font-style sans-serif
- //   src local('ITCAvantGardeStd-Demi'), url(../fonts/ITCAvantGardeStd-Demi.otf) format('otf')
-    
-  
-font = "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
-customFont = 'ITCAvantGardeStd-Demi'
+@font-face
+  font-family 'MyFont'
+  src url("./../fonts/MyFont.otf") format('opentype')
+      
+font = "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif
+customFont = 'MyFont'
 maxContainerWidth = 1246px;
 med = 1130px;
 sml = 480px;
@@ -649,6 +647,7 @@ sideTextContainer()
     padding-bottom 5em
     h1
       text-transform uppercase
+      font-family customFont
       font-size 3.998em
       font-weight 600
       margin-bottom 0.3em
