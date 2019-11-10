@@ -51,6 +51,7 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
             history.push(nextRoute);
           }); 
         } else {
+          animateCSS('.ring-container', ['fadeOut', panelSpeed]);
           animateCSS('.cover', ['fadeOut', coverSpeed], () => {
             // Going from page without scroll up to Home page
 

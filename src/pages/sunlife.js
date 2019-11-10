@@ -1,8 +1,9 @@
 import React from "react"
 import SidePanel from './../components/small/sidePanel'
 
-class SunLife extends React.Component {
+const skillUrl = "https://www.amazon.ca/Sun-Life-Financial/dp/B07F7F52J5";
 
+class SunLife extends React.Component {
   render() {
     return (
       <div className="portfolio-feature three-feature">
@@ -19,6 +20,10 @@ class SunLife extends React.Component {
           <div className="blue-ring">
             <div className="black-cover"></div>
           </div>
+        </div>
+
+        <div id="linkButton" onClick={()=> window.open(skillUrl, "_blank")}>
+          <span>- View Alexa Skill -</span>
         </div>
       </div>
     );

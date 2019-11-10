@@ -40,9 +40,11 @@ class Menu extends React.Component {
     			path: '/teabot'
     		}
     	],
-    	enterTimeout: 280,
-    	leaveTimeout: 230
+    	enterTimeout: 800,
+    	leaveTimeout: 800
     };
+
+    // 280, 230
 
     this.routeTo = this.routeTo.bind(this);
   }
