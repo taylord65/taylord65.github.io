@@ -22,8 +22,8 @@ class SunLife extends React.Component {
           </div>
         </div>
 
-        <div id="linkButton" onClick={()=> window.open(skillUrl, "_blank")}>
-          <span>- View Alexa Skill -</span>
+        <div id="linkButton" onClick={()=> window.open(skillUrl)}>
+          <div id="linkButtonText">- View Alexa Skill -</div>
         </div>
       </div>
     );
