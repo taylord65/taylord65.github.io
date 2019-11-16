@@ -1,9 +1,9 @@
 import React from "react";
 import SidePanel from './../components/small/sidePanel'
-import ScrollIndicator from './../components/small/scrollIndicator'
 import IphoneVideo from './../components/small/iphoneVideo'
 import TabbedContent from './../components/small/tabbedContent'
 import Footer from './../components/Footer'
+import Cover from './../components/Cover'
 import Fade from 'react-reveal/Fade'
 
 class Soccer1 extends React.Component {
@@ -12,19 +12,17 @@ class Soccer1 extends React.Component {
       backgroundImage: `url(${this.props.cover})`
     };
 
+    const coverContent = {
+      h1: 'Soccer-1', 
+      h2: 'Design and development', 
+      h3: '2016 - 2017'
+    };
+
     return (
       <div className="portfolio-feature">
 
         <SidePanel routerProps={this.props} />
-
-        <div className="animated fadeIn cover" id="s1_background" style={coverStyle}>
-          <div className="cover-headline">
-            <h1>Soccer-1</h1>
-            <h2>Design and development</h2>
-            <h3>2016 - 2017</h3>
-          </div>
-          <ScrollIndicator />
-        </div>
+        <Cover content={coverContent} coverId={'s1_background'} coverStyle={coverStyle} />
 
         <div className="scrollUpBack">
           <div className="scrollUpSection">

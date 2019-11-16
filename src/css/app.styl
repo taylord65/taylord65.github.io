@@ -404,6 +404,14 @@ highlightColor = #4682b4
     display flex
     border-bottom 1px solid #E2E2E2
     margin auto
+    span
+      margin auto
+      margin-left 1.7em
+      //font-family "Courier New"
+      color #909090
+      display none
+      @media (max-width: sml)
+        display block
     h1
       margin: auto;
       color: #272727;
@@ -418,6 +426,9 @@ highlightColor = #4682b4
     display flex
     flex-direction column
     userSelectNone()
+    .currentFeature
+      .feature-info, .feature-date span
+        opacity 0.34 !important
     .feature
       width 93%
       height calc(100%/5)
@@ -641,6 +652,7 @@ sideTextContainer()
     text-align center
     width 80%
     padding-bottom 5em
+    will-change opacity
     h1
       text-transform uppercase
       font-family customFont
@@ -832,6 +844,7 @@ sideTextContainer()
       padding-left 1px
       line-height 1.3em
       margin-right 1em
+      userSelectNone()
       &:hover
         color #0070c9
     .activeTitle

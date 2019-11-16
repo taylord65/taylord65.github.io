@@ -67,11 +67,14 @@ class Menu extends React.Component {
 	      transitionLeaveTimeout={this.state.leaveTimeout}>
 				{this.props.showMenu &&
 					<div key="menu" className="menu">
-						<div className="menu-header"></div>
+						<div className="menu-header">
+							<span>Portfolio</span>
+						</div>
 
 						<div className="feature-list">
 							{this.state.features.map(feature => 
-								<div key={feature.path} onClick={() => this.routeTo(feature)} className="feature">
+								<div key={feature.path} onClick={() => this.routeTo(feature)} className={`feature ${this.props.location.location.pathname === feature.path ? 'currentFeature' : ''}`}>
+
 									<div className="feature-info">
 										<h1><div className="indicator"></div>{feature.label}</h1>
 										<span>{feature.subLabel}</span>

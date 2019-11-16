@@ -1,9 +1,9 @@
 import React from 'react'
 import SidePanel from './../components/small/sidePanel'
-import ScrollIndicator from './../components/small/scrollIndicator'
 import TabbedContent from './../components/small/tabbedContent'
 import Desktop from './../components/small/desktop'
 import Footer from './../components/Footer'
+import Cover from './../components/Cover'
 import Fade from 'react-reveal/Fade'
 
 class Saildrone extends React.Component {
@@ -12,17 +12,16 @@ class Saildrone extends React.Component {
       backgroundImage: `url(${this.props.cover})`
     };
 
+    const coverContent = {
+      h1: 'Saildrone mission builder', 
+      h2: 'Design and development', 
+      h3: '2016'
+    };
+
     return (
       <div className="portfolio-feature">
         <SidePanel routerProps={this.props} />
-        <div className="animated fadeIn cover" id="sd_background" style={coverStyle}>
-          <div className="cover-headline">
-            <h1>Saildrone mission builder</h1>
-            <h2>Design and development</h2>
-            <h3>2016</h3>
-          </div>
-          <ScrollIndicator />
-        </div>
+        <Cover content={coverContent} coverId={'sd_background'} coverStyle={coverStyle} />
 
         <div className="scrollUpBack">
           <div className="scrollUpSection">

@@ -1,8 +1,8 @@
 import React from 'react'
 import SidePanel from './../components/small/sidePanel'
-import ScrollIndicator from './../components/small/scrollIndicator'
 import Ipad from './../components/small/ipad'
 import Footer from './../components/Footer'
+import Cover from './../components/Cover'
 import Fade from 'react-reveal/Fade'
 
 class FifthLight extends React.Component {
@@ -11,18 +11,17 @@ class FifthLight extends React.Component {
       backgroundImage: `url(${this.props.cover})`
     };
 
+    const coverContent = {
+      h1: 'Fifth light', 
+      h2: 'Design', 
+      h3: '2015'
+    };
+
     return (
       <div className="portfolio-feature">
 
       <SidePanel routerProps={this.props} />
-      <div className="animated fadeIn cover" id="fl_background" style={coverStyle}>
-        <div className="cover-headline">
-          <h1>Fifth light</h1>
-          <h2>Design</h2>
-          <h3>2015</h3>
-        </div>
-        <ScrollIndicator />
-      </div>
+      <Cover content={coverContent} coverId={'fl_background'} coverStyle={coverStyle} />
 
       <div className="scrollUpBack">
         <div className="scrollUpSection">

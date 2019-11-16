@@ -53,10 +53,10 @@ class Header extends React.Component {
   }
 
   routeTo() {
-    window.scrollTo({
-      top: 0, 
-      behavior: 'smooth'
-    });
+    // window.scrollTo({
+    //   top: 0, 
+    //   behavior: 'smooth'
+    // });
 
     setBackgroundToBlack();
 
@@ -120,8 +120,8 @@ class Header extends React.Component {
         </header>
 
         {(this.props.routerProps.location.pathname !== "/" && this.state.showHeaderDetails) && (
-          <div className="rect-fill">
-            <h1 className="animated fadeIn">
+          <div className="rect-fill animated fadeInDown faster">
+            <h1>
               {this.getHeaderTitle(this.props.routerProps.location.pathname)}
             </h1>
           </div>
