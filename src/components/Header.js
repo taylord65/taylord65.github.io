@@ -53,11 +53,6 @@ class Header extends React.Component {
   }
 
   routeTo() {
-    // window.scrollTo({
-    //   top: 0, 
-    //   behavior: 'smooth'
-    // });
-
     setBackgroundToBlack();
 
     this.setState({

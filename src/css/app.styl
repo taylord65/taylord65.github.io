@@ -410,8 +410,6 @@ highlightColor = #4682b4
       //font-family "Courier New"
       color #909090
       display none
-      @media (max-width: sml)
-        display block
     h1
       margin: auto;
       color: #272727;
@@ -427,6 +425,7 @@ highlightColor = #4682b4
     flex-direction column
     userSelectNone()
     .currentFeature
+      background-color #f9f9f9
       .feature-info, .feature-date span
         opacity 0.34 !important
     .feature
@@ -610,6 +609,7 @@ sideTextContainer()
   height 100%
   z-index 2
   cursor pointer
+  will-change opacity
   @media (max-width: med)
     display none
   svg
@@ -622,6 +622,9 @@ sideTextContainer()
     text-transform uppercase
     font-size 0.9em
     color #ababab
+
+.fadedArrow
+  opacity 0.3    
     
 .side-text-left
   sideTextContainer()
@@ -943,9 +946,9 @@ sideTextContainer()
 .slf-cover 
   z-index 10
   background transparent !important
-  pointer-events none
+  left 3em
+  right 3em
   .slf-cover-headline 
-    pointer-events none
     padding-bottom 0px
     h1
       text-transform uppercase
@@ -1012,7 +1015,9 @@ numSpins = 2
     height ringDiameter
     border-radius 50%
     display flex
-    box-shadow 0px 0px 6em rgba(35, 106, 183, 0.7)
+    box-shadow 0px 0px 6em rgba(35, 106, 183, 0.8)
+    @media (max-width: sml)
+      box-shadow none
     animation-name spin
     animation-duration spinSpeed
     animation-iteration-count numSpins
@@ -1024,54 +1029,58 @@ numSpins = 2
       width "calc(%s - %s)" % (ringDiameter (ringWidth))
       height "calc(%s - %s)" % (ringDiameter (ringWidth))
       border-radius 50%
-      background-color #060606
+      background-color #000000
 
-cornerLineLength = 20px
-boxWidth = 12em
-boxHeight = 4em
-borderColor = #313131
+cornerLineLength = 1em
+boxWidth = 14em
+boxHeight = 5em
+borderColor = #3e6ed6
+borderWidth = 1px
 
 #linkButton
   position absolute
-  bottom 2em
+  z-index 30
+  bottom 0
+  top 0
   left 0
   right 0
   width boxWidth
   height boxHeight
-  margin 20px
+  margin auto
   background none
   border none
   cursor pointer
-  color white
+  font-size 0.7em
+  color #ccc
   padding 0
   box-sizing content-box
-  border 2px solid transparent
+  border borderWidth solid transparent
   display flex
   &::before
-    top -2px
-    left -2px
-    border-top 2px solid borderColor
-    border-left 2px solid borderColor
+    top -1 * borderWidth
+    left -1 * borderWidth
+    border-top borderWidth solid borderColor
+    border-left borderWidth solid borderColor
     transition 0.5s all
   &::after
-    top -2px
-    right -2px
-    border-top 2px solid borderColor
-    border-right 2px solid borderColor
+    top -1 * borderWidth
+    right -1 * borderWidth
+    border-top borderWidth solid borderColor
+    border-right borderWidth solid borderColor
     transition 0.5s all
   #linkButtonText
     margin auto
     &::before
-      bottom -2px
-      left -2px
-      border-bottom 2px solid borderColor
-      border-left 2px solid borderColor
+      bottom -1 * borderWidth
+      left -1 * borderWidth
+      border-bottom borderWidth solid borderColor
+      border-left borderWidth solid borderColor
       transition 0.5s all
     &::after
-      bottom -2px
-      right -2px
-      border-bottom 2px solid borderColor
-      border-right 2px solid borderColor
+      bottom -1 * borderWidth
+      right -1 * borderWidth
+      border-bottom borderWidth solid borderColor
+      border-right borderWidth solid borderColor
       transition 0.5s all
 
 #linkButton::before, #linkButton::after, #linkButtonText::before, #linkButtonText::after
@@ -1172,5 +1181,25 @@ borderColor = #313131
   &.slide-leave-active {
     transform: translateX(100%);
   }
+}
+
+
+
+.slfFade-enter {
+  opacity: 0.01;
+}
+
+.slfFade-enter.slfFade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms cubic-bezier(0, 1, 0.5, 1);
+}
+
+.slfFade-leave {
+  opacity: 1;
+}
+
+.slfFade-leave.slfFade-leave-active {
+  opacity: 0.01;
+  transition: opacity 500ms cubic-bezier(0, 1, 0.5, 1);
 }
 

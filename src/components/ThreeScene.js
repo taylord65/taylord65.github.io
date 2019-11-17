@@ -204,11 +204,10 @@ class ThreeScene extends React.Component {
   };
 
   generateSceneObjects = () => {
-    let group = new THREE.Object3D();
+    this.group = new THREE.Group();
+
     let geometry = new THREE.BoxGeometry( 40, 30, 40 );
     let numObjects = 120;
-
-    //maybe have 1 mesh
 
     for ( let i = 0; i < numObjects; i ++ ) {
       let object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({
@@ -226,7 +225,7 @@ class ThreeScene extends React.Component {
       object.rotation.y = Math.random() * 2 * Math.PI;
       object.rotation.z = Math.random() * 2 * Math.PI;
 
-      let masterScale = 1;
+      let masterScale = 0.95;
 
       object.scale.x = (10*Math.random() * 2 + 1)*masterScale;
       object.scale.y = (5*Math.random() * 2 + 1)*masterScale;
@@ -235,12 +234,13 @@ class ThreeScene extends React.Component {
       object.castShadow = true;
       object.receiveShadow = false;
 
-      group.add( object );
-
-      this.objects.push( object );
+      this.group.add( object );
     }
 
-    this.scene.add(group);
+    this.group.scale.set(0.001,0.001,0.001);
+    this.scaleBlocks();
+
+    this.scene.add(this.group);
   };
 
   generateFloor = () => {
@@ -294,13 +294,14 @@ class ThreeScene extends React.Component {
     this.controls.enableDamping = false;
     this.controls.maxDistance = 6000;
 
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    let blackCubeWidth = 1;
+
+    const geometry = new THREE.BoxGeometry(blackCubeWidth, blackCubeWidth, blackCubeWidth);
     const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
     this.cube = new THREE.Mesh(geometry, material);
     this.scene.add(this.cube);
 
     this.scene.background = new THREE.Color( 0xFFFFFF );
-    this.objects = [];
     this.mount.appendChild(this.renderer.domElement);
   };
 
@@ -336,15 +337,24 @@ class ThreeScene extends React.Component {
   };
 
   rotateBlocks = () => {
-    this.objects.forEach((object) => {
+    this.group.children.forEach((object) => {
       object.rotateX(blockRotateSpeed);
       object.rotateY(blockRotateSpeed);
       object.rotateZ(blockRotateSpeed);
     });
+
     this.scene.children[3].rotateY(clusterRotateSpeed);
     this.scene.children[3].rotateX(clusterRotateSpeed);
     this.scene.children[3].rotateZ(-1 * clusterRotateSpeed);
-  }
+  };
+
+  scaleBlocks = () => {
+    //Scale the cluster out after a delay
+    setTimeout(() => {
+      let tween = new TWEEN.Tween(this.group.scale).to({x: 1, y: 1, z: 1}, 100).start();
+      return tween;
+    }, 500);
+  };
 
   updateDimensions = () => {
     this.renderer.setSize(window.innerWidth, window.innerHeight)

@@ -47,7 +47,7 @@ class SidePanel extends React.Component {
   render() {
     return (
       <div>
-        <div onClick={this.prevRoute} className="side-text-left">
+        <div onClick={this.prevRoute} className={`side-text-left ${this.state.route === '/sunlife' ? 'fadedArrow' : ''}`}>
           <svg version="1.1" width="512" height="512" viewBox="0 0 512 512">
             <path
               fill="#FFFFFF"
@@ -56,7 +56,7 @@ class SidePanel extends React.Component {
           </svg>
         </div>
 
-        <div onClick={this.nextRoute} className="side-text-right">
+        <div onClick={this.nextRoute} className={`side-text-right`}>
           <svg version="1.1" width="512" height="512" viewBox="0 0 512 512">
             <path
               fill="#FFFFFF"

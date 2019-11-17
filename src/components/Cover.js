@@ -1,6 +1,6 @@
 import React from "react"
 
-const zeroPoint = document.documentElement.clientHeight * 0.45;
+const zeroPoint = document.documentElement.clientHeight * 0.28;
 
 class Cover extends React.Component {
 
