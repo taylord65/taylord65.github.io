@@ -74,8 +74,11 @@ p
   left 0
   right 0
   height 62px
-  background-color #232327
+  background-color #000000
   display flex
+  opacity 1
+  will-change opacity
+  transition-timing-function ease-in-out
   h1
     margin auto
     color #FFF
@@ -950,6 +953,9 @@ sideTextContainer()
   right 3em
   .slf-cover-headline 
     padding-bottom 0px
+    &:hover
+      h3
+        color #FFFFFF !important
     h1
       text-transform uppercase
       font-family customFont
@@ -973,7 +979,7 @@ sideTextContainer()
       font-weight 300
       font-family font
       color #ffffffbf
-      userSelectNone()
+      text-decoration underline
     @media (max-width: sml)
       width 100%
       h1
@@ -1032,9 +1038,9 @@ numSpins = 2
       background-color #000000
 
 cornerLineLength = 1em
-boxWidth = 14em
-boxHeight = 5em
-borderColor = #3e6ed6
+boxWidth = 40%
+boxHeight = 20%
+borderColor = #319BE2
 borderWidth = 1px
 
 #linkButton
@@ -1090,13 +1096,13 @@ borderWidth = 1px
   height cornerLineLength
   position absolute
 
-#linkButton:hover::before, #linkButton:hover::after
-  width boxWidth
-  height boxHeight
+// #linkButton:hover::before, #linkButton:hover::after
+//   width boxWidth
+//   height boxHeight
 
-#linkButton:hover #linkButtonText::before, #linkButton:hover #linkButtonText::after
-  width boxWidth
-  height boxHeight
+// #linkButton:hover #linkButtonText::before, #linkButton:hover #linkButtonText::after
+//   width boxWidth
+//   height boxHeight
   
 
 

@@ -9,9 +9,9 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
-      showHeaderDetails: false,
       enterTimeout: 1000,
-      leaveTimeout: 230
+      leaveTimeout: 230,
+      rectOpacity: 0
     };
 
     this.handleScroll = this.handleScroll.bind(this);
@@ -37,6 +37,16 @@ class Header extends React.Component {
   
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
+
+    const headerHeight = document.getElementsByTagName("header")[0].offsetHeight;
+    const scrollUpPosition = (document.documentElement.clientHeight * 0.8) - headerHeight;
+    const multiplier = 6;
+
+    this.setState({
+      headerHeight: headerHeight,
+      scrollUpPosition: scrollUpPosition,
+      startPosition: scrollUpPosition - headerHeight*multiplier
+    });
   }
 
   componentWillUnmount() {
@@ -47,7 +57,7 @@ class Header extends React.Component {
     if (this.props.routerProps.location.pathname !== prevProps.routerProps.location.pathname) {
       // Route Change. Avoid black bar from showing again
       this.setState({
-        showHeaderDetails: false
+        rectOpacity: 0
       });
     }
   }
@@ -56,7 +66,7 @@ class Header extends React.Component {
     setBackgroundToBlack();
 
     this.setState({
-      showHeaderDetails: false
+      rectOpacity: 0
     });
 
     goToRoute(this.props.routerProps.location.pathname, '/', this.props.routerProps.history, animateCSS, true);
@@ -64,20 +74,28 @@ class Header extends React.Component {
 
   handleScroll(event) {
     if (document.getElementsByClassName("scrollUpSection")[0]) {
-      const node = document.querySelector('.cover');
+      
+      if (document.documentElement.scrollTop >= this.state.scrollUpPosition) {
+        this.setState({
+          rectOpacity: 1
+        });
+      } else if (document.documentElement.scrollTop < this.state.startPosition) {
+        this.setState({
+          rectOpacity: 0
+        });
+      } else if (document.documentElement.scrollTop >= this.state.startPosition) {
+        this.setState({
+          rectOpacity: (document.documentElement.scrollTop/(this.state.scrollUpPosition - this.state.startPosition)) - (this.state.scrollUpPosition/(this.state.scrollUpPosition - this.state.startPosition)) + 1
+        });
+      }
+
+      let node = document.querySelector('.cover');
 
       if (document.getElementsByClassName("scrollUpSection")[0].getBoundingClientRect().top - document.getElementsByTagName("header")[0].offsetHeight < 0) {
-        this.setState({
-          showHeaderDetails: true
-        });
         node.classList.remove('animated');
         node.classList.remove('fadeIn');
         node.classList.add('hidden-cover');
       } else {
-        this.setState({
-          showHeaderDetails: false
-        });
-
         node.classList.remove('hidden-cover');
       }
     }
@@ -114,8 +132,8 @@ class Header extends React.Component {
           </CSSTransitionGroup>
         </header>
 
-        {(this.props.routerProps.location.pathname !== "/" && this.state.showHeaderDetails) && (
-          <div className="rect-fill animated fadeInDown faster">
+        {(this.props.routerProps.location.pathname !== "/") && (
+          <div className="rect-fill" style={{opacity: this.state.rectOpacity}}>
             <h1>
               {this.getHeaderTitle(this.props.routerProps.location.pathname)}
             </h1>
