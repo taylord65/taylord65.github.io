@@ -47,7 +47,7 @@ class Soccer1 extends React.Component {
                 <Fade>
                   <h1>An engaging learning experience</h1>
                 </Fade>
-                <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/3dModel2.mp4"}/>
+                <IphoneVideo src={"3dModel2"}/>
                 <div className="description-area">
                   <Fade>
                     <p>
@@ -92,7 +92,7 @@ class Soccer1 extends React.Component {
                 <Fade>
                   <h1>Personalized Training</h1>
                 </Fade>
-                <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/trainingVideo.mp4"} />
+                <IphoneVideo src={"trainingVideo"} />
                 <div className="description-area">
                   <Fade>
                   <p>
@@ -117,7 +117,7 @@ class Soccer1 extends React.Component {
                 <Fade>
                   <h1>Your training schedule at a glance</h1>
                 </Fade>
-                <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/calVideo.mp4"} />
+                <IphoneVideo src={"s1/calVideo"} />
 
                 <div className="description-area">
                   <Fade>
@@ -141,7 +141,7 @@ class Soccer1 extends React.Component {
                 <Fade>
                   <h1>A community for soccer</h1>
                 </Fade>
-                <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/newPost.mp4"} />
+                <IphoneVideo src={"s1/newPost"} />
 
                 <div className="description-area">
                   <Fade>
@@ -163,7 +163,7 @@ class Soccer1 extends React.Component {
                 <Fade>
                   <h1>Customizable profiles</h1>
                 </Fade>
-                <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/newJerseyChange.mp4"} />
+                <IphoneVideo src={"s1/newJerseyChange"} />
                 <div className="description-area">
                   <Fade>
                   <p>
@@ -182,7 +182,7 @@ class Soccer1 extends React.Component {
                 <Fade>
                   <h1>A tool for coaches</h1>
                 </Fade>
-                <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/coachTool.mp4"} />
+                <IphoneVideo src={"s1/coachTool"} />
 
                 <div className="description-area">
                   <Fade>
@@ -212,7 +212,7 @@ class Soccer1 extends React.Component {
                 <Fade>
                   <h1>Explore the app as a visitor</h1>
                 </Fade>
-                <IphoneVideo src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/s1/visitor.mp4"} />
+                <IphoneVideo src={"s1/visitor"} />
 
                 <div className="description-area">
                   <Fade>

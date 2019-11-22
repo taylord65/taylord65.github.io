@@ -11,7 +11,8 @@ class Desktop extends React.Component {
         <img src="https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/macbook2X_noLabel.jpg" alt="Macbook" />
         <div className="video-container">
           <video loop autoPlay playsInline muted>
-            <source src={this.props.src} type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+            <source src={`https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/${this.props.src}.mp4`} type="video/mp4" />
+            <source src={`https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/webm/${this.props.src}.webm`} type="video/webm" />
           </video>
         </div>
       </div>

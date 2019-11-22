@@ -41,7 +41,7 @@ class Saildrone extends React.Component {
                     <h1>Define your data mission</h1>
                   </Fade>
                   
-                  <Desktop src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/sd/sd_first.mp4"} />
+                  <Desktop src={"sd/sd_first"} />
                   <div className="description-area">
                   <Fade>
                     <p>
@@ -74,7 +74,7 @@ class Saildrone extends React.Component {
                   <h1>Map based planning</h1>
                 </Fade>
 
-                <Desktop src={"https://s3.us-east-2.amazonaws.com/taylordotsikasportfolio/saildroneVideo.mp4"} />
+                <Desktop src={"saildroneVideo"} />
 
                 <div className="description-area">
                   <Fade>
