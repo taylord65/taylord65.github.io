@@ -11,7 +11,6 @@ import { cleanMaterial } from '../helpers/cleanMaterial'
 const cubeSize = 10500;
 const cubeHeight = 3900;
 const floorPositionY = -3000;
-const clusterRotateSpeed = 0.0002;
 const blockRotateSpeed = 0.0008;
 
 class ThreeScene extends React.Component {
@@ -348,8 +347,6 @@ class ThreeScene extends React.Component {
     this.controls.enablePan = false;
     this.controls.enableDamping = false;
     this.controls.maxDistance = 6000;
-
-    let blackCubeWidth = 1;
 
     this.scene.background = new THREE.Color( 0x000000 );
     this.mount.appendChild(this.renderer.domElement);
