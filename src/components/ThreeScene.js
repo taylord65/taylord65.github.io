@@ -120,6 +120,9 @@ class ThreeScene extends React.Component {
             group.add(mesh);
           }
         }
+        const scaleAmount = 3;
+
+        group.scale.set(scaleAmount, scaleAmount, scaleAmount);
 
         //Center the SVG
         let bbox = new THREE.Box3().setFromObject(group);
@@ -324,7 +327,7 @@ class ThreeScene extends React.Component {
     this.camera = new THREE.PerspectiveCamera(70, width / height, 1, cubeSize*3 );
 
     this.camera.position.z = 5061;
-    this.camera.position.y = -1144;
+    //this.camera.position.y = -1144;
 
     const light = new THREE.SpotLight( 0xffffff, 0.3 );
     const ambientLight = new THREE.AmbientLight( 0x313131 );
