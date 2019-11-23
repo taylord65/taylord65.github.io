@@ -20,7 +20,7 @@ class ThreeScene extends React.Component {
 
     this.state = {
       showWebGLNotice: false,
-      colorThemeName: 'BLACK'
+      colorThemeName: 'ALT'
     };
   }
 
@@ -272,7 +272,7 @@ class ThreeScene extends React.Component {
 
       let spread = 2500;
 
-      object.position.x = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
+      object.position.x = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread*2;
       object.position.y = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
       object.position.z = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
 
@@ -351,19 +351,11 @@ class ThreeScene extends React.Component {
 
     let blackCubeWidth = 1;
 
-    const geometry = new THREE.BoxGeometry(blackCubeWidth, blackCubeWidth, blackCubeWidth);
-    const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    this.cube = new THREE.Mesh(geometry, material);
-    this.scene.add(this.cube);
-
     this.scene.background = new THREE.Color( 0x000000 );
     this.mount.appendChild(this.renderer.domElement);
   };
 
   startAnimationLoop = () => {
-    this.cube.rotation.x += 0.01
-    this.cube.rotation.y += 0.01
-
     this.rotateBlocks();
     this.renderer.render(this.scene, this.camera);
 
@@ -397,16 +389,12 @@ class ThreeScene extends React.Component {
       object.rotateY(blockRotateSpeed);
       object.rotateZ(blockRotateSpeed);
     });
-
-    this.scene.children[3].rotateY(clusterRotateSpeed);
-    this.scene.children[3].rotateX(clusterRotateSpeed);
-    this.scene.children[3].rotateZ(-1 * clusterRotateSpeed);
   };
 
   scaleBlocks = () => {
     //Scale the cluster out after a delay
     setTimeout(() => {
-      let tween = new TWEEN.Tween(this.group.scale).to({x: 1, y: 1, z: 1}, 100).start();
+      let tween = new TWEEN.Tween(this.group.scale).to({x: 1, y: 1, z: 1}, 150).start();
       return tween;
     }, 500);
   };
