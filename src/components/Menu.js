@@ -94,7 +94,7 @@ class Menu extends React.Component {
 				}
 				</CSSTransitionGroup>
 
-				<div className={`menu-button-container ${this.props.location.location.pathname === "/" ? 'homeScreen' : ''}`} onClick={this.props.onClick}>
+				<div className={`menu-button-container`} onClick={this.props.onClick}>
 					<div id="menuIcon" className={(this.props.showMenu ? 'open' : 'closed')}>
 						<span></span>
 						<span></span>

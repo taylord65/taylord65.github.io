@@ -40,6 +40,7 @@ html, body, #root, .App, main
   padding 0px
   font-size 20px
   font-family font
+  background-color #000
   @media (max-width: sml)
     font-size 16px
 
@@ -659,6 +660,8 @@ sideTextContainer()
     width 80%
     padding-bottom 5em
     will-change opacity
+    @media (max-width: sml)
+      padding-bottom 20%
     h1
       text-transform uppercase
       font-family customFont
@@ -951,6 +954,9 @@ sideTextContainer()
   background transparent !important
   left 3em
   right 3em
+  @media (max-width: sml)
+    left 0
+    right 0
   .slf-cover-headline 
     padding-bottom 0px
     &:hover
@@ -1051,6 +1057,7 @@ borderWidth = 1px
   left 0
   right 0
   width boxWidth
+  min-width 17em
   height boxHeight
   margin auto
   background none
