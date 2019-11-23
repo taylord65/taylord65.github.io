@@ -8,6 +8,7 @@
   "dependencies": {
     "@tweenjs/tween.js": "^18.3.1",
     "react": "^16.8.6",
+    "react-app-polyfill": "^1.0.4",
     "react-dom": "^16.8.6",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^5.1.1",
@@ -29,12 +30,14 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie 11"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie 11"
     ]
   }
 }
