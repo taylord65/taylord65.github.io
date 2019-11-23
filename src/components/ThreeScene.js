@@ -1,6 +1,7 @@
 import React from 'react';
 import * as THREE from 'three';
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import TWEEN from "@tweenjs/tween.js";
 
 import { animateCSS } from '../helpers/animateCSS'
@@ -19,7 +20,7 @@ class ThreeScene extends React.Component {
 
     this.state = {
       showWebGLNotice: false,
-      colorThemeName: 'WHITE'
+      colorThemeName: 'BLACK'
     };
   }
 
@@ -27,8 +28,9 @@ class ThreeScene extends React.Component {
     if (window.WebGLRenderingContext) {
       this.sceneSetup();
       this.generateSceneObjects();
-      this.generateFloor();
-      this.generateGrid();
+      //this.generateFloor();
+      //this.generateGrid();
+      this.generateTitle();
 
       animateCSS('#three', ['fadeIn'], () => {
         setBackgroundToBlack();
@@ -88,9 +90,59 @@ class ThreeScene extends React.Component {
     }
   }
 
+  generateTitle = () => {
+    const loader = new SVGLoader();
+
+    // load a SVG resource
+    loader.load(
+      'name.svg',
+      (data) => {
+        let paths = data.paths;
+        let group = new THREE.Group();
+
+        for (let i = 0; i < paths.length; i++) {
+          let path = paths[i];
+
+          let material = new THREE.MeshBasicMaterial({
+            color: path.color,
+            side: THREE.DoubleSide,
+            depthWrite: false
+          });
+
+          let shapes = path.toShapes(true);
+
+          for (let j = 0; j < shapes.length; j++) {
+            let shape = shapes[ j ];
+            let geometry = new THREE.ShapeBufferGeometry( shape );
+            geometry.applyMatrix(new THREE.Matrix4().makeScale ( 1, -1, 1 ));
+
+            let mesh = new THREE.Mesh( geometry, material );
+            group.add(mesh);
+          }
+        }
+
+        //Center the SVG
+        let bbox = new THREE.Box3().setFromObject(group);
+        let width = bbox.getSize().x;
+        let height = bbox.getSize().y;
+
+        group.translateX(-width/2);
+        group.translateY(height/2);
+
+        this.scene.add(group);
+      },
+      function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      },
+      function (error) {
+        console.log('An error happened');
+      }
+    );
+  };
+
   generateGrid = () => {
     let material = new THREE.LineBasicMaterial({
-      color: 0xc9c9c9
+      color: 0x0c4677
     });
 
     //Uprights
@@ -215,7 +267,7 @@ class ThreeScene extends React.Component {
         })
       );
 
-      let spread = 1800;
+      let spread = 2500;
 
       object.position.x = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
       object.position.y = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
@@ -275,7 +327,7 @@ class ThreeScene extends React.Component {
     this.camera.position.y = -1144;
 
     const light = new THREE.SpotLight( 0xffffff, 0.3 );
-    const ambientLight = new THREE.AmbientLight( 0xc5c5c5 );
+    const ambientLight = new THREE.AmbientLight( 0x313131 );
     light.position.set(0, 5000, 0 );
 
     this.scene.add(light);
@@ -301,7 +353,7 @@ class ThreeScene extends React.Component {
     this.cube = new THREE.Mesh(geometry, material);
     this.scene.add(this.cube);
 
-    this.scene.background = new THREE.Color( 0xFFFFFF );
+    this.scene.background = new THREE.Color( 0x000000 );
     this.mount.appendChild(this.renderer.domElement);
   };
 
