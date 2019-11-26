@@ -13,11 +13,8 @@ class SunLife extends React.Component {
           <div className="animated fadeIn cover-headline slf-cover-headline">
             <h1>Sun Life</h1>
             <h2>Development</h2>
-            <h3>View Alexa Skill</h3>
-            
-            <div className="animated fadeIn" id="linkButton" onClick={()=> window.open(skillUrl)}>
-              <div id="linkButtonText"></div>
-            </div>
+            <h3 onClick={()=> window.open(skillUrl)}>View Alexa Skill</h3>
+
           </div>
         </div>
 

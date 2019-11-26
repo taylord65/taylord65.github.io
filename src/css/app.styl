@@ -209,7 +209,7 @@ menuTransition = 0.2s ease-in-out;
     
 .menu-button-container
   position fixed
-  z-index 7
+  z-index 51
   top 0
   height 3em
   right 0
@@ -390,7 +390,7 @@ highlightColor = #4682b4
 
 .menu
   position fixed
-  z-index 6
+  z-index 50
   background-color rgba(255,255,255,1)
   top 0
   width 65%
@@ -574,7 +574,7 @@ highlightColor = #4682b4
     background -moz-linear-gradient(rgba(0, 0, 0, 0), black)
     background linear-gradient(rgba(0, 0, 0, 0), black)
   footer
-    background-color #171717
+    background-color #000000
     transition background-color menuTransition
     height 7em
     margin-bottom -1px
@@ -959,9 +959,6 @@ sideTextContainer()
     right 0
   .slf-cover-headline 
     padding-bottom 0px
-    &:hover
-      h3
-        color #FFFFFF !important
     h1
       text-transform uppercase
       font-family customFont
@@ -986,6 +983,9 @@ sideTextContainer()
       font-family font
       color #ffffffbf
       text-decoration underline
+      cursor pointer
+      &:hover
+        color #FFFFFF !important
     @media (max-width: sml)
       width 100%
       h1
@@ -1045,7 +1045,7 @@ numSpins = 2
 
 cornerLineLength = 1em
 boxWidth = 40%
-boxHeight = 20%
+boxHeight = 60%
 borderColor = #319BE2
 borderWidth = 1px
 
@@ -1054,10 +1054,8 @@ borderWidth = 1px
   z-index 30
   bottom 0
   top 0
-  left 0
-  right 0
-  width boxWidth
-  min-width 17em
+  left 5%
+  right 5%
   height boxHeight
   margin auto
   background none
