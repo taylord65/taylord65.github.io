@@ -11,7 +11,7 @@ import { cleanMaterial } from '../helpers/cleanMaterial'
 const cubeSize = 10500;
 const cubeHeight = 3900;
 const floorPositionY = -3000;
-const blockRotateSpeed = 0.0008;
+const blockRotateSpeed = 0.002;
 
 class ThreeScene extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class ThreeScene extends React.Component {
 
     this.state = {
       showWebGLNotice: false,
-      colorThemeName: 'ALT'
+      colorThemeName: 'NEW'
     };
   }
 
@@ -28,8 +28,9 @@ class ThreeScene extends React.Component {
       this.sceneSetup();
       this.generateSceneObjects();
       //this.generateFloor();
-      //this.generateGrid();
+      this.generateGrid();
       this.generateTitle();
+      //this.generateSkybox();
 
       animateCSS('#three', ['fadeIn'], () => {
         setBackgroundToBlack();
@@ -134,10 +135,10 @@ class ThreeScene extends React.Component {
         this.scene.add(group);
       },
       function (xhr) {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        //console.log((xhr.loaded / xhr.total * 100) + '% loaded');
       },
       function (error) {
-        console.log('An error happened');
+        //console.log('An error happened');
       }
     );
   };
@@ -147,84 +148,91 @@ class ThreeScene extends React.Component {
       color: 0x0c4677
     });
 
-    //Uprights
-    for (let i=0; i< 4; i++) {
-      let x, z;
-      let geometry = new THREE.Geometry();
+    let horizontalSquare = (y) => {
+      for (let i=0; i< 4; i++) {
+        let x1, x2, z1, z2;
+        let geometry = new THREE.Geometry();
 
-      switch(i) {
-        case 0:
-          x = cubeSize/2;
-          z = cubeSize/2;
-          break;
-        case 1:
-          x = (-1) * cubeSize/2;
-          z = cubeSize/2;
-          break;
-        case 2:
-          x = (-1) * cubeSize/2;
-          z = (-1) * cubeSize/2;
-          break;
-        case 3:
-          x = cubeSize/2;
-          z = (-1) * cubeSize/2;
-          break;
-        default:
+        switch(i) {
+          case 0:
+            x1 = (-1) * cubeSize/2;
+            z1 = cubeSize/2;
+
+            x2 = cubeSize/2;
+            z2 = cubeSize/2;
+            break;
+          case 1:
+            x1 = cubeSize/2;
+            z1 = cubeSize/2;
+
+            x2 = cubeSize/2;
+            z2 = (-1) * cubeSize/2;
+            break;
+          case 2:
+            x1 = cubeSize/2;
+            z1 = (-1) * cubeSize/2;
+
+            x2 = (-1) * cubeSize/2;
+            z2 = (-1) * cubeSize/2;
+            break;
+          case 3:
+            x1 = (-1) * cubeSize/2;
+            z1 = (-1) * cubeSize/2;
+
+            x2 = (-1) * cubeSize/2;
+            z2 = cubeSize/2;
+            break;
+          default:
+        }
+
+        geometry.vertices.push(
+          new THREE.Vector3(x1, y, z1),
+          new THREE.Vector3(x2, y, z2)
+        );
+
+        let line = new THREE.Line( geometry, material );
+        this.scene.add( line );
+      } 
+    };
+
+    let upRights = () => {
+      for (let i=0; i< 4; i++) {
+        let x, z;
+        let geometry = new THREE.Geometry();
+
+        switch(i) {
+          case 0:
+            x = cubeSize/2;
+            z = cubeSize/2;
+            break;
+          case 1:
+            x = (-1) * cubeSize/2;
+            z = cubeSize/2;
+            break;
+          case 2:
+            x = (-1) * cubeSize/2;
+            z = (-1) * cubeSize/2;
+            break;
+          case 3:
+            x = cubeSize/2;
+            z = (-1) * cubeSize/2;
+            break;
+          default:
+        }
+
+        geometry.vertices.push(
+          new THREE.Vector3(x, cubeHeight, z),
+          new THREE.Vector3(x, floorPositionY, z)
+        );
+
+        let line = new THREE.Line( geometry, material );
+        this.scene.add( line );
       }
-
-      geometry.vertices.push(
-        new THREE.Vector3(x, cubeHeight, z),
-        new THREE.Vector3(x, floorPositionY, z)
-      );
-
-      let line = new THREE.Line( geometry, material );
-      this.scene.add( line );
     }
 
-    for (let i=0; i< 4; i++) {
-      let x1, x2, z1, z2;
-      let geometry = new THREE.Geometry();
-
-      switch(i) {
-        case 0:
-          x1 = (-1) * cubeSize/2;
-          z1 = cubeSize/2;
-
-          x2 = cubeSize/2;
-          z2 = cubeSize/2;
-          break;
-        case 1:
-          x1 = cubeSize/2;
-          z1 = cubeSize/2;
-
-          x2 = cubeSize/2;
-          z2 = (-1) * cubeSize/2;
-          break;
-        case 2:
-          x1 = cubeSize/2;
-          z1 = (-1) * cubeSize/2;
-
-          x2 = (-1) * cubeSize/2;
-          z2 = (-1) * cubeSize/2;
-          break;
-        case 3:
-          x1 = (-1) * cubeSize/2;
-          z1 = (-1) * cubeSize/2;
-
-          x2 = (-1) * cubeSize/2;
-          z2 = cubeSize/2;
-          break;
-        default:
-      }
-
-      geometry.vertices.push(
-        new THREE.Vector3(x1, cubeHeight, z1),
-        new THREE.Vector3(x2, cubeHeight, z2)
-      );
-
-      let line = new THREE.Line( geometry, material );
-      this.scene.add( line );
-    }
+    horizontalSquare(cubeHeight);
+    horizontalSquare(floorPositionY);
+    upRights();
   };
 
   getRandomColor = (customThemeName) => {
@@ -245,6 +253,14 @@ class ThreeScene extends React.Component {
       ALT: {
         colorName: 'COLORNAME',
         colorSet: ['363635', '62A87C', '617073', '4D685A', '545775', '202C39', '1F487E', '60B2E5', 'AEECEF']
+      },
+      NEW: {
+        colorName: 'NEW',
+        colorSet: ['022B3A', '235789', '4C86A8', '235789', '4C86A8', 'a80707', '8cfc03']
+      },
+      CAMO: {
+        colorName: 'CAMO',
+        colorSet: ['BAAD80', '4B6329', '260500', '142513']
       }
     };
 
@@ -261,7 +277,7 @@ class ThreeScene extends React.Component {
     this.group = new THREE.Group();
 
     let geometry = new THREE.BoxGeometry( 40, 30, 40 );
-    let numObjects = 120;
+    let numObjects = 300;
 
     for ( let i = 0; i < numObjects; i ++ ) {
       let object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({
@@ -269,9 +285,9 @@ class ThreeScene extends React.Component {
         })
       );
 
-      let spread = 2500;
+      let spread = 5000;
 
-      object.position.x = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread*2;
+      object.position.x = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
       object.position.y = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
       object.position.z = (Math.round(Math.random()) * 2 - 1) * Math.random() * spread;
 
@@ -300,7 +316,7 @@ class ThreeScene extends React.Component {
   generateFloor = () => {
     let loader = new THREE.TextureLoader();
     let self = this;
-    const url = 'https://i.imgur.com/OV4o87l.jpg';
+    const url = 'darkness.png';
 
     loader.load(url, function ( texture ) {
       texture.wrapS = THREE.RepeatWrapping; 
@@ -318,6 +334,33 @@ class ThreeScene extends React.Component {
     });
   };
 
+  generateSkybox = () => {
+    let materialArray = [];
+    let texture_ft = new THREE.TextureLoader().load( 'spaceTest.jpg');
+    let texture_bk = new THREE.TextureLoader().load( 'spaceTest.jpg');
+    let texture_up = new THREE.TextureLoader().load( 'spaceTest.jpg');
+    let texture_dn = new THREE.TextureLoader().load( 'spaceTest.jpg');
+    let texture_rt = new THREE.TextureLoader().load( 'spaceTest.jpg');
+    let texture_lf = new THREE.TextureLoader().load( 'spaceTest.jpg');
+
+    materialArray.push(new THREE.MeshBasicMaterial( { map: texture_ft }));
+    materialArray.push(new THREE.MeshBasicMaterial( { map: texture_bk }));
+    materialArray.push(new THREE.MeshBasicMaterial( { map: texture_up }));
+    materialArray.push(new THREE.MeshBasicMaterial( { map: texture_dn }));
+    materialArray.push(new THREE.MeshBasicMaterial( { map: texture_rt }));
+    materialArray.push(new THREE.MeshBasicMaterial( { map: texture_lf }));
+
+    for (let i = 0; i < 6; i++) {
+      materialArray[i].side = THREE.BackSide;
+    }
+
+    const boxDistance = 30000;
+
+    let skyboxGeo = new THREE.BoxGeometry( boxDistance, boxDistance, boxDistance);
+    let skybox = new THREE.Mesh( skyboxGeo, materialArray );
+    this.scene.add( skybox );  
+  };
+
   sceneSetup = () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -326,7 +369,7 @@ class ThreeScene extends React.Component {
     this.camera = new THREE.PerspectiveCamera(70, width / height, 1, cubeSize*3 );
 
     this.camera.position.z = 5061;
-    //this.camera.position.y = -1144;
+    this.camera.position.y = -1144;
 
     const light = new THREE.SpotLight( 0xffffff, 0.3 );
     const ambientLight = new THREE.AmbientLight( 0x313131 );
@@ -383,15 +426,15 @@ class ThreeScene extends React.Component {
   rotateBlocks = () => {
     this.group.children.forEach((object) => {
       object.rotateX(blockRotateSpeed);
-      object.rotateY(blockRotateSpeed);
-      object.rotateZ(blockRotateSpeed);
+      //object.rotateY(blockRotateSpeed);
+      //object.rotateZ(blockRotateSpeed);
     });
   };
 
   scaleBlocks = () => {
     //Scale the cluster out after a delay
     setTimeout(() => {
-      let tween = new TWEEN.Tween(this.group.scale).to({x: 1, y: 1, z: 1}, 150).start();
+      let tween = new TWEEN.Tween(this.group.scale).to({x: 1, y: 1, z: 1}, 160).start();
       return tween;
     }, 500);
   };
