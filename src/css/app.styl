@@ -67,7 +67,10 @@ p
   span
     color #000
     margin auto
-  
+
+.backDropBlur
+  backdrop-filter blur(1.20em)
+
 .rect-fill
   position fixed
   z-index 6
@@ -84,6 +87,7 @@ p
     margin auto
     color #FFF
     font-size 1.414em
+    will-change opacity
   @media (max-width: sml)
     height 50px
     h1
@@ -387,11 +391,15 @@ highlightColor = #4682b4
   background-color rgba(0,0,0,0.7)
   width 100%
   height 100%
+  
+.blurred-shade
+  backdrop-filter blur(0.3em)
+  background-color rgba(0,0,0,0.13) !important
 
 .menu
   position fixed
   z-index 50
-  background-color rgba(255,255,255,1)
+  background-color rgba(255,255,255,0.96)
   top 0
   width 65%
   max-width 30em
@@ -402,6 +410,7 @@ highlightColor = #4682b4
   text-align center
   overflow hidden
   will-change transform
+  backdrop-filter saturate(223%) blur(16px)
   .menu-header
     height 15%
     width 100%
@@ -964,7 +973,7 @@ sideTextContainer()
       font-family customFont
       font-size 3.998em
       font-weight 600
-      margin-bottom auto
+      margin-bottom 0.05em
       margin-top auto
       userSelectNone()
     h2

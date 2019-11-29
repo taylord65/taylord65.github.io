@@ -110,7 +110,7 @@ class Menu extends React.Component {
 		      transitionEnterTimeout={this.state.enterTimeout}
 		      transitionLeaveTimeout={this.state.leaveTimeout}>
 					{this.props.showMenu &&
-						<div className="black-curtain" onClick={this.props.onClick}></div>
+						<div className="black-curtain" className={`black-curtain ${this.props.location.location.pathname === '/' ? 'blurred-shade' : ''}`} onClick={this.props.onClick}></div>
 					}
 				</CSSTransitionGroup>
 			</div>

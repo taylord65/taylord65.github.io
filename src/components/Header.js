@@ -4,6 +4,8 @@ import { setBackgroundToBlack } from '../helpers/setBackgroundToBlack'
 import { CSSTransitionGroup } from 'react-transition-group'
 import { goToRoute } from '../helpers/goToRoute'
 
+const maxOpacity = 0.80;
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +13,8 @@ class Header extends React.Component {
     this.state = {
       enterTimeout: 1000,
       leaveTimeout: 230,
-      rectOpacity: 0
+      rectOpacity: 0,
+      h1Opacity: 0
     };
 
     this.handleScroll = this.handleScroll.bind(this);
@@ -57,7 +60,8 @@ class Header extends React.Component {
     if (this.props.routerProps.location.pathname !== prevProps.routerProps.location.pathname) {
       // Route Change. Avoid black bar from showing again
       this.setState({
-        rectOpacity: 0
+        rectOpacity: 0,
+        h1Opacity: 0
       });
     }
   }
@@ -66,7 +70,8 @@ class Header extends React.Component {
     setBackgroundToBlack();
 
     this.setState({
-      rectOpacity: 0
+      rectOpacity: 0,
+      h1Opacity: 0
     });
 
     goToRoute(this.props.routerProps.location.pathname, '/', this.props.routerProps.history, animateCSS, true);
@@ -77,26 +82,36 @@ class Header extends React.Component {
       
       if (document.documentElement.scrollTop >= this.state.scrollUpPosition) {
         this.setState({
-          rectOpacity: 1
+          rectOpacity: maxOpacity,
+          h1Opacity: 1
         });
       } else if (document.documentElement.scrollTop < this.state.startPosition) {
         this.setState({
-          rectOpacity: 0
+          rectOpacity: 0,
+          h1Opacity: 0
         });
       } else if (document.documentElement.scrollTop >= this.state.startPosition) {
         this.setState({
-          rectOpacity: (document.documentElement.scrollTop/(this.state.scrollUpPosition - this.state.startPosition)) - (this.state.scrollUpPosition/(this.state.scrollUpPosition - this.state.startPosition)) + 1
+          rectOpacity: (document.documentElement.scrollTop/(this.state.scrollUpPosition - this.state.startPosition)) - (this.state.scrollUpPosition/(this.state.scrollUpPosition - this.state.startPosition)) + maxOpacity,
+          h1Opacity: (document.documentElement.scrollTop/(this.state.scrollUpPosition - this.state.startPosition)) - (this.state.scrollUpPosition/(this.state.scrollUpPosition - this.state.startPosition)) + 1
         });
       }
 
-      let node = document.querySelector('.cover');
+      let coverNode = document.querySelector('.cover');
+      let rectFillNode = document.querySelector('.rect-fill');
 
-      if (document.getElementsByClassName("scrollUpSection")[0].getBoundingClientRect().top - document.getElementsByTagName("header")[0].offsetHeight < 0) {
-        node.classList.remove('animated');
-        node.classList.remove('fadeIn');
-        node.classList.add('hidden-cover');
+      if (document.getElementsByClassName("scrollUpSection")[0].getBoundingClientRect().top - document.getElementsByTagName("header")[0].offsetHeight < 0) {        
+        rectFillNode.classList.add('backDropBlur');
       } else {
-        node.classList.remove('hidden-cover');
+        rectFillNode.classList.remove('backDropBlur');
+      }
+
+      if (document.getElementsByClassName("scrollUpSection")[0].getBoundingClientRect().top < 0) {        
+        coverNode.classList.remove('animated');
+        coverNode.classList.remove('fadeIn');
+        coverNode.classList.add('hidden-cover');
+      } else {
+        coverNode.classList.remove('hidden-cover');
       }
     }
   }
@@ -133,8 +148,8 @@ class Header extends React.Component {
         </header>
 
         {(this.props.routerProps.location.pathname !== "/") && (
-          <div className="rect-fill" style={{opacity: this.state.rectOpacity}}>
-            <h1>
+          <div className="rect-fill" style={{backgroundColor: `rgba(0,0,0,${this.state.rectOpacity}`}}>
+            <h1 style={{opacity: this.state.h1Opacity}}>
               {this.getHeaderTitle(this.props.routerProps.location.pathname)}
             </h1>
           </div>
