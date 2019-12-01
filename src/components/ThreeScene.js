@@ -38,7 +38,7 @@ class ThreeScene extends React.Component {
       this.generateGrid();
       this.generateTitle();
       //this.generateSkybox();
-      //this.glitch(glitchTime);
+      this.glitch(glitchTime);
 
       animateCSS('#three', ['fadeIn'], () => {
         setBackgroundToBlack();
@@ -400,10 +400,10 @@ class ThreeScene extends React.Component {
     this.controls.enableDamping = false;
     this.controls.maxDistance = 6000;
 
-    // this.composer = new EffectComposer(this.renderer);
-    // this.composer.addPass(new RenderPass(this.scene, this.camera));
-    // const glitchPass = new GlitchPass();
-    // this.composer.addPass(glitchPass);
+    this.composer = new EffectComposer(this.renderer);
+    this.composer.addPass(new RenderPass(this.scene, this.camera));
+    const glitchPass = new GlitchPass();
+    this.composer.addPass(glitchPass);
 
     this.scene.background = new THREE.Color( 0x000000 );
     this.mount.appendChild(this.renderer.domElement);
@@ -412,11 +412,11 @@ class ThreeScene extends React.Component {
   startAnimationLoop = () => {
     this.rotateBlocks();
 
-    // if (this.state.glitchEnabled) {
-    //   this.composer.render();
-    // } else {
+    if (this.state.glitchEnabled) {
+      this.composer.render();
+    } else {
       this.renderer.render(this.scene, this.camera);
-    // }
+    }
 
     TWEEN.update();
     this.frameId = window.requestAnimationFrame(this.startAnimationLoop);
@@ -458,15 +458,15 @@ class ThreeScene extends React.Component {
     }, 500);
   };
 
-  // glitch = (time) => {
-  //   this.setState({glitchEnabled: true});
+  glitch = (time) => {
+    this.setState({glitchEnabled: true});
 
-  //   setTimeout(() => {
-  //     this.setState({
-  //       glitchEnabled: false
-  //     });
-  //   }, time);
-  // };
+    setTimeout(() => {
+      this.setState({
+        glitchEnabled: false
+      });
+    }, time);
+  };
 
   updateDimensions = () => {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
