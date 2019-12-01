@@ -399,7 +399,7 @@ highlightColor = #4682b4
 .menu
   position fixed
   z-index 50
-  background-color rgba(255,255,255,0.96)
+  background-color rgb(255, 255, 255)
   top 0
   width 65%
   max-width 30em
@@ -650,6 +650,14 @@ sideTextContainer()
   svg
     transform translateX(-50%) translateY(-50%) rotate(-90deg)
 
+mobileTitle = 2.6em //2.6
+mobileH2 = 0.9em //0.9
+mobileH3 = 0.7em //0.707
+
+//2.6, 0.9, 0.707
+
+mobileTitleMarginBottom = 0.1em
+    
 .cover 
   top 0
   bottom 0
@@ -670,13 +678,13 @@ sideTextContainer()
     padding-bottom 5em
     will-change opacity
     @media (max-width: sml)
-      padding-bottom 20%
+      padding-bottom 15vh
     h1
       text-transform uppercase
       font-family customFont
       font-size 3.998em
       font-weight 600
-      margin-bottom 0.3em
+      margin-bottom 0.1em
       userSelectNone()
     h2
       text-transform uppercase
@@ -696,12 +704,12 @@ sideTextContainer()
     @media (max-width: sml)
       width 100%
       h1
-        font-size 2em
-        margin-bottom 0.4em
+        font-size mobileTitle
+        margin-bottom mobileTitleMarginBottom
       h2
-        font-size 0.9em
+        font-size mobileH2
       h3
-        font-size 0.707em
+        font-size mobileH3
   .links-to-app 
     margin auto
     width 250px
@@ -734,6 +742,53 @@ sideTextContainer()
 .hidden-cover
   @media (max-width: med)
     display none
+    
+.slf-cover 
+  z-index 10
+  background transparent !important
+  left 3em
+  right 3em
+  @media (max-width: sml)
+    left 0
+    right 0
+  .slf-cover-headline 
+    padding-bottom 0px
+    h1
+      text-transform uppercase
+      font-family customFont
+      font-size 3.998em
+      font-weight 600
+      margin-bottom 0.1em
+      margin-top auto
+      userSelectNone()
+    h2
+      text-transform uppercase
+      font-size 1.414em
+      letter-spacing 0.2em
+      margin-top auto
+      margin-bottom auto
+      font-weight 300
+      font-family font
+      color #ffffffbf
+      userSelectNone()
+    h3
+      font-size 1em
+      font-weight 300
+      font-family font
+      color #ffffffbf
+      text-decoration underline
+      cursor pointer
+      &:hover
+        color #FFFFFF !important
+    @media (max-width: sml)
+      width 100%
+      h1
+        font-size mobileTitle
+        margin-bottom mobileTitleMarginBottom
+      h2
+        font-size mobileH2
+      h3
+        font-size mobileH3
 
 .overview-banner
   height auto
@@ -958,52 +1013,6 @@ sideTextContainer()
     margin-left 1em
     margin-right 1em
     
-.slf-cover 
-  z-index 10
-  background transparent !important
-  left 3em
-  right 3em
-  @media (max-width: sml)
-    left 0
-    right 0
-  .slf-cover-headline 
-    padding-bottom 0px
-    h1
-      text-transform uppercase
-      font-family customFont
-      font-size 3.998em
-      font-weight 600
-      margin-bottom 0.05em
-      margin-top auto
-      userSelectNone()
-    h2
-      text-transform uppercase
-      font-size 1.414em
-      letter-spacing 0.2em
-      margin-top auto
-      margin-bottom auto
-      font-weight 300
-      font-family font
-      color #ffffffbf
-      userSelectNone()
-    h3
-      font-size 1em
-      font-weight 300
-      font-family font
-      color #ffffffbf
-      text-decoration underline
-      cursor pointer
-      &:hover
-        color #FFFFFF !important
-    @media (max-width: sml)
-      width 100%
-      h1
-        font-size 2em
-        margin-bottom 0.4em
-      h2
-        font-size 0.9em
-      h3
-        font-size 0.707em
 
 ringDiameter = 80vw
 maxRingDiameter = 700px
