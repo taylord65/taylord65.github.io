@@ -1,7 +1,12 @@
 import React from 'react';
 import * as THREE from 'three';
+
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
+
 import TWEEN from "@tweenjs/tween.js";
 
 import { animateCSS } from '../helpers/animateCSS'
@@ -11,7 +16,8 @@ import { cleanMaterial } from '../helpers/cleanMaterial'
 const cubeSize = 10500;
 const cubeHeight = 3900;
 const floorPositionY = -3000;
-const blockRotateSpeed = 0.002;
+const blockRotateSpeed = 0.004;
+const glitchTime = 700;
 
 class ThreeScene extends React.Component {
   constructor(props) {
@@ -19,7 +25,8 @@ class ThreeScene extends React.Component {
 
     this.state = {
       showWebGLNotice: false,
-      colorThemeName: 'NEW'
+      colorThemeName: 'NEW',
+      glitchEnabled: false
     };
   }
 
@@ -31,6 +38,7 @@ class ThreeScene extends React.Component {
       this.generateGrid();
       this.generateTitle();
       //this.generateSkybox();
+      this.glitch(glitchTime);
 
       animateCSS('#three', ['fadeIn'], () => {
         setBackgroundToBlack();
@@ -393,13 +401,25 @@ class ThreeScene extends React.Component {
     this.controls.enableDamping = false;
     this.controls.maxDistance = 6000;
 
+    this.composer = new EffectComposer(this.renderer);
+    this.composer.addPass(new RenderPass(this.scene, this.camera));
+    const glitchPass = new GlitchPass();
+    this.composer.addPass(glitchPass);
+
+    console.log(this.composer);
+
     this.scene.background = new THREE.Color( 0x000000 );
     this.mount.appendChild(this.renderer.domElement);
   };
 
   startAnimationLoop = () => {
     this.rotateBlocks();
-    this.renderer.render(this.scene, this.camera);
+
+    if (this.state.glitchEnabled) {
+      this.composer.render();
+    } else {
+      this.renderer.render(this.scene, this.camera);
+    }
 
     TWEEN.update();
     this.frameId = window.requestAnimationFrame(this.startAnimationLoop);
@@ -439,6 +459,16 @@ class ThreeScene extends React.Component {
       let tween = new TWEEN.Tween(this.group.scale).to({x: 1, y: 1, z: 1}, 160).start();
       return tween;
     }, 500);
+  };
+
+  glitch = (time) => {
+    this.setState({glitchEnabled: true});
+
+    setTimeout(() => {
+      this.setState({
+        glitchEnabled: false
+      });
+    }, time);
   };
 
   updateDimensions = () => {
