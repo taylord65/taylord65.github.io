@@ -31,9 +31,12 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
         }
       });
     } else {
-      let delayForScroll = window.scrollY === 0 ? 0 : 300;
+      let delayForScroll = 0;
 
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      if (nextRoute !== '/') {
+        delayForScroll = window.scrollY === 0 ? 0 : 300;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+      }
 
       setTimeout(() => {
         if (nextRoute === '/sunlife') {
@@ -46,10 +49,10 @@ export function goToRoute(currentRoute, nextRoute, history, animateCSS, isTClick
         } else if (nextRoute === '/' && !routesWithoutScrollUp.includes(currentRoute)) {
           // Going from a page with scroll up to Home page
 
-          animateCSS('.portfolio-feature', ['fadeOut', panelSpeed]);
-          animateCSS(panelClass, ['fadeOutDown', panelSpeed], () => {
+          //animateCSS('.portfolio-feature', ['fadeOut', panelSpeed]);
+          //animateCSS(panelClass, ['fadeOutDown', panelSpeed], () => {
             history.push(nextRoute);
-          }); 
+          //}); 
         } else {
           animateCSS('.ring-container', ['fadeOut', panelSpeed]);
           animateCSS('.cover', ['fadeOut', coverSpeed], () => {
