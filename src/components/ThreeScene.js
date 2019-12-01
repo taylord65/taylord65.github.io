@@ -126,8 +126,10 @@ class ThreeScene extends React.Component {
 
         //Center the SVG
         let bbox = new THREE.Box3().setFromObject(group);
-        let width = bbox.getSize().x;
-        let height = bbox.getSize().y;
+        const center = new THREE.Vector3();
+
+        let width = bbox.getSize(center).x;
+        let height = bbox.getSize(center).y;
 
         group.translateX(-width/2);
         group.translateY(height/2);
