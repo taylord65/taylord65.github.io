@@ -38,7 +38,7 @@ class ThreeScene extends React.Component {
       this.generateGrid();
       this.generateTitle();
       //this.generateSkybox();
-      this.glitch(glitchTime);
+      //this.glitch(glitchTime);
 
       animateCSS('#three', ['fadeIn'], () => {
         setBackgroundToBlack();
@@ -59,7 +59,6 @@ class ThreeScene extends React.Component {
 
   componentWillUnmount() {
     if (!this.state.showWebGLNotice) {
-      clearTimeout(this.turnOffGlitchTimeout);
       window.removeEventListener("resize", this.updateDimensions);
       window.cancelAnimationFrame(this.frameId);
 
@@ -459,15 +458,15 @@ class ThreeScene extends React.Component {
     }, 500);
   };
 
-  glitch = (time) => {
-    this.setState({glitchEnabled: true});
+  // glitch = (time) => {
+  //   this.setState({glitchEnabled: true});
 
-    setTimeout(() => {
-      this.setState({
-        glitchEnabled: false
-      });
-    }, time);
-  };
+  //   setTimeout(() => {
+  //     this.setState({
+  //       glitchEnabled: false
+  //     });
+  //   }, time);
+  // };
 
   updateDimensions = () => {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
