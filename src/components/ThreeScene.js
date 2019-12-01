@@ -401,12 +401,10 @@ class ThreeScene extends React.Component {
     this.controls.enableDamping = false;
     this.controls.maxDistance = 6000;
 
-    this.composer = new EffectComposer(this.renderer);
-    this.composer.addPass(new RenderPass(this.scene, this.camera));
-    const glitchPass = new GlitchPass();
-    this.composer.addPass(glitchPass);
-
-    console.log(this.composer);
+    // this.composer = new EffectComposer(this.renderer);
+    // this.composer.addPass(new RenderPass(this.scene, this.camera));
+    // const glitchPass = new GlitchPass();
+    // this.composer.addPass(glitchPass);
 
     this.scene.background = new THREE.Color( 0x000000 );
     this.mount.appendChild(this.renderer.domElement);
@@ -415,11 +413,11 @@ class ThreeScene extends React.Component {
   startAnimationLoop = () => {
     this.rotateBlocks();
 
-    if (this.state.glitchEnabled) {
-      this.composer.render();
-    } else {
+    // if (this.state.glitchEnabled) {
+    //   this.composer.render();
+    // } else {
       this.renderer.render(this.scene, this.camera);
-    }
+    // }
 
     TWEEN.update();
     this.frameId = window.requestAnimationFrame(this.startAnimationLoop);
