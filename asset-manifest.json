@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/taylord65.github.io/static/css/main.9d563e77.chunk.css",
+    "main.js": "/taylord65.github.io/static/js/main.8fbcbc0c.chunk.js",
+    "main.js.map": "/taylord65.github.io/static/js/main.8fbcbc0c.chunk.js.map",
+    "runtime~main.js": "/taylord65.github.io/static/js/runtime~main.8b9d6155.js",
+    "runtime~main.js.map": "/taylord65.github.io/static/js/runtime~main.8b9d6155.js.map",
+    "static/js/2.82f39cbe.chunk.js": "/taylord65.github.io/static/js/2.82f39cbe.chunk.js",
+    "static/js/2.82f39cbe.chunk.js.map": "/taylord65.github.io/static/js/2.82f39cbe.chunk.js.map",
+    "index.html": "/taylord65.github.io/index.html",
+    "precache-manifest.d38019183cd897961c2cda88572ddb25.js": "/taylord65.github.io/precache-manifest.d38019183cd897961c2cda88572ddb25.js",
+    "service-worker.js": "/taylord65.github.io/service-worker.js",
+    "static/css/main.9d563e77.chunk.css.map": "/taylord65.github.io/static/css/main.9d563e77.chunk.css.map",
+    "static/media/app.css": "/taylord65.github.io/static/media/MyFont.5d6673c4.otf",
+    "static/media/fl_cover_dark.jpg": "/taylord65.github.io/static/media/fl_cover_dark.4df589fe.jpg",
+    "static/media/iphoneSVG.c3e3def8.svg": "/taylord65.github.io/static/media/iphoneSVG.c3e3def8.svg",
+    "static/media/s1_cover_faded.png": "/taylord65.github.io/static/media/s1_cover_faded.0855481f.png",
+    "static/media/sd_cover.jpg": "/taylord65.github.io/static/media/sd_cover.647d1af5.jpg",
+    "static/media/tb_new_cover.jpg": "/taylord65.github.io/static/media/tb_new_cover.a1f0ef88.jpg"
+  }
+}
